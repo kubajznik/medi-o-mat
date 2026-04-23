@@ -19,6 +19,7 @@ interface Medium {
     mediumArt: string;
     beschreibung: string;
     url: string;
+    spotifyUrl?: string;
     image: string;
     code: string;
     codierung: { [key: string]: number };
@@ -100,6 +101,7 @@ const ErgebnisContent = () => {
                                         image={card.image}
                                         mediumArt={card.mediumArt}
                                         url={card.url}
+                                        spotifyUrl={card.spotifyUrl}
                                         cardIndex={index}
                                     />
                                 </div>

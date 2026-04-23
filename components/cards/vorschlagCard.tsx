@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { SpotifyIcon } from "../icons/spotify";
 
 export default function VorschlagCard({
   name,
   beschreibung,
   image,
   url,
+  spotifyUrl,
   mediumArt,
   codierung,
   cardClassName,
@@ -15,6 +17,7 @@ export default function VorschlagCard({
   codierung?: number;
   mediumArt?: string;
   url?: string;
+  spotifyUrl?: string;
   name: string;
   beschreibung: string;
   image: string;
@@ -66,16 +69,32 @@ export default function VorschlagCard({
         )}
       </div>
       {codierung}
-      <a
-        href={url ? url : "/"}
-        className="uppercase cursor-pointer"
-        target="_blank"
-      >
-        <div className="mt-8 flex items-baseline gap-4 justify-center p-2 rounded-lg bg-black text-white cursor-pointer">
-          zum medium
-          <i className="pi pi-external-link text-sm cursor-pointer"></i>
-        </div>
-      </a>
+      <div className="flex justify-around">
+        <a
+          href={url ? url : "/"}
+          className="uppercase cursor-pointer w-fit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="mt-8 flex items-baseline gap-4 justify-center p-4 rounded-lg bg-black text-white cursor-pointer">
+            <i className="pi pi-external-link text-lg cursor-pointer"></i>
+          </div>
+        </a>
+
+        {
+          spotifyUrl && 
+          <a
+            href={spotifyUrl}
+            className="uppercase cursor-pointer w-fit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="mt-8 flex items-baseline gap-4 justify-center rounded-lg bg-black text-white cursor-pointer">
+              <SpotifyIcon className="h-[52px] w-[52px]"/>
+            </div>
+          </a>
+        }
+      </div>
     </div>
   );
 }
