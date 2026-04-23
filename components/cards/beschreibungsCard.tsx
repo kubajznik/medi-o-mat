@@ -3,17 +3,13 @@ import React from "react";
 export default function BeschreibungsCard({
   handleClick,
   beschreibung,
-  hideExample,
 }: {
-  hideExample: boolean;
   handleClick: () => void;
   beschreibung: string;
 }) {
   return (
     <div
-      className={`${
-        hideExample ? "hidden" : ""
-      } p-4 bg-white transition ease-in-out text-black max-w-[300px] h-min rounded-lg flex flex-col gap-4 shadow-lg`}
+      className={`p-4 bg-white transition ease-in-out text-black max-w-[300px] h-min rounded-lg flex flex-col gap-4 shadow-lg`}
     >
       <span className="flex flex-row justify-between items-baseline">
         <h3 className="font-medium text-xl text-dark">Beschreibung</h3>

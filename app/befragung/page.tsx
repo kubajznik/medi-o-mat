@@ -53,7 +53,7 @@ export default function Befragung() {
     if (
       currentQuestionIndex >= currentCategoryIndex &&
       currentQuestionIndex <
-        currentCategoryIndex + data.fragen[i].fragenliste.length
+      currentCategoryIndex + data.fragen[i].fragenliste.length
     ) {
       currentQuestion =
         data.fragen[i].fragenliste[currentQuestionIndex - currentCategoryIndex];
@@ -64,47 +64,51 @@ export default function Befragung() {
 
   return (
     <div className="bg-gray-100 w-full h-screen">
-      <div className="flex flex-col gap-14 items-center pt-[100px]">
+      <div className="flex flex-col gap-14 items-center pt-4 md:pt-24">
         <div className="flex flex-row gap-4">
           {/* Zurück-Button */}
-          {currentQuestionIndex > 0 && (
-            <div className="w-min">
+
+          <div className="relative w-full max-w-[1000px]">
+            {currentQuestionIndex > 0 && !hideExample && (
               <button
                 onClick={handleQuestionBefore}
                 type="button"
-                className="p-4 bg-[#C86BFA] text-white rounded-lg flex gap-2 justify-center items-center w-min"
+                className="absolute top-3 left-3 md:-left-16 p-4 bg-[#C86BFA] text-white rounded-lg flex gap-2 justify-center items-center w-min"
               >
                 <i
                   className="pi pi-arrow-left"
                   style={{ fontSize: "1rem", fontWeight: "bold" }}
                 ></i>
               </button>
+            )}
+
+            {currentQuestion && !hideExample && (
+              <FragenKarte
+                frage={currentQuestion.frage}
+                handleNextQuestion={handleNextQuestion}
+                fragenCounter={{
+                  index: currentQuestionIndex + 1,
+                  counter: totalQuestionCount,
+                }}
+                bewertung={currentQuestion.bewertung}
+              />
+            )}
+
+            <div className="absolute top-3 right-3 md:top-3 md:-right-16 z-10">
+              <BeschreibungsBtn
+                hideExample={hideExample}
+                handleClick={() => setHideExample(!hideExample)}
+              />
             </div>
-          )}
+            {
+              hideExample &&
+              <BeschreibungsCard
+                handleClick={() => setHideExample(false)}
+                beschreibung={currentQuestion?.beschreibung || ""}
+              />
+            }
+          </div>
 
-          {currentQuestion && (
-            <FragenKarte
-              frage={currentQuestion.frage}
-              //kategorie={data.fragen[currentQuestionIndex].kategorie}
-              handleNextQuestion={handleNextQuestion}
-              fragenCounter={{
-                index: currentQuestionIndex + 1,
-                counter: totalQuestionCount,
-              }}
-              bewertung={currentQuestion.bewertung}
-            />
-          )}
-
-          <BeschreibungsBtn
-            hideExample={hideExample}
-            handleClick={() => setHideExample(!hideExample)}
-          />
-
-          <BeschreibungsCard
-            hideExample={!hideExample}
-            handleClick={() => setHideExample(false)}
-            beschreibung={currentQuestion?.beschreibung || ""}
-          />
         </div>
         {/* <button
           className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] text-[#FE4E4E] uppercase w-[500px] p-2 rounded-lg font-medium"

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
 import { router } from "next/client";
+import { Suspense } from "react";
 
 interface Answer {
   value: number;
   weight: number;
 }
 
-export default function Gewichtung() {
+function GewichtungContent() {
   const router = useRouter();
 
   const questions: any[] = [];
@@ -56,10 +57,10 @@ export default function Gewichtung() {
   // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="px-10 h-screen  text-dark pt-10">
+    <div className="px-5 md:px-10 h-screen  text-dark pt-10">
       <div className="flex flex-col gap-2">
-        <h1 className="font-semibold text-[56px]">Gewichtung der Thesen</h1>
-        <h3 className="text-2xl max-w-[900px] mb-10">
+        <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
+        <h3 className="text-xl md:text-2xl max-w-[900px] mb-3 md:mb-10">
           Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
           um diese mit doppelter Gewichtung in die Berechnung einfließen zu
           lassen.
@@ -67,7 +68,7 @@ export default function Gewichtung() {
 
         <div className="flex flex-col gap-3 w-full justify-center items-center">
           {questions.map((frage, index) => (
-            <div className="w-3/4" key={index}>
+            <div className="w-full md:w-3/4" key={index}>
               {index === 0 ? (
                 <p className="gewichtungCategory">Plattform</p>
               ) : (
@@ -103,7 +104,7 @@ export default function Gewichtung() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center text-center mt-10">
+        <div className="flex flex-col items-center text-center mt-5 md:mt-10 mb-5">
           {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
           {/* <p className="mb-2 text-[#c4c4c4]">
             {totalCount} These(n) wurde(n) ausgewählt
@@ -113,7 +114,8 @@ export default function Gewichtung() {
             onClick={() =>
               router.push("/ergebnis?answer=" + JSON.stringify(output))
             }
-            className={`px-6 py-4 bg-[#C86BFA16] hover:bg-[#C86BFA24] text-[#C86BFA] text-2xl rounded-lg flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:scale-105 ease-in uppercase font-medium`}
+            className="flex w-[400px] flex-row-reverse items-center justify-center gap-3 rounded-lg bg-[#C86BFA16] px-6 py-4 text-2xl 
+                      font-medium uppercase text-[#C86BFA] transition ease-in hover:scale-105 hover:bg-[#C86BFA24]"
           >
             <i className="pi pi-arrow-right" style={{ fontSize: "1.3rem" }}></i>
             zur auswertung
@@ -123,5 +125,13 @@ export default function Gewichtung() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Gewichtung() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GewichtungContent />
+    </Suspense>
   );
 }

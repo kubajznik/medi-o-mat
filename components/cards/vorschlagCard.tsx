@@ -25,15 +25,14 @@ export default function VorschlagCard({
   };
   return (
     <div
-      className={`${cardClassName} ${
-        cardIndex === 0
+      className={`${cardClassName} ${cardIndex === 0
           ? "silver-border"
           : cardIndex === 1
-          ? "gold-border"
-          : cardIndex === 2
-          ? "bronze-border"
-          : "border-2 border-gray-200"
-      } bg-white p-6 w-[332px] min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all`}
+            ? "gold-border"
+            : cardIndex === 2
+              ? "bronze-border"
+              : "border-2 border-gray-200"
+        } bg-white p-6 w-72 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all`}
     >
       <div className="flex flex-col gap-6">
         <span>
@@ -56,9 +55,8 @@ export default function VorschlagCard({
           <p className="text-base">
             {showMore
               ? beschreibung
-              : `${beschreibung.slice(0, 200)}${
-                  beschreibung.length > 200 ? "..." : ""
-                }`}
+              : `${beschreibung.slice(0, 200)}${beschreibung.length > 200 ? "..." : ""
+              }`}
           </p>
         )}
         {beschreibung && beschreibung.length > 200 && (

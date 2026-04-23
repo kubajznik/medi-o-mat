@@ -35,11 +35,11 @@ export default function GewichtungsCard({
       <p
         onClick={mark}
         ref={marker}
-        className="opacity-0 transition-opacity duration-300 absolute inset-0 flex justify-start items-center hover:opacity-100 ml-5 font-bold text-xl text-[#C86BFA]"
+        className="opacity-0 transition-opacity duration-300 absolute inset-0 flex justify-start items-center hover:opacity-100 ml-5 font-bold text-lg md:text-xl text-[#C86BFA]"
       >
         2x
       </p>
-      <p className="pl-16 font-medium text-xl">{frage}</p>
+      <p className="pl-12 font-medium text-lg md:text-xl">{frage}</p>
     </div>
   );
 }
