@@ -1020,7 +1020,7 @@
     "name": "Beyond Gossip",
     "mediumArt": "youtube",
     "beschreibung": "Beyond Gossip ist ein kostenloses Angebot von funk und gehört damit zum öffentlich-rechtlichen Rundfunk. Die Inhalte werden auf verschiedenen Plattformen wie TikTok, Instagram, YouTube und der eigenen Website bereitgestellt. Die Plattform konzentriert sich darauf, die subtileren Aspekte hinter der Popkultur-Gerüchteküche in unter 5 Minuten zu beleuchten. In einer Welt, die von der Schnelllebigkeit der sozialen Medien geprägt ist, entstehen oft Spekulationen und Vermutungen, ohne dass die Fakten überprüft oder hinterfragt werden. Beyond Gossip hat es sich zur Mission gemacht, diesen scheinbaren \"Fakten\" auf den Grund zu gehen.",
-    "url": "https:/funk.net/channel/beyond-gossip-12324",
+    "url": "https://funk.net/channel/beyond-gossip-12324",
     "image": "/logos/beyondgossip.jpeg",
     "code": "beyond",
     "codierung": {
@@ -1137,7 +1137,7 @@
     "name": "Apokalypse & Filterkaffee",
     "mediumArt": "podcast",
     "beschreibung": "Als morgendliches News-Omelett bezeichnen Micky Beisenherz und seine Mit-Moderator:innen ihren Nachrichtenpodcast. Darin servieren sie, mithilfe von verschiedensten Gästen, die wichtigsten Aufmacher, Schlagzeilen, Titelthemen, Leitartikel und Tweets des Tages.  Etwa 40 Minuten dauern die einzelnen Episoden, die täglich ab 5 Uhr morgens überall dort zu finden sind, wo es Podcasts gibt. Die Inhalte sind allen zu empfehlen, die gerne grob informiert sind – mit trockenen Nachrichtenformaten aber nicht so viel anfangen können. Wie viel Raum die tatsächlichen Nachrichten einnehmen, variiert hier von Folge zu Folge, von Gast zu Gast. Von lustig-anekdotisch bis ernsthaft-politisch ist alles dabei.",
-    "url": "https://apokalypse-und-filterkaffee.io/",
+    "url": "https://apokalypse-und-filterkaffee.podigee.io/",
     "spotifyUrl": "https://open.spotify.com/show/6kyGUIbKUH7G506XGX4lNk?si=e8ceadcb9cb14ba1",
     "image": "/logos/apofilter.jpeg",
     "code": "apokalypse",
@@ -1296,7 +1296,6 @@
     "mediumArt": "website",
     "beschreibung": "CORRECTIV ist ein gemeinwohlorientiertes Medienhaus, das Demokratie stärkt. Als vielfach ausgezeichnete Redaktion stehen sie für investigativen Journalismus. Sie lösen öffentliche Debatten aus, arbeiten mit Bürgerinnen und Bürgern an ihren Recherchen und fördern die Gesellschaft mit unseren Bildungsprogrammen. Zentrale Ziele sind, Machtmissbrauch aufzudecken und ein Zeichen gegen Rechtsextremismus zu setzen. Die Recherchen werden durch private Spenden und unabhängige Institutionen oder Stiftungen finanziert, damit sie nicht durch politische Entscheider, Werbung oder Quoten beeinflusst werden.",
     "url": "https://correctiv.org",
-    "image": "/logos/correctiv.svg",
     "image": "/logos/correctiv.svg",
     "code": "corrweb",
     "codierung": {
