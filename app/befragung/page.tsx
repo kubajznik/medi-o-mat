@@ -1,9 +1,11 @@
 "use client";
+import ToggleKeyboardButton from "@/components/buttons/ToggleKeyboardButton";
 import BeschreibungsBtn from "@/components/buttons/beschreibungsBtn";
 import BeschreibungsCard from "@/components/cards/beschreibungsCard";
 import FragenKarte from "@/components/cards/fragenKarte";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import localStorageManager from "@/util/localStore";
 
 // import JSON
 import data from "../../data/questions.json";
@@ -14,6 +16,11 @@ export default function Befragung() {
   const [hideExample, setHideExample] = useState(false);
   const [summe, setSumme] = useState(0);
   const [currentQuestValue, setCurrentQuestValue] = useState<number[]>([]);
+  const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+
+  useEffect(() => {
+    setIsKeyboardMode(localStorageManager.getKeyboardMode());
+  }, []);
 
   const handleCancel = () => {
     router.push("/");
@@ -86,18 +93,24 @@ export default function Befragung() {
               <FragenKarte
                 frage={currentQuestion.frage}
                 handleNextQuestion={handleNextQuestion}
+                isKeyboardMode={isKeyboardMode}
                 fragenCounter={{
                   index: currentQuestionIndex + 1,
                   counter: totalQuestionCount,
                 }}
-                bewertung={currentQuestion.bewertung}
+                bewertung={currentQuestion.bewertung ?? []}
               />
             )}
 
-            <div className="absolute top-3 right-3 md:top-3 md:-right-16 z-10">
+            <div className="absolute top-3 right-3 md:top-3 md:-right-16 z-10 flex flex-col gap-4">
               <BeschreibungsBtn
                 hideExample={hideExample}
                 handleClick={() => setHideExample(!hideExample)}
+              />
+              <ToggleKeyboardButton
+                className="invisible md:visible"
+                isActive={isKeyboardMode}
+                onToggle={setIsKeyboardMode}
               />
             </div>
             {

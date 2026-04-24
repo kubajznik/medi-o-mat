@@ -1,18 +1,30 @@
 "use client";
 import React from "react";
 
+type Props = {
+  label: string;
+  handleClick: () => void;
+  index: number;
+  buttonRef?: (el: HTMLButtonElement | null) => void;
+  onFocus?: () => void;
+  isFocused?: boolean;
+};
+
 export default function FrageButton({
   label,
   handleClick,
-}: {
-  label: string;
-  handleClick: () => void;
-}) {
+  buttonRef,
+  onFocus,
+  isFocused = false,
+}: Props) {
   return (
     <button
+      ref={buttonRef}
       type="button"
       onClick={handleClick}
-      className="p-4 border-solid border-2 border-gray-300 rounded-2xl transition hover:border-[#C86BFA] active:bg-blue-700 active:text-white text-dark hover:scale-110"
+      onFocus={onFocus}
+      className="border-solid border-2 rounded-2xl p-4 transition active:bg-blue-700 active:text-white text-dark hover:border-[#C86BFA] hover:scale-110
+         border-gray-300"
     >
       {label}
     </button>
