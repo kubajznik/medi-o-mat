@@ -1,39 +1,54 @@
 "use client";
 import GewichtungsCard from "@/components/cards/gewichtungsCard";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
-import { router } from "next/client";
 import { Suspense } from "react";
-
-interface Answer {
-  value: number;
-  weight: number;
-}
+import type {
+  Antworten,
+  Fragebogen,
+  GewichteteAntwort,
+} from "@/types/Befragung";
 
 function GewichtungContent() {
   const router = useRouter();
 
-  const questions: any[] = [];
-  for (let category of data["fragen"]) {
-    for (let question of category.fragenliste) {
-      questions.push(question.frage);
-    }
-  }
+  const questionData = data as Fragebogen;
+  const questions = questionData.fragen.flatMap((category) =>
+    category.fragenliste.map((question) => question.frage)
+  );
+
+
 
   const searchParams = useSearchParams();
-  let output: Answer[] = [];
-  let answers = JSON.parse(searchParams.get("answer") as string);
-  for (let i = 0; i < answers.length; i++) {
-    output.push({
-      value: answers[i],
-      weight: 1,
-    });
-  }
+  const answersParam = searchParams.get("answer");
+  const answers = useMemo<Antworten>(() => {
+    if (!answersParam) return [];
+    try {
+      const parsed = JSON.parse(answersParam);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Failed to parse answers from search params:", error);
+      return [];
+    }
+  }, [answersParam]);
+
+  const [output, setOutput] = useState<GewichteteAntwort[]>(() =>
+    answers.map((value) => ({ value, weight: 1 }))
+  );
+
+  useEffect(() => {
+    setOutput(answers.map((value) => ({ value, weight: 1 })));
+  }, [answers]);
 
   function doubleWeight(question: number) {
-    output[question].weight = output[question].weight == 1 ? 2 : 1;
-    console.log(output);
+    setOutput((prev) =>
+      prev.map((item, index) =>
+        index === question
+          ? { ...item, weight: item.weight === 1 ? 2 : 1 }
+          : item
+      )
+    );
   }
 
   /**
@@ -57,7 +72,7 @@ function GewichtungContent() {
   // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="px-5 md:px-10 h-screen  text-dark pt-10">
+    <div className="px-5 md:px-10 min-h-screen  text-dark pt-10">
       <div className="flex flex-col gap-2">
         <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
         <h3 className="text-xl md:text-2xl max-w-[900px] mb-3 md:mb-10">

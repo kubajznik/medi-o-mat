@@ -1,48 +1,57 @@
 "use client";
+import localStorageManager from "@/util/localStore";
+import { useEffect } from "react";
 import VorschlagCard from "@/components/cards/vorschlagCard";
 import test from "../../data/media.json";
 import { useRouter, useSearchParams } from "next/navigation";
 //import {useEffect, useState} from 'react';
-import React, { Suspense } from "react";
+import React, { Suspense, use } from "react";
 import textData from "@/data/texte.json";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
 import Crown from "@/components/icons/crown";
-import { Container } from "postcss";
-
-interface Bewertung {
-    wert: number;
-    label: string;
-}
-
-interface Medium {
-    name: string;
-    mediumArt: string;
-    beschreibung: string;
-    url: string;
-    spotifyUrl?: string;
-    image: string;
-    code: string;
-    codierung: { [key: string]: number };
-}
+import type { GewichteteAntworten } from "@/types/Befragung";
+import type { Media, MediaList, MediaResults } from "@/types/Media";
 
 const ErgebnisContent = () => {
     const router = useRouter();
     const animate = useAnimationToggle(7000);
     const searchParams = useSearchParams();
 
-    const testArray: Medium[] = test;
+    const mediaList: MediaList = test as MediaList;
+    const mediaResults: MediaResults = {};
+    const answersParam = searchParams.get("answer");
+    const answers: GewichteteAntworten = (() => {
+        if (!answersParam) return [];
+        try {
+            const parsed = JSON.parse(answersParam);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error("Failed to parse answers from search params:", error);
+            return [];
+        }
+    })();
 
-    let mediaResults: { [index: string]: number } = {};
-    let answers = JSON.parse(searchParams.get("answer") as string);
+    // Reset der Antworten im Localstorage
+    useEffect(() => {
+        localStorageManager.clearAnswers();
+    }, []);
 
-    for (let medium of test) {
-        // @ts-ignore
+    for (const medium of mediaList) {
         mediaResults[medium.code] = 0;
         for (let attr in medium.codierung) {
-            // @ts-ignore
-            mediaResults[medium.code] += Math.pow(answers[attr - 1].value - medium.codierung[attr], 2) * answers[attr - 1].weight;
+            const answerIndex = Number(attr) - 1;
+            const answer = answers[answerIndex];
+            if (!Number.isInteger(answerIndex) || !answer) {
+                console.error("Invalid answer mapping for medium:", {
+                    mediumCode: medium.code,
+                    attr,
+                    answerIndex,
+                });
+                continue;
+            }
+            mediaResults[medium.code] +=
+                Math.pow(answer.value - medium.codierung[attr], 2) * answer.weight;
         }
-        // @ts-ignore
         mediaResults[medium.code] = Math.sqrt(mediaResults[medium.code]);
     }
 
@@ -52,21 +61,15 @@ const ErgebnisContent = () => {
     });
 
     let winners = sorted.slice(0, 3);
-    const favoriteCards: any[] = [];
+    const favoriteCards: Media[] = [];
     favoriteCards.push(
-        test.find((e, i) => {
-            return e.code == winners[0][0];
-        })
+        mediaList.find((e) => e.code === winners[0][0]) as Media
     );
     favoriteCards.push(
-        test.find((e, i) => {
-            return e.code == winners[1][0];
-        })
+        mediaList.find((e) => e.code === winners[1][0]) as Media
     );
     favoriteCards.unshift(
-        test.find((e, i) => {
-            return e.code == winners[2][0];
-        })
+        mediaList.find((e) => e.code === winners[2][0]) as Media
     );
 
     return (

@@ -4,8 +4,10 @@ import BeschreibungsBtn from "@/components/buttons/beschreibungsBtn";
 import BeschreibungsCard from "@/components/cards/beschreibungsCard";
 import FragenKarte from "@/components/cards/fragenKarte";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import localStorageManager from "@/util/localStore";
+import type { Antworten, Fragebogen } from "@/types/Befragung";
+import ResetButton from "@/components/buttons/ResetButton";
 
 // import JSON
 import data from "../../data/questions.json";
@@ -15,59 +17,64 @@ export default function Befragung() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [hideExample, setHideExample] = useState(false);
   const [summe, setSumme] = useState(0);
-  const [currentQuestValue, setCurrentQuestValue] = useState<number[]>([]);
+  const [currentQuestValue, setCurrentQuestValue] = useState<Antworten>([]);
   const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+
+  const questionData = data as Fragebogen;
+  const flatQuestions = useMemo(
+    () => questionData.fragen.flatMap((category) => category.fragenliste),
+    [questionData]
+  );
+  const totalQuestionCount = flatQuestions.length;
 
   useEffect(() => {
     setIsKeyboardMode(localStorageManager.getKeyboardMode());
-  }, []);
+    const savedAnswers = localStorageManager.getAnswers();
+    if (savedAnswers.length >= totalQuestionCount && totalQuestionCount > 0) {
+      router.replace("/gewichtung?answer=" + JSON.stringify(savedAnswers));
+      return;
+    }
+    if (savedAnswers.length > 0) {
+      setCurrentQuestValue(savedAnswers);
+      setSumme(savedAnswers.reduce((acc, val) => acc + val, 0));
+      setCurrentQuestionIndex(savedAnswers.length);
+    }
+  }, [router, totalQuestionCount]);
 
   const handleCancel = () => {
     router.push("/");
   };
 
+  const onReset = () => {
+    localStorageManager.clearAnswers();
+    setCurrentQuestionIndex(0);
+    setCurrentQuestValue([]);
+    setSumme(0);
+  };
+  const currentQuestion = flatQuestions[currentQuestionIndex] ?? null;
+
   const handleNextQuestion = (value: number) => {
-    setCurrentQuestValue((prev) => [...prev, value]);
+    localStorageManager.addAnswer(value);
+    const nextValues = [...currentQuestValue, value];
+    setCurrentQuestValue(nextValues);
     setSumme((prev) => prev + value);
-    let updatedSumme = summe + value;
-    let updateQuestValue = [...currentQuestValue, value];
-    if (currentQuestionIndex + 1 < totalQuestionCount) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      router.push("/gewichtung?answer=" + JSON.stringify(updateQuestValue));
+    const nextIndex = currentQuestionIndex + 1;
+    if (nextIndex < totalQuestionCount) {
+      setCurrentQuestionIndex(nextIndex);
+      return;
     }
+    router.push("/gewichtung?answer=" + JSON.stringify(nextValues));
   };
 
   const handleQuestionBefore = () => {
     if (currentQuestionIndex > 0) {
+      localStorageManager.popAnswer();
+      const lastValue = currentQuestValue[currentQuestValue.length - 1] ?? 0;
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
-      setSumme(
-        (prev) => prev - currentQuestValue[currentQuestValue.length - 1]
-      );
+      setSumme((prev) => prev - lastValue);
       setCurrentQuestValue((prev) => prev.slice(0, -1));
     }
   };
-
-  // Helper
-  let totalQuestionCount = data.fragen.reduce(
-    (acc, curr) => acc + curr.fragenliste.length,
-    0
-  );
-
-  let currentQuestion = null;
-  let currentCategoryIndex = 0;
-  for (let i = 0; i < data.fragen.length; i++) {
-    if (
-      currentQuestionIndex >= currentCategoryIndex &&
-      currentQuestionIndex <
-      currentCategoryIndex + data.fragen[i].fragenliste.length
-    ) {
-      currentQuestion =
-        data.fragen[i].fragenliste[currentQuestionIndex - currentCategoryIndex];
-      break;
-    }
-    currentCategoryIndex += data.fragen[i].fragenliste.length;
-  }
 
   return (
     <div className="bg-gray-100 w-full h-screen">
@@ -112,6 +119,9 @@ export default function Befragung() {
                 isActive={isKeyboardMode}
                 onToggle={setIsKeyboardMode}
               />
+              <ResetButton
+                onReset={onReset}
+                />
             </div>
             {
               hideExample &&

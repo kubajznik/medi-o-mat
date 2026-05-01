@@ -1,17 +1,13 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import FrageButton from "../buttons/frageButtun";
-
-interface Bewertung {
-  wert: number;
-  label: string;
-}
+import type { BewertungsOption } from "@/types/Befragung";
 
 interface FragenKarteProps {
   frage: string;
   kategorie?: string;
   fragenCounter: { index: number; counter: number };
-  bewertung?: Bewertung[];
+  bewertung?: BewertungsOption[];
   handleNextQuestion: (value: number) => void;
   isKeyboardMode?: boolean;
 }

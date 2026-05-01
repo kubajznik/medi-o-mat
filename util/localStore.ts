@@ -1,5 +1,6 @@
 const config = {
     KEYBOARD_MODE: "keyboard-mode",
+    ANSWERS: "answers",
 } as const;
 
 type ConfigKey = typeof config[keyof typeof config];
@@ -38,6 +39,34 @@ class LocalStorageManager {
     getKeyboardMode(): boolean {
         const value = this.getItem(config.KEYBOARD_MODE);
         return value === "true";
+    }
+
+    addAnswer(value: number) {
+        const answers = this.getAnswers();
+        answers.push(value);
+        this.setItem(config.ANSWERS, JSON.stringify(answers));
+    }
+
+    getAnswers(): number[] {
+        const value = this.getItem(config.ANSWERS);
+        if (!value) return [];
+        try {
+            const parsed = JSON.parse(value);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error(`Error parsing answers from localStorage: ${error}`);
+            return [];
+        }
+    }
+
+    clearAnswers() {
+        this.removeItem(config.ANSWERS);
+    }
+
+    popAnswer() {
+        const answers = this.getAnswers();
+        answers.pop();
+        this.setItem(config.ANSWERS, JSON.stringify(answers));
     }
 };
 
