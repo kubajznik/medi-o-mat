@@ -11,7 +11,7 @@ export default async function Datenschutz() {
     <div className="min-h-screen w-full px-4 text-dark">
       <div className="flex flex-col items-start text-left pt-8 pl-4">
         <h1 className="text-4xl font-semibold text-dark">Datenschutz</h1>
-        <div className="text-dark mt-8 max-w-[800px]">
+        <div className="text-dark my-8 max-w-[800px]">
           <ReactMarkdown
             remarkPlugins={[remarkBreaks]}
             components={{

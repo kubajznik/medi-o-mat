@@ -16,7 +16,8 @@ Die Nutzung erfolgt grundsätzlich ohne Angabe personenbezogener Daten.
 Die erhobenen Daten dienen ausschließlich der direkten Generierung von Medienempfehlungen. Die eingegebenen Daten werden nicht dauerhaft gespeichert, sondern dienen ausschließlich der direkten Generierung von Medienempfehlungen. Sie werden temporär während der Nutzung verarbeitet und anschließend verworfen.
 
 # 4. Speicherung und Löschung
-Die Eingaben werden nicht dauerhaft gespeichert, sondern nur zur unmittelbaren Berechnung der Ergebnisse verwendet.
+Die Eingaben werden temporär im Browser gespeichert, bis die Berechnung abgeschlossen ist um eine reibungslose Nutzung der Webseite zu gewährleisten.
+Anschließend werden die Daten aus dem lokalen Speicher des Browsers gelöscht. Sie erreichen nie unseren Server.
 
 # 5. Hosting und Server-Logfiles
 Beim Aufruf unserer Website werden automatisch Informationen durch den Hosting-Anbieter erfasst (sogenannte Server-Logfiles), z. B.:
@@ -31,8 +32,7 @@ Unser Angebot enthält Links zu externen Websites Dritter (z. B. empfohlene Medi
 Für deren Inhalte und Datenschutzpraktiken sind ausschließlich deren Betreiber verantwortlich.
 
 # 7. Cookies
-Unsere Website verwendet nur technisch notwendige Cookies (sofern zutreffend).
-Falls keine Cookies:👉 Wir verwenden keine Cookies.
+Wir verwenden keine Cookies.
 
 # 8. Ihre Rechte
 Sie haben im Rahmen der gesetzlichen Bestimmungen folgende Rechte:
