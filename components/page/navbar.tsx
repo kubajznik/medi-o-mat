@@ -18,7 +18,11 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-300 bg-slate-200 text-lg font-medium text-dark">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center justify-center gap-3 absolute left-4" onClick={closeMobileMenu}>
+        <Link
+          href="/"
+          onClick={closeMobileMenu}
+          className="absolute left-4 flex items-center justify-center gap-3 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
+        >
           <img src="/images/mediomat_logo.png" alt="Medi-o-Mat Logo" className="h-8 w-auto" />
         </Link>
 
