@@ -29,11 +29,11 @@ export default function VorschlagCard({
   return (
     <div
       className={`${cardClassName} ${cardIndex === 0
-          ? "silver-border"
+          ? "border-[4px] border-[#74c1f7]"
           : cardIndex === 1
-            ? "gold-border"
+            ? "border-[4px] border-[#f06bc2]"
             : cardIndex === 2
-              ? "bronze-border"
+              ? "border-[4px] border-[#fa8f07]"
               : "border-2 border-gray-200"
         } bg-white p-6 w-72 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all`}
     >
