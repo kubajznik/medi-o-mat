@@ -13,6 +13,7 @@
   --medio-gelb: #fde083;
   --medio-orange: #fa8f07;
   --medio-pink: #f06bc2;
+  --medio-creme: #fff3e0;
   --spotify-green: #1db954;
   --spotify-black: #000000;
   --bg: #ffffff;
@@ -35,7 +36,7 @@
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
   --surface: #f1f5f9;
-  --text-primary: #9b9b9c;
+  --text-primary: var(--medio-creme);
   --text-negative: #ffffff;
   --text-faded: #6b7280;
   --soft-gray: #c4c4c4;

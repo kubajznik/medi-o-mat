@@ -38,12 +38,6 @@ export default function HomeClient({
         <i className="pi-arrow-right text-white pi" style={{ fontSize: "1.2rem" }} />
         {startButton}
       </button>
-      <button
-        onClick={() => router.push("/media")}
-        className="mt-6 font-medium text-gray-400 text-lg underline"
-      >
-        {medienuebersichtButton}
-      </button>
       <ScrollToButton targetId={nextSectionId} />
     </div>
   );
