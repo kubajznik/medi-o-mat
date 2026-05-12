@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import FrageButton from "../buttons/frageButtun";
 import type { BewertungsOption } from "@/types/Befragung";
+import { useKeyboardHandler } from "@/context/KeyboardContext";
 
 interface FragenKarteProps {
   frage: string;
@@ -47,45 +48,48 @@ export default function FragenKarte({
     handleButtonClick(bewertung[index].wert);
   };
 
-  const onCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const isArrow = e.key === "ArrowRight" || e.key === "ArrowLeft";
+  useKeyboardHandler({
+    enabled: isKeyboardMode,
+    onKey: (event, action) => {
+      if (bewertung.length === 0) return false;
 
-    if (e.repeat && !isArrow) return;
-
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      setFocusedIndex((prev) => Math.min(prev + 1, bewertung.length - 1));
-      return;
-    }
-
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      setFocusedIndex((prev) => Math.max(prev - 1, 0));
-      return;
-    }
-
-    if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-      e.preventDefault();
-      selectAt(focusedIndex);
-      return;
-    }
-
-    if (/^[1-9]$/.test(e.key)) {
-      const nextIndex = Number(e.key) - 1;
-      if (nextIndex < bewertung.length) {
-        e.preventDefault();
-        setFocusedIndex(nextIndex);
-        setTimeout(() => selectAt(nextIndex), 450);
+      const isNav = action.type === "nav";
+      if (event.repeat && !isNav) {
+        return true;
       }
-    }
-  };
+
+      if (action.type === "nav") {
+        if (action.direction === "right") {
+          setFocusedIndex((prev) => Math.min(prev + 1, bewertung.length - 1));
+          return true;
+        }
+        if (action.direction === "left") {
+          setFocusedIndex((prev) => Math.max(prev - 1, 0));
+          return true;
+        }
+      }
+
+      if (action.type === "confirm" || (action.type === "button" && action.button === "green")) {
+        selectAt(focusedIndex);
+        return true;
+      }
+
+      if (action.type === "number") {
+        const nextIndex = action.value - 1;
+        if (nextIndex < bewertung.length) {
+          setFocusedIndex(nextIndex);
+          setTimeout(() => selectAt(nextIndex), 450);
+          return true;
+        }
+      }
+
+      return false;
+    },
+  });
 
   return (
-    <div
-      onKeyDown={onCardKeyDown}
-      className="flex flex-col gap-6 md:gap-10 w-full max-w-[1000px] rounded-2xl px-4 md:px-8 lg:px-16 py-6 md:py-10 shadow-lg bg-white text-dark"
-    >
-      <h3 className="font-semibold text-lg text-center md:text-left md:text-2xl leading-[140%]">
+    <div className="flex flex-col gap-6 md:gap-10 bg-surface shadow-lg px-4 md:px-8 lg:px-16 py-6 md:py-10 rounded-2xl w-full max-w-[1000px]">
+      <h3 className="font-semibold text-lg md:text-2xl md:text-left text-center leading-[140%]">
         {"Frage " + fragenCounter.index + " von " + fragenCounter.counter}
       </h3>
 
@@ -93,7 +97,7 @@ export default function FragenKarte({
         {frage + "."}
       </h2>
 
-      <div className="flex flex-col md:flex-row md:justify-between gap-3 md:gap-6 mt-2 md:mt-6">
+      <div className="flex md:flex-row flex-col md:justify-between gap-3 md:gap-6 mt-2 md:mt-6">
         {bewertung.map((frage, index) => (
           <FrageButton
             key={index}

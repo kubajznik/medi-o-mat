@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import localStorageManager from "@/util/localStore";
 import type { Antworten, Fragebogen } from "@/types/Befragung";
 import ResetButton from "@/components/buttons/ResetButton";
+import { useKeyboardHandler } from "@/context/KeyboardContext";
 
 // import JSON
 import data from "../../data/questions.json";
@@ -76,8 +77,19 @@ export default function Befragung() {
     }
   };
 
+  useKeyboardHandler({
+    enabled: isKeyboardMode,
+    onKey: (event, action) => {
+      if (action.type === "button" && action.button === "red") {
+        handleQuestionBefore();
+        return true;
+      }
+      return false;
+    }
+  })
+
   return (
-    <div className="bg-gray-100 w-full h-screen">
+    <div className="w-full h-screen">
       <div className="flex flex-col items-center gap-14 pt-4 md:pt-24">
         <div className="flex flex-row gap-4">
           {/* Zurück-Button */}
