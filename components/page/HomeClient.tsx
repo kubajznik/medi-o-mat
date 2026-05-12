@@ -24,7 +24,7 @@ export default function HomeClient({
     <div className="flex flex-col justify-center items-center mt-10 sm:mt-0 min-h-screen text-center">
       <img src="/images/mediomat_logo.png" alt="Medi-o-Mat Logo" className="px-2 w-auto h-auto" />
       <p
-        className="mt-8 md:mt-16 max-w-[800px] font-normal text-dark text-xl"
+        className="mt-8 md:mt-16 max-w-[800px] font-normal text-text-primary text-xl"
         style={{ whiteSpace: "pre-wrap" }}
       >
         {ersteInformation}
@@ -33,7 +33,7 @@ export default function HomeClient({
         onClick={() => router.push("/befragung")}
         className={`${
           animate ? "animate__animated animate__headShake" : ""
-        } mt-28 px-6 py-4 bg-[#f06bc2] text-white font-light text-2xl rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase font-medium`}
+        } mt-28 px-6 py-4 bg-medio-pink text-white font-medium text-2xl rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
       >
         <i className="pi-arrow-right text-white pi" style={{ fontSize: "1.2rem" }} />
         {startButton}

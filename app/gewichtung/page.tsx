@@ -72,16 +72,16 @@ function GewichtungContent() {
   // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="px-5 md:px-10 min-h-screen  text-dark pt-10">
+    <div className="px-5 md:px-10 pt-10 min-h-screen text-dark">
       <div className="flex flex-col gap-2">
         <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
-        <h3 className="text-xl md:text-2xl max-w-[900px] mb-3 md:mb-10">
+        <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
           Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
           um diese mit doppelter Gewichtung in die Berechnung einfließen zu
           lassen.
         </h3>
 
-        <div className="flex flex-col gap-3 w-full justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-3 w-full">
           {questions.map((frage, index) => (
             <div className="w-full md:w-3/4" key={index}>
               {index === 0 ? (
@@ -119,9 +119,9 @@ function GewichtungContent() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center text-center mt-5 md:mt-10 mb-5">
+        <div className="flex flex-col items-center mt-5 md:mt-10 mb-5 text-center">
           {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
-          {/* <p className="mb-2 text-[#c4c4c4]">
+          {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
           </p> */}
           <button
@@ -129,10 +129,9 @@ function GewichtungContent() {
             onClick={() =>
               router.push("/ergebnis?answer=" + JSON.stringify(output))
             }
-            className="flex w-[400px] flex-row-reverse items-center justify-center gap-3 rounded-lg bg-[#C86BFA16] px-6 py-4 text-2xl 
-                      font-medium uppercase text-[#C86BFA] transition ease-in hover:scale-105 hover:bg-[#C86BFA24]"
+            className="flex flex-row-reverse justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
           >
-            <i className="pi pi-arrow-right" style={{ fontSize: "1.3rem" }}></i>
+            <i className="pi-arrow-right pi" style={{ fontSize: "1.3rem" }}></i>
             zur auswertung
           </button>
           <br />

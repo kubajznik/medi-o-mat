@@ -4,6 +4,58 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --medio-dark: #101028;
+  --medio-lila: #6631d7;
+  --medio-purple-10: #c86bfa16;
+  --medio-purple-14: #c86bfa24;
+  --medio-cyan: #74c1f7;
+  --medio-gelb: #fde083;
+  --medio-orange: #fa8f07;
+  --medio-pink: #f06bc2;
+  --spotify-green: #1db954;
+  --spotify-black: #000000;
+  --bg: #ffffff;
+  --fg: var(--medio-dark);
+  --accent: var(--medio-cyan);
+  --highlight: var(--medio-pink);
+  --muted: #e2e8f0;
+  --surface: #f1f5f9;
+  --text-primary: #111827;
+  --text-negative: #ffffff;
+  --text-faded: #6b7280;
+  --soft-gray: #c4c4c4;
+  --navbar-bg: var(--medio-gelb);
+}
+
+[data-theme="dark"] {
+  --bg: var(--medio-dark);
+  --fg: #fff;
+  --accent: var(--medio-cyan);
+  --highlight: var(--medio-pink);
+  --muted: #e2e8f0;
+  --surface: #f1f5f9;
+  --text-primary: #9b9b9c;
+  --text-negative: #ffffff;
+  --text-faded: #6b7280;
+  --soft-gray: #c4c4c4;
+  --navbar-bg: var(--medio-dark);
+}
+
+[data-theme="arcade"] {
+  --bg: #ffffff;
+  --fg: var(--medio-dark);
+  --accent: var(--medio-cyan);
+  --highlight: var(--medio-pink);
+  --muted: #e2e8f0;
+  --surface: #f1f5f9;
+  --text-primary: #111827;
+  --text-negative: #ffffff;
+  --text-faded: #6b7280;
+  --soft-gray: #c4c4c4;
+  --navbar-bg: var(--medio-lila);
+}
+
 .card > div {
   /* background-color: gold; */
   border: 4px solid #ffe298;
@@ -40,7 +92,7 @@
 
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: #101028;
+  color: var(--text-primary);
 }
 
 /* body {
@@ -51,7 +103,7 @@
   font-weight: 800;
   margin-top: 40px;
   margin-bottom: 8px;
-  color: rgba(0, 0, 0, 80%);
+  color: var(--text-primary);
 }
 
 #frageButton {

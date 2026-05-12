@@ -23,8 +23,7 @@ export default function FrageButton({
       type="button"
       onClick={handleClick}
       onFocus={onFocus}
-      className="border-solid border-2 rounded-2xl p-4 transition active:bg-blue-700 active:text-white text-dark hover:border-[#C86BFA] hover:scale-110
-         border-gray-300"
+      className="active:bg-blue-700 p-4 border-2 border-gray-300 hover:border-highlight border-solid rounded-2xl text-dark active:text-white hover:scale-110 transition"
     >
       {label}
     </button>

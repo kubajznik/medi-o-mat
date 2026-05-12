@@ -7,6 +7,7 @@ import Footer from "@/components/page/footer";
 import "primeicons/primeicons.css";
 import "animate.css";
 import Navbar from "@/components/page/navbar";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
-        {<Navbar />}
-        {children}
-        {<Footer />}
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-bg`}>
+          <Navbar />
+            {children}
+          <Footer />
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

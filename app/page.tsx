@@ -10,7 +10,7 @@ import header from "@/data/header.json";
  */
 export default function Home() {
   return (
-    <div className="px-4 w-full h-full text-dark">
+    <div className="px-4 w-full h-full text-text-primary">
       <HomeClient
         ersteInformation={textData.ersteInformation} 
         startButton={textData.startButton}

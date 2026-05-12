@@ -29,21 +29,21 @@ export default function VorschlagCard({
   return (
     <div
       className={`${cardClassName} ${cardIndex === 0
-          ? "border-[4px] border-[#74c1f7]"
+          ? "border-[4px] border-medio-cyan"
           : cardIndex === 1
-            ? "border-[4px] border-[#f06bc2]"
-            : cardIndex === 2
-              ? "border-[4px] border-[#fa8f07]"
-              : "border-2 border-gray-200"
+                ? "border-[4px] border-medio-pink"
+              : cardIndex === 2
+                  ? "border-[4px] border-medio-orange"
+                : "border-2 border-gray-200"
         } bg-white p-6 w-72 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all`}
     >
       <div className="flex flex-col gap-6">
         <span>
-          <p className="px-2 bg-gray-100 text-gray-500 w-min rounded-md font-medium tracking-[1px] uppercase text-sm">
+          <p className="bg-gray-100 px-2 rounded-md w-min font-medium text-gray-500 text-sm uppercase tracking-[1px]">
             {mediumArt}
           </p>
           <h2
-            className="font-semibold text-2xl px-1 mt-1 uppercase"
+            className="mt-1 px-1 font-semibold text-2xl uppercase"
             title={name}
           >
             {name.length > 27 ? `${name.slice(0, 27)}...` : name}
@@ -52,7 +52,7 @@ export default function VorschlagCard({
         <img
           src={image}
           alt="medium"
-          className="rounded-lg h-[200px] bg-contain"
+          className="bg-contain rounded-lg h-[200px]"
         />
         {beschreibung && (
           <p className="text-base">
@@ -63,7 +63,7 @@ export default function VorschlagCard({
           </p>
         )}
         {beschreibung && beschreibung.length > 200 && (
-          <button onClick={handleClick} className="text-[#c4c4c4] rounded-md">
+          <button onClick={handleClick} className="rounded-md text-text-faded">
             {showMore ? "Weniger anzeigen" : "mehr anzeigen..."}
           </button>
         )}
@@ -72,12 +72,12 @@ export default function VorschlagCard({
       <div className="flex justify-around">
         <a
           href={url ? url : "/"}
-          className="uppercase cursor-pointer w-fit"
+          className="w-fit uppercase cursor-pointer"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="mt-8 flex items-baseline gap-4 justify-center p-4 rounded-lg bg-black text-white cursor-pointer">
-            <i className="pi pi-external-link text-lg cursor-pointer"></i>
+          <div className="flex justify-center items-baseline gap-4 bg-black mt-8 p-4 rounded-lg text-white cursor-pointer">
+            <i className="text-lg cursor-pointer pi pi-external-link"></i>
           </div>
         </a>
 
@@ -85,12 +85,12 @@ export default function VorschlagCard({
           spotifyUrl && 
           <a
             href={spotifyUrl}
-            className="uppercase cursor-pointer w-fit"
+            className="w-fit uppercase cursor-pointer"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div className="mt-8 flex items-baseline gap-4 justify-center rounded-lg bg-black text-white cursor-pointer">
-              <SpotifyIcon className="h-[52px] w-[52px]"/>
+            <div className="flex justify-center items-baseline gap-4 bg-black mt-8 rounded-lg text-white cursor-pointer">
+              <SpotifyIcon className="w-[52px] h-[52px]"/>
             </div>
           </a>
         }

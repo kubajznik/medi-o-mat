@@ -78,7 +78,7 @@ export default function Befragung() {
 
   return (
     <div className="bg-gray-100 w-full h-screen">
-      <div className="flex flex-col gap-14 items-center pt-4 md:pt-24">
+      <div className="flex flex-col items-center gap-14 pt-4 md:pt-24">
         <div className="flex flex-row gap-4">
           {/* Zurück-Button */}
 
@@ -87,10 +87,10 @@ export default function Befragung() {
               <button
                 onClick={handleQuestionBefore}
                 type="button"
-                className="absolute top-3 left-3 md:-left-16 p-4 bg-[#C86BFA] text-white rounded-lg flex gap-2 justify-center items-center w-min"
+                className="top-3 left-3 md:-left-16 absolute flex justify-center items-center gap-2 bg-medio-pink p-4 rounded-lg w-min text-white"
               >
                 <i
-                  className="pi pi-arrow-left"
+                  className="pi-arrow-left text-white pi"
                   style={{ fontSize: "1rem", fontWeight: "bold" }}
                 ></i>
               </button>
@@ -109,7 +109,7 @@ export default function Befragung() {
               />
             )}
 
-            <div className="absolute top-3 right-3 md:top-3 md:-right-16 z-10 flex flex-col gap-4">
+            <div className="top-3 md:top-3 right-3 md:-right-16 z-10 absolute flex flex-col gap-4">
               <BeschreibungsBtn
                 hideExample={hideExample}
                 handleClick={() => setHideExample(!hideExample)}
@@ -134,7 +134,7 @@ export default function Befragung() {
 
         </div>
         {/* <button
-          className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] text-[#FE4E4E] uppercase w-[500px] p-2 rounded-lg font-medium"
+          className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] p-2 rounded-lg w-[500px] font-medium text-[#FE4E4E] uppercase"
           onClick={handleCancel}
         >
           befragung abbrechen

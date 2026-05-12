@@ -1,13 +1,11 @@
-const config = {
-    KEYBOARD_MODE: "keyboard-mode",
-    ANSWERS: "answers",
-} as const;
+import { STORAGE_KEYS, THEMES, type StorageKey, type Theme } from "@/types/storage";
 
-type ConfigKey = typeof config[keyof typeof config];
+const isTheme = (value: string): value is Theme =>
+    (Object.values(THEMES) as Theme[]).includes(value as Theme);
 
 class LocalStorageManager {
 
-    private setItem(key: ConfigKey, value: string) {
+    private setItem(key: StorageKey, value: string) {
         try {
             localStorage.setItem(key, value);
         } catch (error) {
@@ -15,7 +13,7 @@ class LocalStorageManager {
         }
     }
 
-    private getItem(key: ConfigKey): string | null {
+    private getItem(key: StorageKey): string | null {
         try {
             return localStorage.getItem(key);
         } catch (error) {
@@ -24,7 +22,7 @@ class LocalStorageManager {
         }
     }   
 
-    private removeItem(key: ConfigKey) {
+    private removeItem(key: StorageKey) {
         try {
             localStorage.removeItem(key);
         } catch (error) {
@@ -33,22 +31,22 @@ class LocalStorageManager {
     }
 
     setKeyboardMode(enabled: boolean) {
-        this.setItem(config.KEYBOARD_MODE, enabled ? "true" : "false");
+        this.setItem(STORAGE_KEYS.KEYBOARD_MODE, enabled ? "true" : "false");
     }
 
     getKeyboardMode(): boolean {
-        const value = this.getItem(config.KEYBOARD_MODE);
+        const value = this.getItem(STORAGE_KEYS.KEYBOARD_MODE);
         return value === "true";
     }
 
     addAnswer(value: number) {
         const answers = this.getAnswers();
         answers.push(value);
-        this.setItem(config.ANSWERS, JSON.stringify(answers));
+        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(answers));
     }
 
     getAnswers(): number[] {
-        const value = this.getItem(config.ANSWERS);
+        const value = this.getItem(STORAGE_KEYS.ANSWERS);
         if (!value) return [];
         try {
             const parsed = JSON.parse(value);
@@ -60,13 +58,22 @@ class LocalStorageManager {
     }
 
     clearAnswers() {
-        this.removeItem(config.ANSWERS);
+        this.removeItem(STORAGE_KEYS.ANSWERS);
     }
 
     popAnswer() {
         const answers = this.getAnswers();
         answers.pop();
-        this.setItem(config.ANSWERS, JSON.stringify(answers));
+        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(answers));
+    }
+
+    getTheme(): Theme {
+        const value = this.getItem(STORAGE_KEYS.THEME);
+        return value && isTheme(value) ? value : THEMES.LIGHT;
+    }
+
+    setTheme(theme: Theme) {
+        this.setItem(STORAGE_KEYS.THEME, theme);
     }
 };
 

@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Xmark } from "iconoir-react";
+import { Menu, Xmark, Arcade, SunLight, HalfMoon  } from "iconoir-react";
+import { THEMES } from "@/types/storage";
+import { useTheme } from "@/context/ThemeContext";
 
 const navigationItems = [
   { href: "/", label: "Home" },
@@ -24,8 +26,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const showLogo = pathname !== "/";
 
+  const { setTheme } = useTheme();
+
   return (
-    <nav className="top-0 z-50 sticky bg-[#fde083] border-slate-300 border-b font-medium text-dark text-lg">
+    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-dark text-lg">
       <div className="flex justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl h-16">
         <Link
           href="/"
@@ -73,6 +77,23 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <div className="flex flex-row gap-3 mx-auto px-3">
+            <button
+              onClick={() => setTheme(THEMES.ARCADE)}
+            >
+              <Arcade className="mr-4 w-6 h-6" />
+            </button>
+            <button
+            onClick={() => setTheme(THEMES.LIGHT)}
+            >
+              <SunLight className="mr-4 w-6 h-6" />
+            </button>
+            <button
+            onClick={() => setTheme(THEMES.DARK)}
+            >
+              <HalfMoon className="w-6 h-6" />
+            </button>
+            </div>
           </div>
         </div>
       ) : null}

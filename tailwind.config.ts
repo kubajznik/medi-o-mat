@@ -9,10 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#0e0e0e',
-        blue: '#062D77',
-        _purple: '#c86bfa'
-      }
+        bg: "var(--bg)",
+        fg: "var(--fg)",
+        accent: "var(--accent)",
+        text: {
+          primary: "var(--text-primary)",
+          negative: "var(--text-negative)",
+          faded: "var(--text-faded)",
+        },
+        navbar: {
+          bg: "var(--navbar-bg)",
+        },
+        highlight: "var(--highlight)",
+        muted: "var(--muted)",
+        surface: "var(--surface)",
+        "soft-gray": "var(--soft-gray)",
+        "spotify-green": "var(--spotify-green)",
+        "spotify-black": "var(--spotify-black)",
+        dark: "#0e0e0e",
+        blue: "#062D77",
+        medio: {
+          dark: "var(--medio-dark)",
+          lila: "var(--medio-lila)",
+          purple: "var(--medio-purple)",
+          "purple-10": "var(--medio-purple-10)",
+          "purple-14": "var(--medio-purple-14)",
+          cyan: "var(--medio-cyan)",
+          gelb: "var(--medio-gelb)",
+          orange: "var(--medio-orange)",
+          pink: "var(--medio-pink)",
+        },
+      },
     },
   },
   plugins: [],
