@@ -23,11 +23,11 @@ const config: Config = {
         highlight: "var(--highlight)",
         muted: "var(--muted)",
         surface: "var(--surface)",
+        negative: "var(--text-negative)",
         "soft-gray": "var(--soft-gray)",
         "spotify-green": "var(--spotify-green)",
         "spotify-black": "var(--spotify-black)",
         dark: "#0e0e0e",
-        blue: "#062D77",
         medio: {
           dark: "var(--medio-dark)",
           lila: "var(--medio-lila)",

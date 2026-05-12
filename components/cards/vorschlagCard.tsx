@@ -76,8 +76,8 @@ export default function VorschlagCard({
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="flex justify-center items-baseline gap-4 bg-black mt-8 p-4 rounded-lg text-white cursor-pointer">
-            <i className="text-lg cursor-pointer pi pi-external-link"></i>
+          <div className="flex justify-center items-baseline gap-4 bg-fg mt-8 p-4 rounded-lg text-white cursor-pointer">
+            <i className="text-negative text-lg cursor-pointer pi pi-external-link"></i>
           </div>
         </a>
 
