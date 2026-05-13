@@ -16,12 +16,12 @@
   --medio-creme: #fff3e0;
   --spotify-green: #1db954;
   --spotify-black: #000000;
-  --bg: #ffffff;
+  --bg: #f4f4f4;
   --fg: var(--medio-dark);
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: #f1f5f9;
+  --surface:  white;
   --text-primary: #111827;
   --text-negative: #ffffff;
   --text-faded: #6b7280;
@@ -35,7 +35,7 @@
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: #f1f5f9;
+  --surface: #1d1d33;
   --text-primary: #9b9b9c;
   --text-negative: #ffffff;
   --text-faded: #6b7280;
@@ -44,17 +44,17 @@
 }
 
 [data-theme="arcade"] {
-  --bg: #ffffff;
+  --bg: var(--medio-gelb);
   --fg: var(--medio-dark);
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: #f1f5f9;
+  --surface: var(--medio-pink);
   --text-primary: #111827;
   --text-negative: #ffffff;
   --text-faded: #6b7280;
   --soft-gray: #c4c4c4;
-  --navbar-bg: var(--medio-lila);
+  --navbar-bg: var(--medio-pink);
 }
 
 .card > div {
