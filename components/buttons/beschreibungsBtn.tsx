@@ -14,7 +14,7 @@ export default function BeschreibungsBtn({
       type="button"
       className={`${
         hideExample ? "hidden" : ""
-      } p-2 bg-white text-gray-300 hover:text-[#C86BFA] transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110`}
+      } p-2 bg-white transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110`}
     >
       <i
         className="pi pi-question-circle"

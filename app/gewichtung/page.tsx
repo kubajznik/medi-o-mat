@@ -1,38 +1,54 @@
 "use client";
 import GewichtungsCard from "@/components/cards/gewichtungsCard";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
-import { router } from "next/client";
+import { Suspense } from "react";
+import type {
+  Antworten,
+  Fragebogen,
+  GewichteteAntwort,
+} from "@/types/Befragung";
 
-interface Answer {
-  value: number;
-  weight: number;
-}
-
-export default function Gewichtung() {
+function GewichtungContent() {
   const router = useRouter();
 
-  const questions: any[] = [];
-  for (let category of data["fragen"]) {
-    for (let question of category.fragenliste) {
-      questions.push(question.frage);
-    }
-  }
+  const questionData = data as Fragebogen;
+  const questions = questionData.fragen.flatMap((category) =>
+    category.fragenliste.map((question) => question.frage)
+  );
+
+
 
   const searchParams = useSearchParams();
-  let output: Answer[] = [];
-  let answers = JSON.parse(searchParams.get("answer") as string);
-  for (let i = 0; i < answers.length; i++) {
-    output.push({
-      value: answers[i],
-      weight: 1,
-    });
-  }
+  const answersParam = searchParams.get("answer");
+  const answers = useMemo<Antworten>(() => {
+    if (!answersParam) return [];
+    try {
+      const parsed = JSON.parse(answersParam);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Failed to parse answers from search params:", error);
+      return [];
+    }
+  }, [answersParam]);
+
+  const [output, setOutput] = useState<GewichteteAntwort[]>(() =>
+    answers.map((value) => ({ value, weight: 1 }))
+  );
+
+  useEffect(() => {
+    setOutput(answers.map((value) => ({ value, weight: 1 })));
+  }, [answers]);
 
   function doubleWeight(question: number) {
-    output[question].weight = output[question].weight == 1 ? 2 : 1;
-    console.log(output);
+    setOutput((prev) =>
+      prev.map((item, index) =>
+        index === question
+          ? { ...item, weight: item.weight === 1 ? 2 : 1 }
+          : item
+      )
+    );
   }
 
   /**
@@ -56,18 +72,18 @@ export default function Gewichtung() {
   // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="px-10 h-screen  text-dark pt-10">
+    <div className="px-5 md:px-10 pt-10 min-h-screen text-dark">
       <div className="flex flex-col gap-2">
-        <h1 className="font-semibold text-[56px]">Gewichtung der Thesen</h1>
-        <h3 className="text-2xl max-w-[900px] mb-10">
+        <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
+        <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
           Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
           um diese mit doppelter Gewichtung in die Berechnung einfließen zu
           lassen.
         </h3>
 
-        <div className="flex flex-col gap-3 w-full justify-center items-center">
+        <div className="flex flex-col justify-center items-center gap-3 w-full">
           {questions.map((frage, index) => (
-            <div className="w-3/4" key={index}>
+            <div className="w-full md:w-3/4" key={index}>
               {index === 0 ? (
                 <p className="gewichtungCategory">Plattform</p>
               ) : (
@@ -103,9 +119,9 @@ export default function Gewichtung() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center text-center mt-10">
+        <div className="flex flex-col items-center mt-5 md:mt-10 mb-5 text-center">
           {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
-          {/* <p className="mb-2 text-[#c4c4c4]">
+          {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
           </p> */}
           <button
@@ -113,9 +129,9 @@ export default function Gewichtung() {
             onClick={() =>
               router.push("/ergebnis?answer=" + JSON.stringify(output))
             }
-            className={`px-6 py-4 bg-[#C86BFA16] hover:bg-[#C86BFA24] text-[#C86BFA] text-2xl rounded-lg flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:scale-105 ease-in uppercase font-medium`}
+            className="flex flex-row-reverse justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
           >
-            <i className="pi pi-arrow-right" style={{ fontSize: "1.3rem" }}></i>
+            <i className="pi-arrow-right pi" style={{ fontSize: "1.3rem" }}></i>
             zur auswertung
           </button>
           <br />
@@ -123,5 +139,13 @@ export default function Gewichtung() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Gewichtung() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GewichtungContent />
+    </Suspense>
   );
 }

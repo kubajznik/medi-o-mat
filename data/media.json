@@ -82,6 +82,7 @@
     "mediumArt": "podcast",
     "beschreibung": "\"Lage der Nation\" ist ein Podcast, der sich mit aktuellen politischen und gesellschaftlichen Themen in Deutschland beschäftigt. Er diskutiert aktuelle Ereignisse sowie langfristige Entwicklungen. Der Podcast ist kostenlos verfügbar und kann auf verschiedenen Plattformen wie Spotify, Apple Podcasts und anderen Podcast-Apps gestreamt oder heruntergeladen werden. Jede Folge des Podcasts hat eine durchschnittliche Länge von etwa einer Stunde, was es den Moderatoren ermöglicht, komplexe Themen ausführlich zu behandeln und verschiedene Perspektiven zu beleuchten. Der Podcast bietet seinen Hörer*innen eine fundierte Orientierung in der politischen Landschaft Deutschlands und richtet sich an ein interessiertes und informiertes Publikum. Passend zu dem Podcast gib es auch noch das \"Lage der Nation Forum\", das ist eine Online-Plattform, die es den Hörer*innen des gleichnamigen Podcasts ermöglicht, über aktuelle politische Themen zu diskutieren, Meinungen auszutauschen und Fragen zu stellen. Hier können Nutzer in einem moderierten Umfeld ihre Gedanken teilen und an der öffentlichen Debatte teilnehmen, die vom Podcast inspiriert wurde.",
     "url": "https://lagedernation.org/",
+    "spotifyUrl": "https://open.spotify.com/show/7a3LWj5xSFhFRYmztS8wgK?si=03ad9a51aa4f4408",
     "image": "/logos/ldn.svg",
     "code": "lage",
     "codierung": {
@@ -823,6 +824,7 @@
     "mediumArt": "podcast",
     "beschreibung": " \"The Daily\" der New York Times ist ein täglich aktualisierter Podcast, der über verschiedene Plattformen wie Podcast-Apps, die Website der New York Times und andere Podcast-Dienste frei zugänglich ist. Als Nachrichten-Podcast konzentriert sich \"The Daily\" auf eine breite Palette von Themen, darunter Politik, internationale Beziehungen, Wirtschaft, Kultur und Wissenschaft. Jede Episode hat eine durchschnittliche Länge von etwa 20 bis 30 Minuten und bietet gut recherchierte Analysen, Interviews und Hintergrundinformationen zu den behandlungsweise Themen. Die Moderation übernehmen Michael Barbaro und Sabrina Tavernise.",
     "url": "https://www.nytimes.com/column/the-daily",
+    "spotifyUrl": "https://open.spotify.com/show/3IM0lmZxpFAY7CwMuv9H4g?si=5da24aa0b26e4342",
     "image": "/logos/the-daily.jpg",
     "code": "dailynt",
     "codierung": {
@@ -862,6 +864,7 @@
     "mediumArt": "podcast",
     "beschreibung": "\"Jung & Naiv\" ist ein journalistisches Format von Thilo Jung, das auf verschiedenen Plattformen wie YouTube, Spotify und Podcast-Apps verfügbar ist. Als Video- und Podcast-Format bietet \"Jung & Naiv\" einen unkonventionellen Ansatz zur politischen Berichterstattung. Thilo Jung interviewt Politiker, Experten und Persönlichkeiten des öffentlichen Lebens in informeller Atmosphäre und mit einer direkten, oft provokativen Herangehensweise. Die Themenbereiche reichen von Politik und Gesellschaft bis hin zu aktuellen Ereignissen und kontroversen Debatten. Die durchschnittliche Dauer eines Beitrags beträgt etwa 30 bis 60 Minuten. \"Jung & Naiv\" zeichnet sich durch seine ungeschönte, oft kritische Herangehensweise aus und ist für seine unkonventionellen Interviews bekannt, die den Zuschauern tiefe Einblicke in komplexe Themen bieten.",
     "url": "https://jungundnaiv.de/",
+    "spotifyUrl": "https://open.spotify.com/show/4zQKHBLkM3puG5n3jAU2H4?si=14a996b5007d4f5f",
     "image": "/logos/jungnaiv.png",
     "code": "jungnaiv",
     "codierung": {
@@ -939,7 +942,7 @@
     "name": "104.6",
     "mediumArt": "radio",
     "beschreibung": "\"104.6\" ist ein beliebter Radiosender, der in Berlin und Umgebung auf der Frequenz 104,6 MHz zu hören ist. Zudem kann man den Sender über das Internet sowie verschiedene Radio-Apps empfangen. Als Radiokanal bietet \"104.6\" eine vielfältige Mischung aus Musik, Nachrichten, Unterhaltung und Servicebeiträgen. Die Themenpalette ist breit gefächert und umfasst neben aktuellen Nachrichten und lokalen Ereignissen auch Musikcharts, Unterhaltungsformate, Verkehrsinformationen und Veranstaltungstipps. Die Beiträge variieren in ihrer Länge und reichen von kurzen Einspielern bis hin zu längeren Sendungen. Besonders hervorzuheben sind die lokale Ausrichtung des Senders, die abwechslungsreiche Musikmischung und die Kombination aus informativen Beiträgen und unterhaltsamen Formaten.",
-    "url": "https://104.6rtl.com/",
+    "url": "https://www.104.6rtl.com/",
     "image": "/logos/rtl.svg",
     "code": "hundertviersechs",
     "codierung": {
@@ -1017,7 +1020,7 @@
     "name": "Beyond Gossip",
     "mediumArt": "youtube",
     "beschreibung": "Beyond Gossip ist ein kostenloses Angebot von funk und gehört damit zum öffentlich-rechtlichen Rundfunk. Die Inhalte werden auf verschiedenen Plattformen wie TikTok, Instagram, YouTube und der eigenen Website bereitgestellt. Die Plattform konzentriert sich darauf, die subtileren Aspekte hinter der Popkultur-Gerüchteküche in unter 5 Minuten zu beleuchten. In einer Welt, die von der Schnelllebigkeit der sozialen Medien geprägt ist, entstehen oft Spekulationen und Vermutungen, ohne dass die Fakten überprüft oder hinterfragt werden. Beyond Gossip hat es sich zur Mission gemacht, diesen scheinbaren \"Fakten\" auf den Grund zu gehen.",
-    "url": "https:/funk.net/channel/beyond-gossip-12324",
+    "url": "https://funk.net/channel/beyond-gossip-12324",
     "image": "/logos/beyondgossip.jpeg",
     "code": "beyond",
     "codierung": {
@@ -1134,7 +1137,8 @@
     "name": "Apokalypse & Filterkaffee",
     "mediumArt": "podcast",
     "beschreibung": "Als morgendliches News-Omelett bezeichnen Micky Beisenherz und seine Mit-Moderator:innen ihren Nachrichtenpodcast. Darin servieren sie, mithilfe von verschiedensten Gästen, die wichtigsten Aufmacher, Schlagzeilen, Titelthemen, Leitartikel und Tweets des Tages.  Etwa 40 Minuten dauern die einzelnen Episoden, die täglich ab 5 Uhr morgens überall dort zu finden sind, wo es Podcasts gibt. Die Inhalte sind allen zu empfehlen, die gerne grob informiert sind – mit trockenen Nachrichtenformaten aber nicht so viel anfangen können. Wie viel Raum die tatsächlichen Nachrichten einnehmen, variiert hier von Folge zu Folge, von Gast zu Gast. Von lustig-anekdotisch bis ernsthaft-politisch ist alles dabei.",
-    "url": "https://apokalypse-und-filterkaffee.io/",
+    "url": "https://apokalypse-und-filterkaffee.podigee.io/",
+    "spotifyUrl": "https://open.spotify.com/show/6kyGUIbKUH7G506XGX4lNk?si=e8ceadcb9cb14ba1",
     "image": "/logos/apofilter.jpeg",
     "code": "apokalypse",
     "codierung": {
@@ -1213,6 +1217,7 @@
     "mediumArt": "podcast",
     "beschreibung": "Unter der Woche erhältst du hier zwei Mal pro Tag ein Update über die neuesten Nachrichten in den Bereichen Politik, Umwelt und internationales Geschehen. Am Wochenende wird eine Folge am Tag veröffentlicht. Die Folgen dauern im Schnitt zehn Minuten. Jeden Samstag gibt es Spezialfolgen, in denen ein einzelnes Thema für eine halbe bis Dreiviertelstunde unter Betrachtung verschiedener Perspektiven aufgearbeitet wird. Der Podcast wird von ZEIT Online betrieben und ist überall zu finden, wo es Podcasts gibt. Eine Live-Show und ein Newsletter ergänzen das Angebot zusätzlich.",
     "url": "https://zeit.de/serie/was-jetzt",
+    "spotifyUrl": "https://open.spotify.com/show/4ymTKvZm5SGMtk4NlmRyKv?si=d5739860fc9e4f82",
     "image": "/logos/was_jetzt.png",
     "code": "wasjetzt",
     "codierung": {
@@ -1292,7 +1297,6 @@
     "beschreibung": "CORRECTIV ist ein gemeinwohlorientiertes Medienhaus, das Demokratie stärkt. Als vielfach ausgezeichnete Redaktion stehen sie für investigativen Journalismus. Sie lösen öffentliche Debatten aus, arbeiten mit Bürgerinnen und Bürgern an ihren Recherchen und fördern die Gesellschaft mit unseren Bildungsprogrammen. Zentrale Ziele sind, Machtmissbrauch aufzudecken und ein Zeichen gegen Rechtsextremismus zu setzen. Die Recherchen werden durch private Spenden und unabhängige Institutionen oder Stiftungen finanziert, damit sie nicht durch politische Entscheider, Werbung oder Quoten beeinflusst werden.",
     "url": "https://correctiv.org",
     "image": "/logos/correctiv.svg",
-    "image": "/logos/correctiv.svg",
     "code": "corrweb",
     "codierung": {
       "1": 5,
@@ -1331,6 +1335,7 @@
     "mediumArt": "podcast",
     "beschreibung": "Die Tagesschau in 100 Sekunden ist ein Podcast bzw. Videopodcast der ARD, der mehrmals täglich aktualisiert wird und alle wichtigen Themen des Tages kurz (in 100 Sekunden) zusammenfasst. Anzuhören ist er auf allen gängigen Podcast-Plattformen, sowie online auch anzuschauen auf der Website der Tagesschau. ",
     "url": "https://www.tagesschau.de/multimedia/sendung/tagesschau_in_100_sekunden",
+    "spotifyUrl": "https://open.spotify.com/show/4QwUbrMJZ27DpjuYmN4Tun?si=88df91cb405e4581",
     "image": "/logos/tagesschau.svg",
     "code": "tspodcast",
     "codierung": {
@@ -1370,6 +1375,7 @@
     "mediumArt": "podcast",
     "beschreibung": "Auf den Punkt ist ein Podcast der Süddeutschen Zeitung, der täglich erscheint und ein breites Spektrum an tagesakutellen Themen behandelt. Dabei geht es in den ersten 10 bis 15 Minuten etwas tiefgründiger um ein bestimmtes Thema, und in den letzten paar Minuten gibt es noch einen groben Überblick über sonstige wichtige Nachrichten des Tages. Anzuhören ist er auf allen gängigen Podcast-Plattformen, sowie auch online auf der Website der Süddeutschen Zeitung. ",
     "url": "https://www.sueddeutsche.de/thema/Auf_den_Punkt",
+    "spotifyUrl": "https://open.spotify.com/show/7vFmyZR3rDf61V69UpRXbA?si=8714a8dcfe704898",
     "image": "/logos/sueddeutsche_zeitung.svg",
     "code": "aufdenpunkt",
     "codierung": {
@@ -1409,6 +1415,7 @@
     "mediumArt": "podcast",
     "beschreibung": "Today in Focus ist ein Podcast des Guardian, bei dem an jedem Tag unter der Woche ein bestimmtes Thema ausführlich, unter Anderem mit vielen Interviews, behandelt wird. Dabei können die Themen ganz unterschiedlich sein, beziehen sich aber oft auf Politik und Wirtschaft. Anzuhören ist er auf allen gängigen Podcast-Plattformen, sowie auch online auf der Website des Guardian. ",
     "url": "https://www.theguardian.com/news/series/todayinfocus",
+    "spotifyUrl": "https://open.spotify.com/show/2cSQmzYnf6LyrN0Mi6E64p?si=0124399b13d44b99",
     "image": "/logos/guardian.svg",
     "code": "todayfocus",
     "codierung": {
@@ -1486,7 +1493,7 @@
     "name": "Prenzlauer Berg Nachrichten",
     "mediumArt": "website",
     "beschreibung": "Der lokale Nachrichtendienst berichtet über Themen wie Politik, Alltag, Kultur, Bildung und Geschichte, die den Stadtteil Prenzlauer Berg in Berlin betreffen. Die Beiträge stehen auf der Webseite oder als Newsletter zur Verfügung, wobei durch ein kostenpflichtiges Abo exklusive Inhalte freigeschaltet werden können.",
-    "url": "https://www.prenzlauerberg-nachrichten.de",
+    "url": "https://loky.news",
     "image": "https://www.prenzlauerberg-nachrichten.de/wp-content/uploads/2017/01/PBN_Logo_SW-500_83-72dpi.jpg",
     "code": "pberg",
     "codierung": {
@@ -1800,6 +1807,7 @@
     "mediumArt": "podcast",
     "beschreibung": "\"Der Tag\" ist eine tägliche Nachrichtensendung des Deutschlandfunks (DLF), die sich mit aktuellen Ereignissen und Entwicklungen aus Deutschland und der Welt befasst. Die Sendung bietet Hörer*innen eine umfassende Berichterstattung über politische, wirtschaftliche, kulturelle und gesellschaftliche Themen. Sie wird werktags mehrmals am Tag ausgestrahlt und kann auch als Podcast auf der Website des Deutschlandfunks, sowie auf Spotify, Instagram, YouTube und Co. abgerufen werden. Jede Ausgabe von \"Der Tag\" dauert in der Regel etwa 15 bis 30 Minuten und präsentiert Nachrichten, Berichte, Interviews und Analysen von Experten. Die Sendung zeichnet sich durch ihre fundierte und seriöse Berichterstattung, ihre journalistische Qualität und ihre aktuelle Relevanz aus. Sie richtet sich an ein breites Publikum, das an einer objektiven und informativen Berichterstattung interessiert ist.",
     "url": "https://www.deutschlandfunk.de/podcast-104.html",
+    "spotifyUrl": "https://open.spotify.com/show/7JySWeA3XdcaaFa6AWfnb2?si=a95d7fe5b2564696",
     "image": "/images/der_tag.jpeg",
     "code": "dertag",
     "codierung": {
@@ -1839,6 +1847,7 @@
     "mediumArt": "podcast",
     "beschreibung": "\"Deutschlandfunk Aktuell\" ist eine umfassende Nachrichtensendung des Deutschlandfunks, die sich mit aktuellen Ereignissen und Entwicklungen aus Deutschland und der ganzen Welt befasst. Die Sendung bietet den Hörern eine tagesaktuelle Berichterstattung über politische, wirtschaftliche, gesellschaftliche, kulturelle und sportliche Themen. Sie wird mehrmals täglich ausgestrahlt und informiert die Hörer über die wichtigsten Nachrichten und Ereignisse des Tages. Neben den Nachrichtenberichten werden auch Hintergrundberichte, Interviews mit Experten und Analysen präsentiert, um ein umfassendes Bild der aktuellen Lage zu vermitteln. \"Deutschlandfunk Aktuell\" ist nicht nur im Radio zu hören, sondern auch als Livestream auf der Website des Deutschlandfunks verfügbar. Darüber hinaus können Hörer die Sendung als Podcast abonnieren, um sie jederzeit und überall zu hören.",
     "url": "https://www.deutschlandfunk.de/informationen-am-morgen-102.html",
+    "spotifyUrl": "https://open.spotify.com/show/2lKfNKdvWPFHYcHmKuHGJj?si=8f5e9693c3c54b46",
     "image": "/logos/defunk.svg",
     "code": "defunk",
     "codierung": {

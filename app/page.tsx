@@ -1,9 +1,7 @@
-"use client";
-
-import useAnimationToggle from "@/hooks/useAnimationToggle";
-import { useRouter } from "next/navigation";
-import React from "react";
 import textData from "../data/texte.json";
+import { FullpageText } from "@/components/texts/FullpageText";
+import HomeClient from "@/components/page/HomeClient";
+import header from "@/data/header.json";
 
 /**
  *
@@ -11,58 +9,43 @@ import textData from "../data/texte.json";
  *
  */
 export default function Home() {
-  const router = useRouter();
-  const animate = useAnimationToggle(7000);
-
   return (
-    <div className=" h-full w-full px-4 text-dark">
-      <div className="flex flex-col items-center text-center pt-24">
-        <h1 className="text-[96px] font-semibold text-dark">
-          {textData.anwendungsName}
-        </h1>
-        <p
-          className="text-dark mt-16 max-w-[800px] font-normal text-xl"
-          style={{ whiteSpace: "pre-wrap" }}
-        >
-          {textData.ersteInformation}
-        </p>
-        <button
-          onClick={() => router.push("/befragung")}
-          className={`${
-            animate ? "animate__animated animate__headShake" : ""
-          } mt-28 px-6 py-4 bg-[#C86BFA] text-white font-light text-2xl rounded-lg  shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase font-medium`}
-        >
-          <i className="pi pi-arrow-right" style={{ fontSize: "1.2rem" }} />
-          {textData.startButton}
-        </button>
-        <button
-          onClick={() => router.push("/media")}
-          className="underline mt-6 text-lg text-gray-400 font-medium"
-        >
-          {textData.medienuebersichtButton}
-        </button>
-      </div>
+    <div className="px-4 w-full h-full text-text-primary">
+      <HomeClient
+        ersteInformation={textData.ersteInformation} 
+        startButton={textData.startButton}
+        medienuebersichtButton={textData.medienuebersichtButton}
+        nextSectionId="problemstellung"
+      />
 
-      <div className="py-[180px] flex flex-col gap-20 justify-center items-center">
+      <div className="flex flex-col justify-center items-center gap-20 py-[180px]">
         <div className="flex flex-col gap-6 max-w-[800px]">
-          <h2 className="font-semibold text-3xl">
-            {textData.wasIstWahlOMatHeader}
-          </h2>
-          <p style={{ whiteSpace: "pre-wrap" }}>
-            {textData.wasIstWahlOMatSubtext}
-          </p>
-        </div>
+            <FullpageText 
+            header={header.problemstellung}
+            headerId="problemstellung"
+            filePath="data/md/problemstellung.md"
+            nextSectionId="unsere_rolle"
+            />
+            
+            <FullpageText 
+            header={header.unsere_rolle}
+            headerId="unsere_rolle"
+            filePath="data/md/unsere_rolle.md"
+            nextSectionId="medienauswahl"
+            />
 
-        <div className="flex flex-col gap-6 max-w-[800px]">
-          <h2 className="font-semibold text-3xl">{textData.resultsHeader}</h2>
-          <p style={{ whiteSpace: "pre-wrap" }}>{textData.resultsSubtext}</p>
-        </div>
+            <FullpageText 
+            header={header.medienauswahl}
+            headerId="medienauswahl"
+            filePath="data/md/medienauswahl.md"
+            nextSectionId="und_jetzt"
+            />
 
-        <div className="flex flex-col gap-6 max-w-[800px]">
-          <h2 className="font-semibold text-3xl">
-            {textData.disclaimerHeader}
-          </h2>
-          <p style={{ whiteSpace: "pre-wrap" }}>{textData.disclaimerSubtext}</p>
+            <FullpageText 
+            header={header.und_jetzt}
+            headerId="und_jetzt"
+            filePath="data/md/und_jetzt.md"
+            />
         </div>
       </div>
     </div>
