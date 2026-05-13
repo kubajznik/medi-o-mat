@@ -1490,11 +1490,11 @@
     }
   },
   {
-    "name": "Prenzlauer Berg Nachrichten",
+    "name": "loky",
     "mediumArt": "website",
     "beschreibung": "Der lokale Nachrichtendienst berichtet über Themen wie Politik, Alltag, Kultur, Bildung und Geschichte, die den Stadtteil Prenzlauer Berg in Berlin betreffen. Die Beiträge stehen auf der Webseite oder als Newsletter zur Verfügung, wobei durch ein kostenpflichtiges Abo exklusive Inhalte freigeschaltet werden können.",
     "url": "https://loky.news",
-    "image": "https://www.prenzlauerberg-nachrichten.de/wp-content/uploads/2017/01/PBN_Logo_SW-500_83-72dpi.jpg",
+    "image": "https://storage.ghost.io/c/7d/16/7d16f185-219f-4881-8506-d627ebb51163/content/images/size/w640/format/webp/2025/01/Gira-ohne-Hintergrund--ausgef-llt--und-gelbem-Ohr-Sticker-links-rechts-blickrichtung.png",
     "code": "pberg",
     "codierung": {
       "1": 3,
