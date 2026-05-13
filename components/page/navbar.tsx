@@ -7,13 +7,14 @@ import { Menu, Xmark, Arcade, SunLight, HalfMoon  } from "iconoir-react";
 import { THEMES } from "@/types/storage";
 import { useTheme } from "@/context/ThemeContext";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
+import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 
 const navigationItems = [
   { href: "/", label: "Home" },
-  { href: "#problemstellung", label: "Problem" },
-  { href: "#unsere_rolle", label: "Wir" },
-  { href: "#medienauswahl", label: "Medienauswahl" },
-  { href: "#und_jetzt", label: "Weiter" },
+  { href: "/#problemstellung", label: "Problem" },
+  { href: "/#unsere_rolle", label: "Wir" },
+  { href: "/#medienauswahl", label: "Medienauswahl" },
+  { href: "/#und_jetzt", label: "Weiter" },
   { href: "/befragung", label: "Befragung" },
   { href: "/media", label: "Medienübersicht" },
 ];
@@ -25,7 +26,8 @@ export default function Navbar() {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const pathname = usePathname();
-  const showLogo = pathname !== "/";
+  const { isMainLogoVisible } = useLogoVisibility();
+  const showLogo = pathname !== "/" || !isMainLogoVisible;
 
   const { setTheme } = useTheme();
 
@@ -99,15 +101,7 @@ export default function Navbar() {
 
   return (
     <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-dark text-lg">
-      <div className="flex justify-center items-center mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl h-16">
-        <Link
-          href="/"
-          onClick={closeMobileMenu}
-          className="left-4 absolute flex justify-center items-center gap-3 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
-        >
-          { showLogo && <img src="/images/mediomat_logo.png" alt="Medi-o-Mat Logo" className="w-auto h-7 md:auto" /> }
-        </Link>
-
+      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[800px] h-16">
         {/* lg:flex fügt die alte Navbar wieder ein*/}
         <div className="hidden items-center gap-8">
           {navigationItems.map((item) => (
@@ -119,7 +113,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex right-4 absolute justify-center items-center hover:bg-slate-300 p-2 rounded-md text-dark transition"
+          className="inline-flex hover:bg-slate-300 p-2 rounded-md text-text-primary transition"
           aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
@@ -131,11 +125,26 @@ export default function Navbar() {
             <Menu className="w-6 h-6" />
           )}
         </button>
+
+        <Link
+          href="/"
+          onClick={closeMobileMenu}
+          className="flex justify-center items-center ml-4 gap-3 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
+        >
+          {showLogo && (
+            <img
+              src="/images/mediomat_logo.png"
+              alt="Medi-o-Mat Logo"
+              className="w-auto h-7 origin-center animate-[pop_220ms_ease-out]"
+            />
+          )}
+        </Link>
+
       </div>
 
       {isMobileMenuOpen ? (
         <div id="mobile-navigation" className="right-0 left-0 absolute bg-surface border-slate-300 border-t">
-          <div className="flex flex-row gap-2 mx-auto px-4 sm:px-6 lg:px-8 py-3 max-w-6xl">
+          <div className="flex flex-row gap-2 mx-auto py-3 max-w-[800px]">
             {navigationItems.map((item, index) => (
               <Link
                 key={item.href}

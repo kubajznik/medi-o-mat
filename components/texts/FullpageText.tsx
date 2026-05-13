@@ -6,9 +6,10 @@ interface FullpageTextProps {
     filePath: string;
     headerId?: string;
     nextSectionId?: string;
+    children?: React.ReactNode;
 }
 
-export const FullpageText = ({ header, filePath, headerId, nextSectionId }: FullpageTextProps) => {
+export const FullpageText = ({ header, filePath, headerId, nextSectionId, children }: FullpageTextProps) => {
   return (
     <div className="flex flex-col justify-center ms-center max-w-[800px] min-h-screen text-justify" id ={headerId}> 
       {header && <h1 className="mb-4 pt-16 font-bold text-2xl text-left">{header}</h1>}
@@ -18,6 +19,7 @@ export const FullpageText = ({ header, filePath, headerId, nextSectionId }: Full
           <ScrollToButton targetId={nextSectionId} />
         </div>
       )}
+      {children}
     </div>
   );
 };

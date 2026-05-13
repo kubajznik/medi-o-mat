@@ -9,6 +9,7 @@ import "animate.css";
 import Navbar from "@/components/page/navbar";
 import { ThemeProvider } from "../context/ThemeContext";
 import { KeyboardProvider } from "@/context/KeyboardContext";
+import { LogoVisibilityProvider } from "@/context/LogoVisibilityContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +26,15 @@ export default function RootLayout({
   return (
     <ThemeProvider>
       <KeyboardProvider>
-        <html lang="en">
-          <body className={`${inter.className} bg-bg`}>
-            <Navbar />
-            {children}
-            <Footer />
-          </body>
-        </html>
+        <LogoVisibilityProvider>
+          <html lang="en">
+            <body className={`${inter.className} bg-bg`}>
+              <Navbar />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        </LogoVisibilityProvider>
       </KeyboardProvider>
     </ThemeProvider>
   );
