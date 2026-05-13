@@ -69,7 +69,8 @@ class LocalStorageManager {
 
     getTheme(): Theme {
         const value = this.getItem(STORAGE_KEYS.THEME);
-        return value && isTheme(value) ? value : THEMES.LIGHT;
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? THEMES.DARK : THEMES.LIGHT;
+        return value && isTheme(value) ? value : systemTheme;
     }
 
     setTheme(theme: Theme) {

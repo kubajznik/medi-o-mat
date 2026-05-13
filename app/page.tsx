@@ -39,7 +39,13 @@ export default function Home() {
             headerId="medienauswahl"
             filePath="data/md/medienauswahl.md"
             nextSectionId="und_jetzt"
-            />
+            >
+            <a 
+              href="/media" 
+              className="bg-accent mx-auto mt-[-2em] sm:p-1 lg:p-3 rounded-md w-fit text-text-negative transition-transform duration-200 ease-in-out hover:scale-105">
+              Zur Medienübersicht
+            </a>
+            </FullpageText>
 
             <FullpageText 
             header={header.und_jetzt}
