@@ -8,9 +8,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, use } from "react";
 import textData from "@/data/texte.json";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
-import Crown from "@/components/icons/crown";
 import type { GewichteteAntworten } from "@/types/Befragung";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
+import Place from "@/components/icons/Place";
 
 const ErgebnisContent = () => {
     const router = useRouter();
@@ -68,15 +68,15 @@ const ErgebnisContent = () => {
     favoriteCards.push(
         mediaList.find((e) => e.code === winners[1][0]) as Media
     );
-    favoriteCards.unshift(
+    favoriteCards.push(
         mediaList.find((e) => e.code === winners[2][0]) as Media
     );
 
     return (
-        <div className="overflow-x-hidden p-3 md:p-10 text-dark">
+        <div className="mx-auto p-3 md:p-10 min-h-screen overflow-x-hidden">
             <div className="flex flex-row justify-between">
                 <div>
-                    <h1 className="text-4xl font-semibold">Auswertung</h1>
+                    <h1 className="font-semibold text-4xl">Auswertung</h1>
                     <h2 className="text-xl">
                         Diese Auswahl an Medien könnten Sie interessieren.
                     </h2>
@@ -84,18 +84,16 @@ const ErgebnisContent = () => {
             </div>
 
             <Suspense fallback={<div>Loading...</div>}>
-                <div className="w-full overflow-x-auto overflow-y-hidden pt-10 pb-5">
-                    <div className="flex w-max m-auto p-4">
+                <div className="pt-10 pb-5 w-full overflow-x-auto overflow-y-hidden">
+                    <div className="flex m-auto p-4 w-max">
                         {favoriteCards.map((card, index) => (
                             <div
                                 key={index}
                                 className={`relative ${
-                                    index === 0 ? "order-2 md:order-1" :
-                                    index === 1 ? "order-1 md:order-2" :
-                                    "order-3"
+                                    test
                                 }`}
                             >
-                                <Crown index={index} />
+                                <Place index={index} />
                                 <div className="flex">
                                     <VorschlagCard
                                         key={index}
@@ -114,18 +112,17 @@ const ErgebnisContent = () => {
                 </div>
             </Suspense>
 
-            <span className="flex w-full flex-col items-center md:items-end md:absolute top-3 right-3 gap-2">
+            <span className="top-3 right-3 md:absolute flex flex-col items-center md:items-end gap-2 w-full">
                 <button
                     onClick={() => router.push("/befragung")}
-                    className="flex w-fit items-center mr-3 gap-3 rounded-lg bg-purple-100 px-6 py-4 uppercase text-purple-400 scale-95 transition-all 
-                            hover:scale-100 hover:bg-purple-200 hover:text-purple-500"
+                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mr-3 px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
                 >
                     {textData.repeat}
                     <i className="pi pi-replay" style={{ fontSize: "1rem" }} />
                 </button>
                 <button
                     onClick={() => router.push("/")}
-                    className="underline text-sm text-gray-400"
+                    className="text-gray-400 text-sm underline"
                 >
                     {textData.zurStartseite}
                 </button>

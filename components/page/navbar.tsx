@@ -100,8 +100,8 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-dark text-lg">
-      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[800px] h-16">
+    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-lg">
+      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[900px] h-16">
         {/* lg:flex fügt die alte Navbar wieder ein*/}
         <div className="hidden items-center gap-8">
           {navigationItems.map((item) => (
@@ -113,7 +113,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="inline-flex hover:bg-slate-300 p-2 rounded-md text-text-primary transition"
+          className="inline-flex hover:bg-slate-300 p-2 rounded-md transition"
           aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
@@ -129,7 +129,7 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={closeMobileMenu}
-          className="flex justify-center items-center ml-4 gap-3 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
+          className="flex justify-center items-center gap-3 ml-4 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
         >
           {showLogo && (
             <img
@@ -144,7 +144,7 @@ export default function Navbar() {
 
       {isMobileMenuOpen ? (
         <div id="mobile-navigation" className="right-0 left-0 absolute bg-surface border-slate-300 border-t">
-          <div className="flex flex-row gap-2 mx-auto py-3 max-w-[800px]">
+          <div className="flex flex-row gap-2 mx-auto py-3 max-w-[900px]">
             {navigationItems.map((item, index) => (
               <Link
                 key={item.href}

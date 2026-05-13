@@ -30,12 +30,12 @@
 }
 
 [data-theme="dark"] {
-  --bg: var(--medio-dark);
+  --bg: #1d1d33;
   --fg: #fff;
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: #1d1d33;
+  --surface: var(--medio-dark);
   --text-primary: #9b9b9c;
   --text-negative: #ffffff;
   --text-faded: #6b7280;
@@ -44,13 +44,13 @@
 }
 
 [data-theme="arcade"] {
-  --bg: var(--medio-gelb);
+  --bg: var(--medio-dark);
   --fg: var(--medio-dark);
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: var(--medio-pink);
-  --text-primary: #111827;
+  --surface: var(--medio-cyan);
+  --text-primary: #9b9b9c;
   --text-negative: #ffffff;
   --text-faded: #6b7280;
   --soft-gray: #c4c4c4;

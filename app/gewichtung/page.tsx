@@ -72,18 +72,20 @@ function GewichtungContent() {
   // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="px-5 md:px-10 pt-10 min-h-screen text-dark">
-      <div className="flex flex-col gap-2">
-        <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
-        <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
-          Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
-          um diese mit doppelter Gewichtung in die Berechnung einfließen zu
-          lassen.
-        </h3>
+    <div className="flex flex-col items-center px-5 md:px-10 pt-10 min-h-screen">
+      <div className="flex flex-col gap-2 max-w-[900px]">
+        <div className="items-start">
+          <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
+          <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
+            Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
+            um diese mit doppelter Gewichtung in die Berechnung einfließen zu
+            lassen.
+          </h3>
+        </div>
 
-        <div className="flex flex-col justify-center items-center gap-3 w-full">
+        <div className="flex flex-col justify-center gap-3">
           {questions.map((frage, index) => (
-            <div className="w-full md:w-3/4" key={index}>
+            <div className="w-full" key={index}>
               {index === 0 ? (
                 <p className="gewichtungCategory">Plattform</p>
               ) : (
@@ -119,7 +121,7 @@ function GewichtungContent() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center mt-5 md:mt-10 mb-5 text-center">
+        <div className="flex flex-col items-center mx-auto mt-5 md:mt-10 mb-5 text-center">
           {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
           {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
@@ -129,13 +131,11 @@ function GewichtungContent() {
             onClick={() =>
               router.push("/ergebnis?answer=" + JSON.stringify(output))
             }
-            className="flex flex-row-reverse justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
+            className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg sm:w-full md:w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
           >
-            <i className="pi-arrow-right pi" style={{ fontSize: "1.3rem" }}></i>
             zur auswertung
+            <i className="pi-arrow-right pi" style={{ fontSize: "1.3rem" }}></i>
           </button>
-          <br />
-          <br />
         </div>
       </div>
     </div>

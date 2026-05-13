@@ -19,7 +19,7 @@ export default function ToggleKeyboardButton({ className, isActive = false, onTo
         <button
         onClick={handleClick}
         type="button"
-        className={`p-2 bg-white text-gray-400 transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110 ${className}`}
+        className={`p-2 bg-surface text-text-primary transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110 ${className}`}
         >
             {
                 isActive ? 

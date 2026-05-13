@@ -99,10 +99,10 @@ export default function Befragung() {
               <button
                 onClick={handleQuestionBefore}
                 type="button"
-                className="top-3 left-3 md:-left-16 absolute flex justify-center items-center gap-2 bg-medio-pink p-4 rounded-lg w-min text-white"
+                className="top-3 left-3 md:-left-16 absolute flex justify-center items-center gap-2 bg-medio-pink p-4 rounded-lg w-min text-negative"
               >
                 <i
-                  className="pi-arrow-left text-white pi"
+                  className="pi-arrow-left text-negative pi"
                   style={{ fontSize: "1rem", fontWeight: "bold" }}
                 ></i>
               </button>

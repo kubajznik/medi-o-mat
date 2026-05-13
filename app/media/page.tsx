@@ -12,19 +12,19 @@ export default function Gewichtung() {
     cards.push(medium);
   }
   return (
-    <div className=" text-dark p-8">
+    <div className="p-8">
       <div className="flex justify-between items-center">
         <span>
-          <h1 className="text-4xl font-semibold">Unsere Medien</h1>
+          <h1 className="font-semibold text-4xl">Unsere Medien</h1>
           <h2 className="text-xl">Folgende Medien wurden von uns codiert</h2>
         </span>
         <span className="flex flex-col gap-2">
           <button
             onClick={() => router.push("/")}
-            className="px-6 py-4 bg-purple-100 rounded-lg text-purple-400 uppercase flex gap-3 items-center hover:bg-purple-200 hover:text-purple-500 hover:scale-100 scale-95 transition-all"
+            className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 px-6 py-4 rounded-lg text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
           >
             {textData.zurStartseite}
-            {/* <i className="pi pi-arrow-right" style={{ fontSize: "1rem" }} /> */}
+            {/* <i className="pi-arrow-right pi" style={{ fontSize: "1rem" }} /> */}
           </button>
         </span>
       </div>

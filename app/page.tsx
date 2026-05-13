@@ -10,7 +10,7 @@ import header from "@/data/header.json";
  */
 export default function Home() {
   return (
-    <div className="px-4 w-full h-full text-text-primary">
+    <div className="px-4 w-full h-full">
       <HomeClient
         ersteInformation={textData.ersteInformation} 
         startButton={textData.startButton}
@@ -19,7 +19,7 @@ export default function Home() {
       />
 
       <div className="flex flex-col justify-center items-center gap-20 py-[180px]">
-        <div className="flex flex-col gap-6 max-w-[800px]">
+        <div className="flex flex-col gap-6 max-w-[900px]">
             <FullpageText 
             header={header.problemstellung}
             headerId="problemstellung"
@@ -42,7 +42,7 @@ export default function Home() {
             >
             <a 
               href="/media" 
-              className="bg-accent mx-auto mt-[-2em] sm:p-1 lg:p-3 rounded-md w-fit text-text-negative transition-transform duration-200 ease-in-out hover:scale-105">
+              className="bg-accent mx-auto mt-[-2em] sm:p-1 lg:p-3 rounded-md w-fit text-text-negative hover:scale-105 transition-transform duration-200 ease-in-out">
               Zur Medienübersicht
             </a>
             </FullpageText>

@@ -4,8 +4,8 @@ import Link from "next/link";
 //TODO - Footer definieren
 export default function Footer() {
   return (
-    <footer className="flex justify-around p-4 text-lg text-dark font-medium text-center bg-medio-dark">
-      <div className="flex justify-around max-w-screen-sm w-full">
+    <footer className="flex justify-around bg-medio-dark p-4 font-medium text-lg text-center">
+      <div className="flex justify-around w-full max-w-screen-sm">
         <Link href="/impressum" className="text-white hover:text-medio-pink">
           Impressum
         </Link>

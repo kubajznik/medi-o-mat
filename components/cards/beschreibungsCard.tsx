@@ -9,21 +9,21 @@ export default function BeschreibungsCard({
 }) {
   return (
     <div
-      className={`p-4 bg-white transition ease-in-out text-black max-w-[300px] h-min rounded-lg flex flex-col gap-4 shadow-lg`}
+      className={`p-4 bg-surface transition ease-in-out max-w-[300px] h-min rounded-lg flex flex-col gap-4 shadow-lg`}
     >
       <span className="flex flex-row justify-between items-baseline">
-        <h3 className="font-medium text-xl text-dark">Beschreibung</h3>
+        <h3 className="font-medium text-xl">Beschreibung</h3>
         <button
           onClick={handleClick}
           type="button"
-          className="rounded-full hover:bg-gray-200"
+          className="hover:bg-fg rounded-full"
         >
-          <i className="pi pi-times text-gray-600 p-2"></i>
+          <i className="p-2 text-text-primary pi pi-times"></i>
         </button>
       </span>
       <p
         className={`${
-          beschreibung ? "text-gray-400" : "text-red-400"
+          beschreibung ? "text-text-primary" : "text-red-400"
         } text-light font-medium `}
       >
         {beschreibung ? beschreibung : "keine Beschreibung vorhanden!"}
