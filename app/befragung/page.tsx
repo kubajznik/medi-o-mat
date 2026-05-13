@@ -121,20 +121,22 @@ export default function Befragung() {
               />
             )}
 
+            { !hideExample &&
             <div className="top-3 md:top-3 right-3 md:-right-16 z-10 absolute flex flex-col gap-4">
               <BeschreibungsBtn
                 hideExample={hideExample}
                 handleClick={() => setHideExample(!hideExample)}
               />
+              <ResetButton
+                onReset={onReset}
+                />
               <ToggleKeyboardButton
                 className="invisible md:visible"
                 isActive={isKeyboardMode}
                 onToggle={setIsKeyboardMode}
               />
-              <ResetButton
-                onReset={onReset}
-                />
             </div>
+            }
             {
               hideExample &&
               <BeschreibungsCard

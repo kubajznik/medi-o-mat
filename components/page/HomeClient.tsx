@@ -60,7 +60,7 @@ export default function HomeClient({
   });
 
   return (
-    <div className="flex flex-col justify-center items-center mt-10 sm:mt-0 min-h-screen text-center">
+    <div id="#start"className="flex flex-col justify-center items-center mt-10 sm:mt-0 min-h-screen text-center">
       <img ref={logoRef} src="/images/mediomat_logo.png" alt="Medi-o-Mat Logo" className="px-2 w-auto h-auto" />
       <p
         className="mt-8 md:mt-16 max-w-[900px] font-normal text-xl"

@@ -73,7 +73,7 @@ const ErgebnisContent = () => {
     );
 
     return (
-        <div className="mx-auto p-3 md:p-10 min-h-screen overflow-x-hidden">
+        <div className="mx-auto p-3 md:p-10 max-w-[1300px] min-h-screen overflow-x-hidden">
             <div className="flex flex-row justify-between">
                 <div>
                     <h1 className="font-semibold text-4xl">Auswertung</h1>

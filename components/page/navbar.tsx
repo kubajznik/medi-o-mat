@@ -10,7 +10,7 @@ import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 
 const navigationItems = [
-  { href: "/", label: "Home" },
+  { href: "/#start", label: "Home" },
   { href: "/#problemstellung", label: "Problem" },
   { href: "/#unsere_rolle", label: "Wir" },
   { href: "/#medienauswahl", label: "Medienauswahl" },
@@ -105,7 +105,7 @@ export default function Navbar() {
         {/* lg:flex fügt die alte Navbar wieder ein*/}
         <div className="hidden items-center gap-8">
           {navigationItems.map((item) => (
-            <Link key={item.href} href={item.href} className="font-medium hover:text-slate-700 transition">
+            <Link key={item.href} href={item.href} className="font-medium transition">
               {item.label}
             </Link>
           ))}
