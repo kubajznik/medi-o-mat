@@ -38,6 +38,7 @@ const config: Config = {
           gelb: "var(--medio-gelb)",
           orange: "var(--medio-orange)",
           pink: "var(--medio-pink)",
+          creme: "var(--medio-creme)",
         },
       },
     },
