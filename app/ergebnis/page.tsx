@@ -1,6 +1,6 @@
 "use client";
 import localStorageManager from "@/util/localStore";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import VorschlagCard from "@/components/cards/vorschlagCard";
 import test from "../../data/media.json";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, use } from "react";
 import textData from "@/data/texte.json";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
+import { useKeyboardHandler } from "@/context/KeyboardContext";
 import type { GewichteteAntworten } from "@/types/Befragung";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
 import Place from "@/components/icons/Place";
@@ -16,6 +17,8 @@ const ErgebnisContent = () => {
     const router = useRouter();
     const animate = useAnimationToggle(7000);
     const searchParams = useSearchParams();
+    const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const [focusedIndex, setFocusedIndex] = useState(0);
 
     const mediaList: MediaList = test as MediaList;
     const mediaResults: MediaResults = {};
@@ -35,6 +38,32 @@ const ErgebnisContent = () => {
     useEffect(() => {
         localStorageManager.clearAnswers();
     }, []);
+
+    useEffect(() => {
+        const target = cardRefs.current[focusedIndex];
+        if (!target) return;
+        target.focus();
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+        });
+    }, [focusedIndex]);
+
+    useKeyboardHandler({
+        enabled: true,
+        onKey: (event, action) => {
+            if (action.type === "nav" && action.direction === "left") {
+                setFocusedIndex((prev) => Math.max(prev - 1, 0));
+                return true;
+            }
+            if (action.type === "nav" && action.direction === "right") {
+                setFocusedIndex((prev) => Math.min(prev + 1, 2));
+                return true;
+            }
+            return false;
+        },
+    });
 
     for (const medium of mediaList) {
         mediaResults[medium.code] = 0;
@@ -97,6 +126,9 @@ const ErgebnisContent = () => {
                                 <div className="flex">
                                     <VorschlagCard
                                         key={index}
+                                        ref={(el) => {
+                                            cardRefs.current[index] = el;
+                                        }}
                                         name={card.name}
                                         beschreibung={card.beschreibung}
                                         image={card.image}
@@ -119,12 +151,6 @@ const ErgebnisContent = () => {
                 >
                     {textData.repeat}
                     <i className="pi pi-replay" style={{ fontSize: "1rem" }} />
-                </button>
-                <button
-                    onClick={() => router.push("/")}
-                    className="text-gray-400 text-sm underline"
-                >
-                    {textData.zurStartseite}
                 </button>
             </span>
         </div>

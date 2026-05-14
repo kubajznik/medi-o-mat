@@ -23,9 +23,9 @@ export default function ToggleKeyboardButton({ className, isActive = false, onTo
         >
             {
                 isActive ? 
-                <Mouse className="w-8 h-8"/>
+                <Mouse className="w-8 h-8 arcade:text-medio-pink"/>
                 : 
-                <Keyboard className="w-8 h-8"/> 
+                <Keyboard className="w-8 h-8 arcade:text-medio-pink"/> 
             }
         </button>
     )
