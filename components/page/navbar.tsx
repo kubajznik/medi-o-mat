@@ -10,7 +10,7 @@ import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 
 const navigationItems = [
-  { href: "/", label: "Home" },
+  { href: "/#start", label: "Home" },
   { href: "/#problemstellung", label: "Problem" },
   { href: "/#unsere_rolle", label: "Wir" },
   { href: "/#medienauswahl", label: "Medienauswahl" },
@@ -100,20 +100,12 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-dark text-lg">
-      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[800px] h-16">
-        {/* lg:flex fügt die alte Navbar wieder ein*/}
-        <div className="hidden items-center gap-8">
-          {navigationItems.map((item) => (
-            <Link key={item.href} href={item.href} className="font-medium hover:text-slate-700 transition">
-              {item.label}
-            </Link>
-          ))}
-        </div>
+    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-lg">
+      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[900px] h-16">
 
         <button
           type="button"
-          className="inline-flex hover:bg-slate-300 p-2 rounded-md text-text-primary transition"
+          className="inline-flex hover:bg-slate-300 p-2 rounded-md transition"
           aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
@@ -129,7 +121,7 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={closeMobileMenu}
-          className="flex justify-center items-center ml-4 gap-3 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
+          className="flex justify-center items-center gap-3 ml-4 cursor-[url('/images/cursor_pink_32x32.png')_7_1,_pointer]"
         >
           {showLogo && (
             <img
@@ -143,14 +135,14 @@ export default function Navbar() {
       </div>
 
       {isMobileMenuOpen ? (
-        <div id="mobile-navigation" className="right-0 left-0 absolute bg-surface border-slate-300 border-t">
-          <div className="flex flex-row gap-2 mx-auto py-3 max-w-[800px]">
+        <div id="mobile-navigation" className="right-0 left-0 absolute bg-surface border-slate-300 border-t border-b-2 border-b-navbar-bg">
+          <div className="flex md:flex-row flex-col md:flex-wrap gap-2 mx-auto py-3 max-w-[900px] arcade:text-medio-lila">
             {navigationItems.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={closeMobileMenu}
-                className="hover:bg-navbar-bg px-3 py-2 rounded-md transition"
+                className="hover:bg-navbar-bg mx-auto px-3 py-2 rounded-md transition"
                 ref={(el) => {
                   itemRefs.current[index] = el;
                 }}
@@ -159,7 +151,7 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex flex-row gap-3 mx-auto px-3">
+            <div className="flex flex-row gap-5 mx-auto px-3">
             <button
               onClick={() => setTheme(THEMES.ARCADE)}
               ref={(el) => {
@@ -167,16 +159,17 @@ export default function Navbar() {
               }}
               onFocus={() => setFocusedIndex(navigationItems.length)}
             >
-              <Arcade className="mr-4 w-6 h-6" />
+              <Arcade className="w-6 h-6"/>
             </button>
             <button
+            className="arcade:text-medio-lila"
             onClick={() => setTheme(THEMES.LIGHT)}
             ref={(el) => {
               itemRefs.current[navigationItems.length + 1] = el;
             }}
             onFocus={() => setFocusedIndex(navigationItems.length + 1)}
             >
-              <SunLight className="mr-4 w-6 h-6" />
+              <SunLight className="w-6 h-6" />
             </button>
             <button
             onClick={() => setTheme(THEMES.DARK)}

@@ -7,8 +7,8 @@ export default async function Impressum() {
   const content = await readFile(filePath, "utf8");
 
   return (
-    <div className="flex flex-col items-center px-4 w-full min-h-screen text-dark">
-      <div className="max-w-[800px] text-justify">
+    <div className="flex flex-col items-center px-4 w-full min-h-screen">
+      <div className="max-w-[900px] text-justify">
         <MarkdownDisplay filePath={filePath} />
       </div>
     </div>

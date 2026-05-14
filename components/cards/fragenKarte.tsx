@@ -89,11 +89,11 @@ export default function FragenKarte({
 
   return (
     <div className="flex flex-col gap-6 md:gap-10 bg-surface shadow-lg px-4 md:px-8 lg:px-16 py-6 md:py-10 rounded-2xl w-full max-w-[1000px]">
-      <h3 className="font-semibold text-lg md:text-2xl md:text-left text-center leading-[140%]">
+      <h3 className="font-semibold arcade:text-medio-lila text-lg md:text-2xl md:text-left text-center leading-[140%]">
         {"Frage " + fragenCounter.index + " von " + fragenCounter.counter}
       </h3>
 
-      <h2 className="font-normal text-xl md:text-4xl leading-[140%]">
+      <h2 className="font-normal arcade:text-medio-dark text-xl md:text-4xl leading-[140%]">
         {frage + "."}
       </h2>
 

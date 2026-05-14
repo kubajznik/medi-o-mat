@@ -19,7 +19,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         const handleSystemThemeChange = (event: MediaQueryListEvent) => {
             const newTheme = event.matches ? THEMES.DARK : THEMES.LIGHT;
             setTheme(newTheme);
-            window.document.documentElement.setAttribute("data-theme", newTheme);
         };
 
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -32,14 +31,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const storedTheme = localStorageManager.getTheme();
-        setThemeState(storedTheme);
-        window.document.documentElement.setAttribute("data-theme", storedTheme);
+        setTheme(storedTheme);
     }, []);
 
     const setTheme = useCallback((nextTheme: Theme) => {
         setThemeState(nextTheme);
         localStorageManager.setTheme(nextTheme);
-        window.document.documentElement.setAttribute("data-theme", nextTheme);
+        const root = document.documentElement;
+        root.classList.toggle("dark", nextTheme === THEMES.DARK);
+        root.setAttribute("data-theme", nextTheme);
         console.log(`Theme set to ${nextTheme}`);
     }, []);
 
