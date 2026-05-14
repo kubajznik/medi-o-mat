@@ -48,6 +48,8 @@ const config: Config = {
   plugins: [
     plugin(({ addVariant }) => {
       addVariant("arcade", 'html[data-theme="arcade"] &');
+      addVariant("dark", 'html[data-theme="dark"] &');
+      addVariant("light", 'html:not([data-theme]) &');
     }),
   ],
 };

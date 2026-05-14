@@ -44,13 +44,13 @@
 }
 
 [data-theme="arcade"] {
-  --bg: var(--medio-dark);
+  --bg: var(--medio-lila);
   --fg: var(--medio-dark);
   --accent: var(--medio-cyan);
   --highlight: var(--medio-pink);
   --muted: #e2e8f0;
-  --surface: var(--medio-cyan);
-  --text-primary: #9b9b9c;
+  --surface: var(--medio-gelb);
+  --text-primary: var(--medio-creme);
   --text-negative: #ffffff;
   --text-faded: #6b7280;
   --soft-gray: #c4c4c4;
@@ -93,12 +93,11 @@
 
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: var(--text-primary);
 }
 
-/* body {
-  background-color: rgb(243 244 246);
-} */
+body {
+  color: var(--text-primary);
+}
 
 .gewichtungCategory {
   font-weight: 800;
