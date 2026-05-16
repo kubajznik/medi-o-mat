@@ -13,6 +13,10 @@ jobs:
         run: cd medi-o-mat && npm install
       - name: build
         run: cd medi-o-mat && npm run build
+      - name: show
+        run: ls
+      - name: show
+        run: ls/medi-o-mat
       - name: FTP Deployer
         uses: sand4rt/ftp-deployer@v1.8
         with:
