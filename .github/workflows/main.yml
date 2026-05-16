@@ -8,7 +8,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: clone-repo
-        run: git clone -b main git@github.com:kubajznik/medi-o-mat.git
+        run: git clone -b main https://github.com/kubajznik/medi-o-mat.git
       - name: install
         run: cd medi-o-mat && npm install
       - name: build
