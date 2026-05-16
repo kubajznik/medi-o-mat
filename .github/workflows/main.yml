@@ -21,4 +21,4 @@ jobs:
           username: kuba
           password: ftp.hosting136189.a2e43.netcup.net
           remote_folder: medi-o-mat.de/httpdocs/
-          local_folder: medi-o-mat/dist
+          local_folder: medi-o-mat/out
