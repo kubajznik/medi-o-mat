@@ -1,0 +1,24 @@
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: clone-repo
+        run: git clone -b main git@github.com:kubajznik/medi-o-mat.git
+      - name: install
+        run: cd medi-o-mat && npm install
+      - name: build
+        run: cd medi-o-mat && npm run build
+      - name: FTP Deployer
+        uses: sand4rt/ftp-deployer@v1.8
+        with:
+          host: ftp.hosting136189.a2e43.netcup.net
+          port: 22
+          username: kuba
+          password: ftp.hosting136189.a2e43.netcup.net
+          remote_folder: /medi-o-mat.de/httpdocs/
+          local_folder: medi-o-mat/dist
