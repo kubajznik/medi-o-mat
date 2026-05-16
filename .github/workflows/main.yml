@@ -17,7 +17,6 @@ jobs:
         uses: sand4rt/ftp-deployer@v1.8
         with:
           host: ftp.hosting136189.a2e43.netcup.net
-          port: 22
           username: kuba
           password: ${{ secrets.FTP_PASSWORD }}
           remote_folder: /medi-o-mat.de/httpdocs/
