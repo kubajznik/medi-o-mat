@@ -10,12 +10,12 @@ import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 
 const navigationItems = [
+  { href: "/befragung", label: "Befragung" },
   { href: "/#start", label: "Home" },
   { href: "/#problemstellung", label: "Problem" },
-  { href: "/#unsere_rolle", label: "Wir" },
+  { href: "/#unsere_rolle", label: "Redaktion" },
   { href: "/#medienauswahl", label: "Medienauswahl" },
-  { href: "/#und_jetzt", label: "Weiter" },
-  { href: "/befragung", label: "Befragung" },
+  { href: "/#und_jetzt", label: "Vision" },
   { href: "/media", label: "Medienübersicht" },
 ];
 
@@ -142,7 +142,11 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={closeMobileMenu}
-                className="hover:bg-navbar-bg mx-auto px-3 py-2 rounded-md transition"
+                className={`mx-auto px-3 py-2 rounded-md transition hover:bg-navbar-bg ${
+                  item.label === "Befragung"
+                    ? "bg-medio-lila text-white font-semibold shadow-md ring-2 ring-medio-lila/40"
+                    : ""
+                }`}
                 ref={(el) => {
                   itemRefs.current[index] = el;
                 }}

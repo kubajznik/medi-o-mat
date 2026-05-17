@@ -5,4 +5,3 @@ Der Medi-O-Mat ist als Abschlussprojekt in einem Seminar zu alternativem Journal
 Medien, die grundlegende journalistische Standards nicht erfüllen oder bei denen sich Rügen des Deutschen Presserats häufen, haben wir ausgeschlossen. Dazu gehören beispielsweise Angebote wie „NachDenkSeiten“ oder „BILD“.
 
 Unser Ziel ist es, reflektiertes, demokratisches Medienhandeln und politische Medienbildung zu stärken. Eine Empfehlung dieser Angebote ist daher nicht mit unseren Grundsätzen vereinbar.
-[Zur Medienauswahl](/media)

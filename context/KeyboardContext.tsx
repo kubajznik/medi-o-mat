@@ -1,7 +1,8 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from "react";
-import * as sounds from "@/components/util/sounds";
+import * as sounds from "@/util/sounds";
+import { useTheme } from "@/context/ThemeContext";
 
 type Direction = "left" | "right" | "up" | "down";
 
@@ -53,6 +54,7 @@ const normalizeKey = (event: KeyboardEvent): KeyboardAction | null => {
 export function KeyboardProvider({ children }: { children: React.ReactNode }) {
     const handlersRef = useRef<KeyboardHandler[]>([]);
     const seqRef = useRef(0);
+    const { theme } = useTheme();
 
     const registerHandler = useCallback<RegisterKeyboardHandler>((handler) => {
         const seq = seqRef.current++;
@@ -68,6 +70,22 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
             handlersRef.current = handlersRef.current.filter((item) => item.id !== entry.id);
         };
     }, []);
+
+    const playSoundOnKey = useCallback((event: KeyboardEvent, action: KeyboardAction) => {
+        if (event.repeat || theme !== "arcade" || window.innerWidth < 768) 
+            return;
+
+
+        if (action.type === "nav") {
+            sounds.playMoveSound();
+            return;
+        }
+
+        if (action.type === "button" && action.button === "green") {
+            sounds.playConfirmSound();
+            return;
+        }
+    }, [theme]);
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
@@ -90,28 +108,13 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
             }
         };
 
-        const playSoundOnKey = (event: KeyboardEvent, action: KeyboardAction) => {
-            if (event.repeat) 
-                return;
-
-
-            if (action.type === "nav") {
-                sounds.playMoveSound();
-                return;
-            }
-
-            if (action.type === "button" && action.button === "green") {
-                sounds.playConfirmSound();
-                return;
-            }
-
-        }
-
         window.addEventListener("keydown", onKeyDown, true);
         return () => window.removeEventListener("keydown", onKeyDown, true);
-    }, []);
+    }, [playSoundOnKey]);
+
 
     const value = useMemo(() => ({ registerHandler }), [registerHandler]);
+
 
     return <KeyboardContext.Provider value={value}>{children}</KeyboardContext.Provider>;
 }

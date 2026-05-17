@@ -4,45 +4,61 @@ import data from "../../data/media.json";
 import VorschlagCard from "@/components/cards/vorschlagCard";
 import { useRouter } from "next/navigation";
 import textData from "@/data/texte.json";
+import { MediaList } from "@/types/Media";
 
 export default function Gewichtung() {
-  const router = useRouter();
-  const cards: any[] = [];
-  for (let medium of data) {
-    cards.push(medium);
-  }
-  return (
-    <div className="p-8">
-      <div className="flex justify-between items-center">
-        <span>
-          <h1 className="font-semibold text-4xl">Unsere Medien</h1>
-          <h2 className="text-xl">Folgende Medien wurden von uns codiert</h2>
-        </span>
-        <span className="flex flex-col gap-2">
-          <button
-            onClick={() => router.push("/")}
-            className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 px-6 py-4 rounded-lg text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
-          >
-            {textData.zurStartseite}
-            {/* <i className="pi-arrow-right pi" style={{ fontSize: "1rem" }} /> */}
-          </button>
-        </span>
-      </div>
+    const router = useRouter();
+    const cards: MediaList = [];
+    for (const medium of data) {
+        cards.push(medium);
+    }
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="flex py-2 wrap">
-          {cards.map((card, index) => (
-            <VorschlagCard
-              key={index}
-              name={card.name}
-              beschreibung={card.beschreibung}
-              image={card.image}
-              mediumArt={card.mediumArt}
-              url={card.url}
-            />
-          ))}
+    const [filteredCards, setFilteredCards] = React.useState(cards);
+
+    const handleSearch = (query: string) => {
+        const filtered = cards.filter((card) =>
+            card.name.toLowerCase().includes(query.toLowerCase()) ||
+            card.beschreibung.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredCards(filtered);
+    };
+
+    return (
+        <div className="p-8">
+            <div className="flex justify-between items-center">
+                <span>
+                    <h1 className="font-semibold text-4xl">Unsere Medien</h1>
+                    <h2 className="text-xl">Folgende Medien wurden von uns codiert</h2>
+
+
+                    <div className="mt-4 w-full min-w-[200px] max-w-sm">
+                        <div className="relative">
+                            <input
+                                className="bg-transparent shadow-sm focus:shadow py-2 pr-28 pl-3 border border-text-primary hover:border-highlight focus:border-highlight rounded-md focus:outline-none w-full placeholder:text-text-faded text-sm transition duration-300 ease"
+                                placeholder="Suche..."
+                                onChange={(e) => handleSearch(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                </span>
+            </div>
+
+            <Suspense fallback={<div>Loading...</div>}>
+                <div className="flex py-2 wrap">
+                    {filteredCards.map((card, index) => (
+                        <VorschlagCard
+                            key={index}
+                            name={card.name}
+                            beschreibung={card.beschreibung}
+                            image={card.image}
+                            mediumArt={card.mediumArt}
+                            url={card.url}
+                            spotifyUrl={card.spotifyUrl}
+                        />
+                    ))}
+                </div>
+            </Suspense>
         </div>
-      </Suspense>
-    </div>
-  );
+    );
 }

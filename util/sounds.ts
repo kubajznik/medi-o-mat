@@ -35,3 +35,36 @@ export function playConfirmSound() {
   oscillator.start(audioCtx.currentTime);
   oscillator.stop(audioCtx.currentTime + 0.25);
 }
+
+export function playFanfareSound() {
+  const audioCtx = new (window.AudioContext || window.AudioContext)();
+    
+  const notes = [
+    {freq: 523, duration: 0.12},
+    {freq: 523, duration: 0.12},
+    {freq: 523, duration: 0.12},
+    {freq: 1047, duration: 0.28},
+    {freq: 784, duration: 0.18},
+    {freq: 659, duration: 0.45}
+  ];
+  
+  let time = audioCtx.currentTime;
+  notes.forEach((note, i) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.frequency.setValueAtTime(note.freq, time);
+    osc.type = 'square';
+    
+    const volume = (i === 3 || i === 5) ? 0.35 : 0.25;
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.exponentialRampToValueAtTime(0.01, time + note.duration);
+    
+    osc.start(time);
+    osc.stop(time + note.duration);
+    time += note.duration + 0.02;
+  });
+}

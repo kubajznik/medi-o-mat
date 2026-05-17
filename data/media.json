@@ -315,7 +315,7 @@
   {
     "name": "Tagesspiegel",
     "mediumArt": "zeitung",
-    "beschreibung": "Der Tagesspiegel ist die auflagenstärkste Abonnementzeitung in Berlin und wird vor allem in den westlichen Bezirken gelesen. Die Zeitung wurde 1945 im amerikanischen Sektor Berlins gegründet und verfolgt seit 2001 den Anspruch, eine überregionale Tageszeitung zu sein. Sie enthält in Kooperation mit dem Handelsblatt ein umfangreiches Wirtschaftsressort. Die Beitragslänge variiert. Die meisten Artikel lassen sich in 5-10 Minuten lesen. Einige Artikel stehen kostenfrei auf der Website zur Verfügung. Das Abo für alle Online-Inhalte kostet 14,99 und das für die gedruckte Zeitung 68,99 im Monat. Der Tagesspiegel bespielt auch mehrere Social Media Kanäle.",
+    "beschreibung": "Der Tagesspiegel ist die auflagenstärkste Abonnementzeitung in Berlin und wird vor allem in den westlichen Bezirken gelesen. Die Zeitung wurde 1945 im amerikanischen Sektor Berlins gegründet und verfolgt seit 2001 den Anspruch, eine überregionale Tageszeitung zu sein. Sie enthält in Kooperation mit dem Handelsblatt ein umfangreiches Wirtschaftsressort. Die Beitragslänge variiert. Die meisten Artikel lassen sich in 5-10 Minuten lesen. Einige Artikel stehen kostenfrei auf der Website zur Verfügung. Das Abo für alle Online-Inhalte kostet 14,99 und das für die gedruckte Zeitung 74,99 im Monat. Der Tagesspiegel bespielt auch mehrere Social Media Kanäle.",
     "url": "https://tagesspiegel.de/",
     "image": "/logos/ts.svg",
     "code": "tagesspiegel",
@@ -667,7 +667,7 @@
     "name": "Podcast vom Tagesspiegel",
     "mediumArt": "podcast",
     "beschreibung": "Den Tagesspiegel Podcast kann man auf der Tagesspiegel-Website, auf Spotify und auf Apple Podcasts hören. Für das Hören eines Beitrags braucht man durchschnittlich 20 Minuten bis eine Stunde. Die Podcasts der Tagesspiegel-Redaktion decken einen großen Bereich von Klimapolitik zu Gynäkologie bis True Crime ab. Sie informieren über allgemeine Geschehnisse, oft mit dem Schwerpunkt auf Berlin.",
-    "url": "https://www.tagesspiegel.de/true-crime-gyncast-eine-runde-berlin-das-sind-die-podcasts-vom-tagesspiegel-8660119.html",
+    "url": "https://www.tagesspiegel.de/podcasts/",
     "image": "/logos/ts.svg",
     "code": "tgpod",
     "codierung": {
@@ -742,10 +742,10 @@
     }
   },
   {
-    "name": "Arte Europa - die Woche",
+    "name": "Arte Europa Weekly",
     "mediumArt": "fernsehen",
-    "beschreibung": "ARTE Europa – Die Woche befasst sich jeden Donnerstag mit Ereignissen aus Europa. Das Videomagazin wird in vier Sprachen moderiert, und zwar auf Deutsch, Englisch, Französisch und Spanisch und man kann es im Fernsehen, in der Arte Mediathek und auf deren Youtube-Kanal ansehen. Die Beiträge dauern durchschnittlich eine viertel Stunde und in den Videos handelt es von Politik, der Umwelt und der Digitalisierung in Europa.",
-    "url": "https://www.arte.tv/de/videos/RC-023198/arte-europa-die-woche/",
+    "beschreibung": "ARTE Europa Weekly befasst sich jeden Donnerstag mit Ereignissen aus Europa. Das Videomagazin wird in vier Sprachen moderiert, und zwar auf Deutsch, Englisch, Französisch und Spanisch und man kann es im Fernsehen, in der Arte Mediathek und auf deren Youtube-Kanal ansehen. Die Beiträge dauern durchschnittlich eine viertel Stunde und in den Videos handelt es von Politik, der Umwelt und der Digitalisierung in Europa.",
+    "url": "https://www.arte.tv/de/videos/RC-023198/arte-europa-weekly/",
     "image": "/logos/arte.svg",
     "code": "artewoche",
     "codierung": {
@@ -1174,11 +1174,11 @@
     }
   },
   {
-    "name": "Inside PolitiX",
+    "name": "PolitiX",
     "mediumArt": "fernsehen",
     "beschreibung": "Damit ihr politisch mitreden könnt! Unsere Hauptstadtkorrespondent*innen nehmen sich regelmäßig ein Thema der Zeit vor und tauchen ganz tief ein. Hier berichten sie von ihren Gesprächen hinter der Kamera und geben fundierte Prognosen.",
     "url": "https://zdf.de/politik/inside-politix",
-    "image": "/logos/inside_politix.png",
+    "image": "https://www.zdf.de/assets/logo-links-inside-politix-100~380x170?cb=1763654332540",
     "code": "politx",
     "codierung": {
       "1": 3,
