@@ -97,7 +97,7 @@ export default function Befragung() {
             <div className="relative flex flex-row gap-4 mx-auto pt-4 md:pt-24 w-full max-w-[1000px]">
                 {/* Zurück-Button */}
 
-                <div className="relative">
+                <div className="relative w-full">
                     {currentQuestionIndex > 0 && !hideExample && (
                         <button
                             onClick={handleQuestionBefore}
