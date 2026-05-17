@@ -5,6 +5,8 @@ import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
+import * as sounds from "@/util/sounds";
+
 import type {
     Antworten,
     Fragebogen,
@@ -19,6 +21,7 @@ function GewichtungContent() {
     );
 
     const handleButtonClick = () => {
+        sounds.playFanfareSound();
         router.push("/ergebnis?answer=" + JSON.stringify(output));
     };
 

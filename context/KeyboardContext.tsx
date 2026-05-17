@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from "react";
-import * as sounds from "@/components/util/sounds";
+import * as sounds from "@/util/sounds";
 import { useTheme } from "@/context/ThemeContext";
 
 type Direction = "left" | "right" | "up" | "down";
