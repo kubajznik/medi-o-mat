@@ -54,12 +54,12 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
       onClick={onClick}
       ref={setBarRef}
       tabIndex={0}
-      className="relative bg-surface p-4 rounded-lg hover:ring-2 hover:ring-highlight overflow-hidden focus:scale-105 cursor-pointer"
+      className="relative bg-surface p-4 rounded-lg md:hover:ring-2 md:hover:ring-highlight overflow-hidden md:focus:scale-105 cursor-pointer"
     >
       <p
         onClick={mark}
         ref={markerRef}
-        className="absolute inset-0 flex justify-start items-center opacity-0 hover:opacity-100 ml-5 font-bold text-highlight text-lg md:text-xl transition-opacity duration-300"
+        className="absolute inset-0 flex justify-start items-center opacity-0 md:hover:opacity-100 ml-5 font-bold text-highlight text-lg md:text-xl transition-opacity duration-300"
       >
         2x
       </p>
