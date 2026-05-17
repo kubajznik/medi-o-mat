@@ -32,7 +32,7 @@ export default function Befragung() {
         setIsKeyboardMode(localStorageManager.getKeyboardMode());
         const savedAnswers = localStorageManager.getAnswers();
         if (savedAnswers.length >= totalQuestionCount && totalQuestionCount > 0) {
-            router.replace("/gewichtung?answer=" + JSON.stringify(savedAnswers));
+            router.replace("/gewichtung");
             return;
         }
         if (savedAnswers.length > 0) {
@@ -68,7 +68,7 @@ export default function Befragung() {
             setCurrentQuestionIndex(nextIndex);
             return;
         }
-        router.push("/gewichtung?answer=" + JSON.stringify(nextValues));
+        router.push("/gewichtung");
     };
 
     const handleQuestionBefore = () => {

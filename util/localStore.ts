@@ -1,4 +1,5 @@
 import { STORAGE_KEYS, THEMES, type StorageKey, type Theme } from "@/types/storage";
+import type { GewichteteAntwort } from "@/types/Befragung";
 
 const isTheme = (value: string): value is Theme =>
     (Object.values(THEMES) as Theme[]).includes(value as Theme);
@@ -45,6 +46,10 @@ class LocalStorageManager {
         this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(answers));
     }
 
+    setAnswers(values: number[]) {
+        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(values));
+    }
+
     getAnswers(): number[] {
         const value = this.getItem(STORAGE_KEYS.ANSWERS);
         if (!value) return [];
@@ -59,6 +64,26 @@ class LocalStorageManager {
 
     clearAnswers() {
         this.removeItem(STORAGE_KEYS.ANSWERS);
+    }
+
+    setWeightedAnswers(values: GewichteteAntwort[]) {
+        this.setItem(STORAGE_KEYS.WEIGHTED_ANSWERS, JSON.stringify(values));
+    }
+
+    getWeightedAnswers(): GewichteteAntwort[] {
+        const value = this.getItem(STORAGE_KEYS.WEIGHTED_ANSWERS);
+        if (!value) return [];
+        try {
+            const parsed = JSON.parse(value);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error(`Error parsing weighted answers from localStorage: ${error}`);
+            return [];
+        }
+    }
+
+    clearWeightedAnswers() {
+        this.removeItem(STORAGE_KEYS.WEIGHTED_ANSWERS);
     }
 
     popAnswer() {
