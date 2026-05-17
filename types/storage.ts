@@ -1,6 +1,7 @@
 export const STORAGE_KEYS = {
     KEYBOARD_MODE: "keyboard-mode",
     ANSWERS: "answers",
+    WEIGHTED_ANSWERS: "weighted-answers",
     THEME: "theme",
 } as const;
 

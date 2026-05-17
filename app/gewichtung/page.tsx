@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import * as sounds from "@/util/sounds";
+import localStorageManager from "@/util/localStore";
 
 import type {
     Antworten,
@@ -20,9 +21,22 @@ function GewichtungContent() {
         category.fragenliste.map((question) => question.frage)
     );
 
+    const parseAnswersParam = (value: string | null): Antworten => {
+        if (!value) return [];
+        try {
+            const decoded = decodeURIComponent(value);
+            const parsed = JSON.parse(decoded);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error("Failed to parse answers from search params:", error);
+            return [];
+        }
+    };
+
     const handleButtonClick = () => {
         sounds.playFanfareSound();
-        router.push("/ergebnis?answer=" + JSON.stringify(output));
+        localStorageManager.setWeightedAnswers(output);
+        router.push("/ergebnis");
     };
 
     // Keyboard navigation section ///////////////////////////////////////////////////////////////////
@@ -96,16 +110,9 @@ function GewichtungContent() {
     // Answer handling section ////////////////////////////////////////////////////////////////////////
     const searchParams = useSearchParams();
     const answersParam = searchParams.get("answer");
-    const answers = useMemo<Antworten>(() => {
-        if (!answersParam) return [];
-        try {
-            const parsed = JSON.parse(answersParam);
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (error) {
-            console.error("Failed to parse answers from search params:", error);
-            return [];
-        }
-    }, [answersParam]);
+    const answersFromQuery = useMemo(() => parseAnswersParam(answersParam), [answersParam]);
+    const answersFromStorage = useMemo(() => localStorageManager.getAnswers(), []);
+    const answers = answersFromQuery.length > 0 ? answersFromQuery : answersFromStorage;
 
     const [output, setOutput] = useState<GewichteteAntwort[]>(() =>
         answers.map((value) => ({ value, weight: 1 }))
@@ -114,6 +121,18 @@ function GewichtungContent() {
     useEffect(() => {
         setOutput(answers.map((value) => ({ value, weight: 1 })));
     }, [answers]);
+
+    useEffect(() => {
+        if (answersFromQuery.length > 0) {
+            localStorageManager.setAnswers(answersFromQuery);
+        }
+    }, [answersFromQuery]);
+
+    useEffect(() => {
+        if (answers.length === 0) {
+            router.replace("/befragung");
+        }
+    }, [answers.length, router]);
 
     function doubleWeight(question: number) {
         setOutput((prev) =>

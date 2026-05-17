@@ -23,21 +23,22 @@ const ErgebnisContent = () => {
     const mediaList: MediaList = test as MediaList;
     const mediaResults: MediaResults = {};
     const answersParam = searchParams.get("answer");
-    const answers: GewichteteAntworten = (() => {
-        if (!answersParam) return [];
+    const parseWeightedParam = (value: string | null): GewichteteAntworten => {
+        if (!value) return [];
         try {
-            const parsed = JSON.parse(answersParam);
+            const decoded = decodeURIComponent(value);
+            const parsed = JSON.parse(decoded);
             return Array.isArray(parsed) ? parsed : [];
         } catch (error) {
             console.error("Failed to parse answers from search params:", error);
             return [];
         }
-    })();
+    };
 
-    // Reset der Antworten im Localstorage
-    useEffect(() => {
-        localStorageManager.clearAnswers();
-    }, []);
+    const answersFromQuery = parseWeightedParam(answersParam);
+    const answersFromStorage = localStorageManager.getWeightedAnswers();
+    const answers: GewichteteAntworten =
+        answersFromQuery.length > 0 ? answersFromQuery : answersFromStorage;
 
     useEffect(() => {
         const target = cardRefs.current[focusedIndex];
@@ -49,6 +50,12 @@ const ErgebnisContent = () => {
             inline: "center",
         });
     }, [focusedIndex]);
+
+    useEffect(() => {
+        if (answers.length === 0) {
+            router.replace("/befragung");
+        }
+    }, [answers.length, router]);
 
     useKeyboardHandler({
         enabled: true,
@@ -144,10 +151,14 @@ const ErgebnisContent = () => {
                 </div>
             </Suspense>
 
-            <span className="top-3 right-3 md:absolute flex flex-col items-center md:items-end gap-2 w-full">
+            <span className="flex flex-col items-center md:items-end gap-2 w-full">
                 <button
-                    onClick={() => router.push("/befragung")}
-                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mr-3 px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
+                    onClick={() => {
+                        localStorageManager.clearAnswers();
+                        localStorageManager.clearWeightedAnswers();
+                        router.push("/befragung");
+                    }}
+                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mx-auto px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
                 >
                     {textData.repeat}
                     <i className="pi pi-replay" style={{ fontSize: "1rem" }} />
