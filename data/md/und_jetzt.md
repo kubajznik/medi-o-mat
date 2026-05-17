@@ -11,4 +11,4 @@ An einer Weiterentwicklung des Projekts mitzuwirken, den Medi-O-Maten auf deine 
 
 Dann schreib uns:
 
-[email@adresse.de](mailto:email@adresse.de)
+[info@medi-o-mat.de](mailto:info@medi-o-mat.de)
