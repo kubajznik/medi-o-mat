@@ -35,6 +35,10 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
     }
   }
 
+  const loseFocus = () => {
+    barRef.current?.blur();
+  }
+
   useKeyboardHandler({
     enabled: true,
     onKey: (event, action) => {
@@ -52,6 +56,7 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
   return (
     <div
       onClick={onClick}
+      onMouseEnter={loseFocus}
       ref={setBarRef}
       tabIndex={0}
       className="relative bg-surface p-4 rounded-lg md:hover:ring-2 md:hover:ring-highlight overflow-hidden md:focus:scale-105 cursor-pointer"

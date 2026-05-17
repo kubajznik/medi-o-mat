@@ -42,6 +42,25 @@ function GewichtungContent() {
         });
     }, [focusedIndex, questions.length]);
 
+    useEffect(() => {
+        const handlePointerEnter = () => {
+            const active = document.activeElement as HTMLElement | null;
+            if (active && active !== document.body) {
+                active.blur();
+            }
+        };
+
+        for (const ref of divRefs.current) {
+            ref?.addEventListener("pointerenter", handlePointerEnter);
+        }
+
+        return () => {
+            for (const ref of divRefs.current) {
+                ref?.removeEventListener("pointerenter", handlePointerEnter);
+            }
+        };
+    }, []);
+
     useKeyboardHandler({
         enabled: true,
         onKey: (event, action) => {
