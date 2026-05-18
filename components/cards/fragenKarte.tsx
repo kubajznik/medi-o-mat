@@ -11,6 +11,9 @@ interface FragenKarteProps {
   bewertung?: BewertungsOption[];
   handleNextQuestion: (value: number) => void;
   isKeyboardMode?: boolean;
+  focusRequestIndex?: number;
+  focusRequestToken?: number;
+  onFocusIndexChange?: (index: number) => void;
 }
 
 export default function FragenKarte({
@@ -20,6 +23,9 @@ export default function FragenKarte({
   handleNextQuestion,
   isKeyboardMode = false,
   bewertung = [],
+  focusRequestIndex,
+  focusRequestToken,
+  onFocusIndexChange,
 }: FragenKarteProps) {
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -34,10 +40,24 @@ export default function FragenKarte({
   }, [defaultIndex, frage]);
 
   useEffect(() => {
+    if (!isKeyboardMode || focusRequestToken === undefined || focusRequestIndex === undefined) {
+      return;
+    }
+    if (bewertung.length === 0) return;
+    const clamped = Math.min(Math.max(focusRequestIndex, 0), bewertung.length - 1);
+    setFocusedIndex(clamped);
+    buttonRefs.current[clamped]?.focus();
+  }, [focusRequestToken, focusRequestIndex, isKeyboardMode, bewertung.length]);
+
+  useEffect(() => {
     if (isKeyboardMode) {
       buttonRefs.current[focusedIndex]?.focus();
     }
   }, [focusedIndex, isKeyboardMode]);
+
+  useEffect(() => {
+    onFocusIndexChange?.(focusedIndex);
+  }, [focusedIndex, onFocusIndexChange]);
 
   const handleButtonClick = (value: number) => {
     handleNextQuestion(value);
@@ -106,7 +126,7 @@ export default function FragenKarte({
             buttonRef={(el) => {
               buttonRefs.current[index] = el;
             }}
-            onFocus={() => setFocusedIndex(index)}
+              onFocus={() => setFocusedIndex(index)}
             isFocused={focusedIndex === index}
             handleClick={() => handleButtonClick(frage.wert)}
           />
