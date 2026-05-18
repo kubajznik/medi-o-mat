@@ -110,16 +110,16 @@ export default function FragenKarte({
   });
 
   return (
-    <div className="flex flex-col gap-6 md:gap-10 short:gap-3 bg-surface shadow-lg px-4 md:px-8 lg:px-16 short:px-4 py-6 md:py-10 short:py-4 rounded-2xl w-full max-w-[1000px]">
-      <h3 className="font-semibold arcade:text-medio-lila text-lg md:text-2xl short:text-base md:text-left text-center leading-[140%]">
+    <div className="flex flex-col gap-[clamp(0.75rem,2.5vh,2.5rem)] bg-surface shadow-lg px-4 md:px-8 lg:px-16 py-[clamp(1rem,3vh,2.5rem)] rounded-2xl w-full max-w-[1000px]">
+      <h3 className="font-semibold arcade:text-medio-lila text-[clamp(1rem,2.5vh,1.5rem)] md:text-left text-center leading-[140%]">
         {"Frage " + fragenCounter.index + " von " + fragenCounter.counter}
       </h3>
 
-      <h2 className="font-normal arcade:text-medio-dark text-xl md:text-4xl short:text-lg leading-[140%]">
+      <h2 className="font-normal arcade:text-medio-dark text-[clamp(1.125rem,3.5vh,2.25rem)] leading-[140%]">
         {frage + "."}
       </h2>
 
-      <div className="flex md:flex-row flex-col md:justify-between gap-3 md:gap-6 short:gap-2 mt-2 md:mt-6 short:mt-2">
+      <div className="flex md:flex-row flex-col md:justify-between gap-[clamp(0.5rem,1.5vh,1.5rem)] mt-[clamp(0.5rem,2vh,1.5rem)]">
         {bewertung.map((frage, index) => (
           <FrageButton
             key={index}

@@ -31,11 +31,11 @@ export default function RootLayout({
         <KeyboardProvider>
           <LogoVisibilityProvider>
             <html lang="en">
-              <body className={`${inter.className} bg-bg`}>
+              <body className={`${inter.className} bg-bg min-h-dvh flex flex-col`}>
                 <AudioUnlock />
                 <InactivityRedirect />
                 <Navbar />
-                {children}
+                <main className="flex flex-1 flex-col min-h-0 w-full">{children}</main>
                 <Footer />
               </body>
             </html>

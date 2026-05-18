@@ -159,18 +159,18 @@ function GewichtungContent() {
     // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
     return (
-        <div className="survey-shell flex flex-col items-center px-5 md:px-10 short:px-4 pt-10 short:pt-4 min-h-screen short:min-h-0 short:max-h-[calc(100dvh-7rem)] short:overflow-hidden">
-            <div className="flex flex-col gap-2 short:gap-1 max-w-[900px] w-full short:min-h-0 short:flex-1 short:overflow-hidden">
-                <div className="items-start short:shrink-0">
-                    <h1 className="font-semibold text-4xl md:text-6xl short:text-2xl">Gewichtung der Thesen</h1>
-                    <h3 className="mb-3 md:mb-10 short:mb-2 max-w-[900px] text-xl md:text-2xl short:text-base">
+        <div className="survey-page flex flex-col items-center px-4 md:px-10 py-[clamp(0.75rem,3vh,2.5rem)] w-full max-w-[900px] mx-auto min-h-0">
+            <div className="flex flex-col gap-2 w-full flex-1 min-h-0">
+                <div className="items-start shrink-0">
+                    <h1 className="font-semibold text-[clamp(1.5rem,4vh,3.75rem)] leading-tight">Gewichtung der Thesen</h1>
+                    <h3 className="mb-[clamp(0.5rem,2vh,2.5rem)] max-w-[900px] text-[clamp(1rem,2.5vh,1.5rem)] leading-snug">
                         Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
                         um diese mit doppelter Gewichtung in die Berechnung einfließen zu
                         lassen.
                     </h3>
                 </div>
 
-                <div className="flex flex-col justify-center gap-3 short:gap-2 short:flex-1 short:min-h-0 short:overflow-y-auto short:pr-1">
+                <div className="flex flex-col justify-center gap-3 flex-1 min-h-0 overflow-y-auto w-full pr-1">
                     {questions.map((frage, index) => (
                         <div className="w-full" key={index}>
                             {index === 0 ? (
@@ -209,7 +209,7 @@ function GewichtungContent() {
                     ))}
                 </div>
 
-                <div className="flex flex-col items-center mx-auto mt-5 md:mt-10 short:mt-3 mb-5 short:mb-2 text-center short:shrink-0">
+                <div className="flex flex-col items-center mx-auto mt-[clamp(0.75rem,2vh,2.5rem)] text-center shrink-0">
                     {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
                     {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
@@ -217,7 +217,7 @@ function GewichtungContent() {
                     <button
                         type="button"
                         onClick={handleButtonClick}
-                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 short:py-3 rounded-lg sm:w-full md:w-[400px] font-medium text-medio-pink text-2xl short:text-lg uppercase hover:scale-105 transition ease-in"
+                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-[clamp(0.75rem,2vh,1rem)] rounded-lg w-full max-w-[400px] font-medium text-medio-pink text-[clamp(1.125rem,2.5vh,1.5rem)] uppercase hover:scale-105 transition ease-in"
                         ref={buttonRef}
                     >
                         zur auswertung

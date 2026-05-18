@@ -140,19 +140,19 @@ const ErgebnisContent = () => {
     );
 
     return (
-        <div className="survey-shell mx-auto p-3 md:p-10 short:p-3 max-w-[1300px] min-h-screen short:min-h-0 overflow-x-hidden short:overflow-y-auto">
-            <div className="flex flex-row justify-between">
+        <div className="survey-page mx-auto p-3 md:p-6 max-w-[1300px] w-full flex flex-col min-h-0 flex-1">
+            <div className="flex flex-row justify-between shrink-0">
                 <div>
-                    <h1 className="font-semibold text-4xl short:text-2xl">Auswertung</h1>
-                    <h2 className="text-xl short:text-base short:leading-snug">
+                    <h1 className="font-semibold text-[clamp(1.5rem,4vh,2.25rem)]">Auswertung</h1>
+                    <h2 className="text-[clamp(1rem,2.5vh,1.25rem)] leading-snug">
                         Diese Auswahl an Medien könnten Sie interessieren.
                     </h2>
                 </div>
             </div>
 
             <Suspense fallback={<div>Loading...</div>}>
-                <div className="pt-10 short:pt-4 pb-5 short:pb-2 w-full overflow-x-auto overflow-y-hidden">
-                    <div className="flex m-auto p-4 short:p-2 w-max">
+                <div className="flex-1 min-h-0 pt-[clamp(0.5rem,2vh,2.5rem)] pb-2 w-full overflow-x-auto overflow-y-hidden">
+                    <div className="flex m-auto p-2 md:p-4 w-max">
                         {favoriteCards.map((card, index) => (
                             <div
                                 key={index}
@@ -182,7 +182,7 @@ const ErgebnisContent = () => {
                 </div>
             </Suspense>
 
-            <span className="flex flex-col items-center md:items-end gap-2 w-full">
+            <span className="flex flex-col items-center md:items-end gap-2 w-full shrink-0 py-[clamp(0.5rem,2vh,1rem)]">
                 <button
                     type="button"
                     ref={buttonRef}

@@ -18,7 +18,7 @@ export default function Home() {
         nextSectionId="problemstellung"
       />
 
-      <div className="flex flex-col justify-center items-center gap-20 short:gap-8 py-[180px] short:py-12">
+      <div className="flex flex-col justify-center items-center gap-[clamp(2rem,8vh,5rem)] py-[clamp(3rem,12vh,11rem)]">
         <div className="flex flex-col gap-6 max-w-[900px]">
             <FullpageText 
             header={header.problemstellung}

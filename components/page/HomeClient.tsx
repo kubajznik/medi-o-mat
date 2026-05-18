@@ -68,18 +68,18 @@ export default function HomeClient({
     });
 
     return (
-        <div id="#start" className="survey-shell flex flex-col justify-center items-center mt-10 sm:mt-0 short:mt-0 min-h-screen short:min-h-0 short:py-4 px-4 text-center">
+        <div id="#start" className="survey-page flex flex-col justify-center items-center px-4 py-[clamp(1rem,4vh,3rem)] text-center">
             <img
                 ref={logoRef}
                 src="/images/mediomat_logo.png"
                 alt="Medi-o-Mat Logo"
-                className="px-2 w-auto max-h-[32vh] short:max-h-[20vh] object-contain"
+                className="px-2 w-auto max-h-[min(32vh,280px)] object-contain"
                 width={900}
                 height={300}
                 decoding="async"
             />
             <p
-                className="mt-8 md:mt-16 short:mt-3 max-w-[900px] font-normal text-xl short:text-base short:leading-snug short:max-h-[30vh] short:overflow-y-auto"
+                className="mt-[clamp(0.75rem,3vh,4rem)] max-w-[900px] font-normal text-[clamp(1rem,2.5vh,1.25rem)] leading-snug"
                 style={{ whiteSpace: "pre-wrap" }}
             >
                 {ersteInformation}
@@ -87,7 +87,7 @@ export default function HomeClient({
             <button
                 onClick={handleStartButtonClick}
                 className={`${animate ? "animate-head-shake" : ""
-                    } mt-28 short:mt-4 px-6 py-4 short:py-3 bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-2xl short:text-lg rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] short:w-full short:max-w-sm perf-gpu-hover transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
+                    } mt-[clamp(1rem,5vh,7rem)] px-6 py-[clamp(0.75rem,2vh,1rem)] bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-[clamp(1.125rem,2.5vh,1.5rem)] rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-full max-w-[400px] perf-gpu-hover transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
             >
                 <i className="pi-arrow-right text-negative pi" style={{ fontSize: "1.2rem" }} />
                 {startButton}
