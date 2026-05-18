@@ -123,12 +123,6 @@ function GewichtungContent() {
     }, [answers]);
 
     useEffect(() => {
-        if (answersFromQuery.length > 0) {
-            localStorageManager.setAnswers(answersFromQuery);
-        }
-    }, [answersFromQuery]);
-
-    useEffect(() => {
         if (answers.length === 0) {
             router.replace("/befragung");
         }

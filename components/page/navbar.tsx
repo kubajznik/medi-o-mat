@@ -8,6 +8,7 @@ import { THEMES } from "@/types/storage";
 import { useTheme } from "@/context/ThemeContext";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
+import localStorageManager from "@/util/localStore";
 
 const navigationItems = [
   { href: "/befragung", label: "Befragung" },
@@ -141,7 +142,12 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={closeMobileMenu}
+                onClick={() => {
+                  if (item.href === "/befragung") {
+                    localStorageManager.clearSurveyProgress();
+                  }
+                  closeMobileMenu();
+                }}
                 className={`mx-auto px-3 py-2 rounded-md transition hover:bg-navbar-bg ${
                   item.label === "Befragung"
                     ? "bg-medio-lila text-white font-semibold shadow-md ring-2 ring-medio-lila/40"

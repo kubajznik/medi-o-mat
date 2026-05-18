@@ -3,6 +3,7 @@
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
+import localStorageManager from "@/util/localStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import ScrollToButton from "../buttons/ScrollToButton";
@@ -26,8 +27,9 @@ export default function HomeClient({
     const { setMainLogoVisible } = useLogoVisibility();
 
     const handleStartButtonClick = () => {
+        localStorageManager.clearSurveyProgress();
         router.push("/befragung");
-    }
+    };
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -50,13 +52,17 @@ export default function HomeClient({
 
     useKeyboardHandler({
         enabled: true,
+        priority: 10,
         onKey: (event, action) => {
-            if (action.type === "button" && action.button === "green") {
+            if (
+                action.type === "button" &&
+                (action.button === "green" || action.button === "yellow")
+            ) {
                 handleStartButtonClick();
-                return true
+                return true;
             }
-            return false
-        }
+            return false;
+        },
     });
 
     return (

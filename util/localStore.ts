@@ -4,6 +4,22 @@ import type { GewichteteAntwort } from "@/types/Befragung";
 const isTheme = (value: string): value is Theme =>
     (Object.values(THEMES) as Theme[]).includes(value as Theme);
 
+/** Survey answers live in memory only (no resume after reload or return visits). */
+let sessionAnswers: number[] = [];
+let sessionWeightedAnswers: GewichteteAntwort[] = [];
+
+const clearLegacySurveyStorage = () => {
+    if (typeof window === "undefined") return;
+    try {
+        localStorage.removeItem(STORAGE_KEYS.ANSWERS);
+        localStorage.removeItem(STORAGE_KEYS.WEIGHTED_ANSWERS);
+    } catch (error) {
+        console.error("Error clearing legacy survey storage:", error);
+    }
+};
+
+clearLegacySurveyStorage();
+
 class LocalStorageManager {
 
     private setItem(key: StorageKey, value: string) {
@@ -41,55 +57,42 @@ class LocalStorageManager {
     }
 
     addAnswer(value: number) {
-        const answers = this.getAnswers();
-        answers.push(value);
-        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(answers));
+        sessionAnswers.push(value);
     }
 
     setAnswers(values: number[]) {
-        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(values));
+        sessionAnswers = [...values];
     }
 
     getAnswers(): number[] {
-        const value = this.getItem(STORAGE_KEYS.ANSWERS);
-        if (!value) return [];
-        try {
-            const parsed = JSON.parse(value);
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (error) {
-            console.error(`Error parsing answers from localStorage: ${error}`);
-            return [];
-        }
+        return [...sessionAnswers];
     }
 
     clearAnswers() {
-        this.removeItem(STORAGE_KEYS.ANSWERS);
+        sessionAnswers = [];
+        clearLegacySurveyStorage();
     }
 
     setWeightedAnswers(values: GewichteteAntwort[]) {
-        this.setItem(STORAGE_KEYS.WEIGHTED_ANSWERS, JSON.stringify(values));
+        sessionWeightedAnswers = values.map((item) => ({ ...item }));
     }
 
     getWeightedAnswers(): GewichteteAntwort[] {
-        const value = this.getItem(STORAGE_KEYS.WEIGHTED_ANSWERS);
-        if (!value) return [];
-        try {
-            const parsed = JSON.parse(value);
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (error) {
-            console.error(`Error parsing weighted answers from localStorage: ${error}`);
-            return [];
-        }
+        return sessionWeightedAnswers.map((item) => ({ ...item }));
     }
 
     clearWeightedAnswers() {
-        this.removeItem(STORAGE_KEYS.WEIGHTED_ANSWERS);
+        sessionWeightedAnswers = [];
+        clearLegacySurveyStorage();
+    }
+
+    clearSurveyProgress() {
+        this.clearAnswers();
+        this.clearWeightedAnswers();
     }
 
     popAnswer() {
-        const answers = this.getAnswers();
-        answers.pop();
-        this.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(answers));
+        sessionAnswers.pop();
     }
 
     getTheme(): Theme {
@@ -106,4 +109,3 @@ class LocalStorageManager {
 const localStorageManager = new LocalStorageManager();
 
 export default localStorageManager;
-

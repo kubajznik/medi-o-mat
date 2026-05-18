@@ -30,17 +30,7 @@ export default function Befragung() {
 
     useEffect(() => {
         setIsKeyboardMode(localStorageManager.getKeyboardMode());
-        const savedAnswers = localStorageManager.getAnswers();
-        if (savedAnswers.length >= totalQuestionCount && totalQuestionCount > 0) {
-            router.replace("/gewichtung");
-            return;
-        }
-        if (savedAnswers.length > 0) {
-            setCurrentQuestValue(savedAnswers);
-            setSumme(savedAnswers.reduce((acc, val) => acc + val, 0));
-            setCurrentQuestionIndex(savedAnswers.length);
-        }
-    }, [router, totalQuestionCount]);
+    }, []);
 
     const handleCancel = () => {
         router.push("/");
@@ -51,7 +41,6 @@ export default function Befragung() {
     };
 
     const onReset = () => {
-        localStorageManager.clearAnswers();
         setCurrentQuestionIndex(0);
         setCurrentQuestValue([]);
         setSumme(0);
@@ -59,7 +48,6 @@ export default function Befragung() {
     const currentQuestion = flatQuestions[currentQuestionIndex] ?? null;
 
     const handleNextQuestion = (value: number) => {
-        localStorageManager.addAnswer(value);
         const nextValues = [...currentQuestValue, value];
         setCurrentQuestValue(nextValues);
         setSumme((prev) => prev + value);
@@ -68,12 +56,12 @@ export default function Befragung() {
             setCurrentQuestionIndex(nextIndex);
             return;
         }
+        localStorageManager.setAnswers(nextValues);
         router.push("/gewichtung");
     };
 
     const handleQuestionBefore = () => {
         if (currentQuestionIndex > 0) {
-            localStorageManager.popAnswer();
             const lastValue = currentQuestValue[currentQuestValue.length - 1] ?? 0;
             setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
             setSumme((prev) => prev - lastValue);

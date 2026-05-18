@@ -7,6 +7,7 @@ import Footer from "@/components/page/footer";
 import "primeicons/primeicons.css";
 import "animate.css";
 import Navbar from "@/components/page/navbar";
+import InactivityRedirect from "@/components/InactivityRedirect";
 import { ThemeProvider } from "../context/ThemeContext";
 import { KeyboardProvider } from "@/context/KeyboardContext";
 import { LogoVisibilityProvider } from "@/context/LogoVisibilityContext";
@@ -29,6 +30,7 @@ export default function RootLayout({
         <LogoVisibilityProvider>
           <html lang="en">
             <body className={`${inter.className} bg-bg`}>
+              <InactivityRedirect />
               <Navbar />
               {children}
               <Footer />

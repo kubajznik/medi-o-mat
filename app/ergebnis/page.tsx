@@ -25,9 +25,8 @@ const ErgebnisContent = () => {
     const [focusedIndex, setFocusedIndex] = useState(0);
 
     const handleRestart = () => {
-        localStorageManager.clearAnswers();
-        localStorageManager.clearWeightedAnswers();
-        router.push("/befragung");
+        localStorageManager.clearSurveyProgress();
+        router.push("/");
     };
 
     const mediaList: MediaList = test as MediaList;
