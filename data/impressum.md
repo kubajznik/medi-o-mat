@@ -1,13 +1,9 @@
 # Impressum
-
-\[Name\(n\) der verantwortlichen Person\(en\) / Teamname\]
-\[Anschrift – Straße, Hausnummer\]
-\[PLZ, Ort\]
-\[Land\]
-
-Kontakt:
-E\-Mail: \[E\-Mail\-Adresse\]
-Telefon: \[optional\]
+Jakub Stříbrný
+Gleimstraße 17
+10437 Berlin
+Deutschland
+[contact@medi-o-mat.de](mailto:contact@medi-o-mat.de)
 
 # Hinweis zum Projektstatus
 Dieses Angebot ist ein Prototyp / Forschungsprojekt\. Inhalte und Funktionen dienen der Erprobung und können sich jederzeit ändern\.

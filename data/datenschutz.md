@@ -1,8 +1,9 @@
 # 1. Verantwortlicher
-Verantwortlich für die Datenverarbeitung auf dieser Website ist:
-[Name(n) / Projektteam]
-[Anschrift]E-Mail: 
-[E-Mail-Adresse]
+Jakub Stříbrný
+Gleimstraße 17
+10437 Berlin
+Deutschland
+[contact@medi-o-mat.de](mailto:contact@medi-o-mat.de)
 
 # 2. Allgemeine Hinweise zur Datenverarbeitung
 Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Die Verarbeitung erfolgt auf Grundlage der Datenschutz-Grundverordnung (DSGVO) sowie der geltenden nationalen Datenschutzgesetze.
