@@ -2,50 +2,64 @@
 
 import localStorageManager from "@/util/localStore";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const INACTIVITY_MS = 30_000;
+const CHECK_INTERVAL_MS = 1_000;
 
 const ACTIVITY_EVENTS = [
     "mousedown",
-    "mousemove",
     "keydown",
     "touchstart",
-    "scroll",
     "click",
 ] as const;
+
+const isStartPage = (pathname: string | null) =>
+    !pathname || pathname === "/";
 
 export default function InactivityRedirect() {
     const router = useRouter();
     const pathname = usePathname();
+    const routerRef = useRef(router);
+    const lastActivityRef = useRef(Date.now());
+    const hasRedirectedRef = useRef(false);
+
+    routerRef.current = router;
 
     useEffect(() => {
-        if (pathname === "/") return;
+        if (isStartPage(pathname)) return;
 
-        let timeoutId: ReturnType<typeof setTimeout>;
+        hasRedirectedRef.current = false;
+        lastActivityRef.current = Date.now();
 
-        const goToStart = () => {
-            localStorageManager.clearSurveyProgress();
-            router.push("/");
-        };
-
-        const resetTimer = () => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(goToStart, INACTIVITY_MS);
+        const markActive = () => {
+            lastActivityRef.current = Date.now();
         };
 
         for (const event of ACTIVITY_EVENTS) {
-            window.addEventListener(event, resetTimer, { passive: true });
+            window.addEventListener(event, markActive, { passive: true });
         }
-        resetTimer();
+        window.addEventListener("mousemove", markActive, { passive: true });
+
+        const intervalId = setInterval(() => {
+            if (hasRedirectedRef.current) return;
+
+            const idleFor = Date.now() - lastActivityRef.current;
+            if (idleFor < INACTIVITY_MS) return;
+
+            hasRedirectedRef.current = true;
+            localStorageManager.clearSurveyProgress();
+            routerRef.current.push("/");
+        }, CHECK_INTERVAL_MS);
 
         return () => {
-            clearTimeout(timeoutId);
+            clearInterval(intervalId);
             for (const event of ACTIVITY_EVENTS) {
-                window.removeEventListener(event, resetTimer);
+                window.removeEventListener(event, markActive);
             }
+            window.removeEventListener("mousemove", markActive);
         };
-    }, [pathname, router]);
+    }, [pathname]);
 
     return null;
 }
