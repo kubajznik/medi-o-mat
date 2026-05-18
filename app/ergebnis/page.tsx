@@ -13,12 +13,22 @@ import type { GewichteteAntworten } from "@/types/Befragung";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
 import Place from "@/components/icons/Place";
 
+const CARD_COUNT = 3;
+const BUTTON_INDEX = CARD_COUNT;
+
 const ErgebnisContent = () => {
     const router = useRouter();
     const animate = useAnimationToggle(7000);
     const searchParams = useSearchParams();
     const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [focusedIndex, setFocusedIndex] = useState(0);
+
+    const handleRestart = () => {
+        localStorageManager.clearAnswers();
+        localStorageManager.clearWeightedAnswers();
+        router.push("/befragung");
+    };
 
     const mediaList: MediaList = test as MediaList;
     const mediaResults: MediaResults = {};
@@ -41,7 +51,10 @@ const ErgebnisContent = () => {
         answersFromQuery.length > 0 ? answersFromQuery : answersFromStorage;
 
     useEffect(() => {
-        const target = cardRefs.current[focusedIndex];
+        const target =
+            focusedIndex === BUTTON_INDEX
+                ? buttonRef.current
+                : cardRefs.current[focusedIndex];
         if (!target) return;
         target.focus();
         target.scrollIntoView({
@@ -60,13 +73,35 @@ const ErgebnisContent = () => {
     useKeyboardHandler({
         enabled: true,
         onKey: (event, action) => {
-            if (action.type === "nav" && action.direction === "left") {
+            if (action.type === "nav" && action.direction === "up") {
                 setFocusedIndex((prev) => Math.max(prev - 1, 0));
                 return true;
             }
-            if (action.type === "nav" && action.direction === "right") {
-                setFocusedIndex((prev) => Math.min(prev + 1, 2));
+            if (action.type === "nav" && action.direction === "down") {
+                setFocusedIndex((prev) =>
+                    prev < CARD_COUNT ? BUTTON_INDEX : prev
+                );
                 return true;
+            }
+            if (action.type === "nav" && action.direction === "left") {
+                setFocusedIndex((prev) => {
+                    if (prev >= CARD_COUNT) return prev;
+                    return Math.max(prev - 1, 0);
+                });
+                return true;
+            }
+            if (action.type === "nav" && action.direction === "right") {
+                setFocusedIndex((prev) => {
+                    if (prev >= CARD_COUNT) return prev;
+                    return Math.min(prev + 1, CARD_COUNT - 1);
+                });
+                return true;
+            }
+            if (action.type === "button" && action.button === "green") {
+                if (buttonRef.current === document.activeElement) {
+                    handleRestart();
+                    return true;
+                }
             }
             return false;
         },
@@ -153,12 +188,10 @@ const ErgebnisContent = () => {
 
             <span className="flex flex-col items-center md:items-end gap-2 w-full">
                 <button
-                    onClick={() => {
-                        localStorageManager.clearAnswers();
-                        localStorageManager.clearWeightedAnswers();
-                        router.push("/befragung");
-                    }}
-                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mx-auto px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all"
+                    type="button"
+                    ref={buttonRef}
+                    onClick={handleRestart}
+                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mx-auto px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all focus-visible:outline-none focus:scale-100"
                 >
                     {textData.repeat}
                     <i className="pi pi-replay" style={{ fontSize: "1rem" }} />
