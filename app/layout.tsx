@@ -5,9 +5,10 @@ import Footer from "@/components/page/footer";
 
 // extern imports
 import "primeicons/primeicons.css";
+import "animate.css";
 import AudioUnlock from "@/components/AudioUnlock";
-import InactivityRedirect from "@/components/InactivityRedirect";
 import Navbar from "@/components/page/navbar";
+import InactivityRedirect from "@/components/InactivityRedirect";
 import { PerformanceProvider } from "@/context/PerformanceContext";
 import { ThemeProvider } from "../context/ThemeContext";
 import { KeyboardProvider } from "@/context/KeyboardContext";
@@ -31,14 +32,14 @@ export default function RootLayout({
         <KeyboardProvider>
           <LogoVisibilityProvider>
             <html lang="en">
-              <body className={`${inter.className} bg-bg min-h-dvh flex flex-col`}>
+              <body className={`${inter.className} bg-bg`}>
                 <AudioUnlock />
                 <InactivityRedirect />
                 <Navbar />
-                <main className="flex flex-1 flex-col min-h-0 w-full">{children}</main>
-                <Footer />
-              </body>
-            </html>
+              {children}
+              <Footer />
+            </body>
+          </html>
           </LogoVisibilityProvider>
         </KeyboardProvider>
       </PerformanceProvider>

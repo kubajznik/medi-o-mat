@@ -108,8 +108,8 @@ export default function Befragung() {
     })
 
     return (
-        <div className="survey-page px-4 py-[clamp(0.5rem,2vh,2rem)] w-full">
-            <div className="relative flex flex-row gap-4 mx-auto w-full max-w-[1000px] flex-1 justify-center">
+        <div className="px-4 w-full h-screen">
+            <div className="relative flex flex-row gap-4 mx-auto pt-4 md:pt-24 w-full max-w-[1000px]">
                 {/* Zurück-Button */}
 
                 <div className="relative w-full">
@@ -166,7 +166,7 @@ export default function Befragung() {
                         />
                     }
                 <button
-                    className="flex bg-accent hover:bg-highlight focus:bg-highlight opacity-0 arcade:opacity-100 mx-auto mt-[clamp(0.75rem,3vh,2.5rem)] p-4 rounded-xl text-medio-dark"
+                    className="flex bg-accent hover:bg-highlight focus:bg-highlight opacity-0 arcade:opacity-100 mx-auto mt-10 p-4 rounded-xl text-medio-dark"
                     onClick={handleResetClick}
                     ref={restartButtonRef}
 

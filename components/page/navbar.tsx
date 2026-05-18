@@ -101,8 +101,8 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-lg short:text-base">
-      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[900px] h-16 short:h-12">
+    <nav className="top-0 z-50 sticky bg-navbar-bg border-surface border-b font-medium text-lg">
+      <div className="flex items-center mx-auto px-4 sm:px-6 lg:px-0 max-w-[900px] h-16">
 
         <button
           type="button"

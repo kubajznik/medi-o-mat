@@ -1,6 +1,5 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
-import { useReduceMotion } from "@/context/PerformanceContext";
 import { SpotifyIcon } from "../icons/spotify";
 
 type VorschlagCardProps = {
@@ -31,7 +30,6 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
 ) => {
   const [showMore, setShowMore] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
-  const reduceMotion = useReduceMotion();
 
   const setCardRef = (node: HTMLDivElement | null) => {
     cardRef.current = node;
@@ -76,19 +74,15 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
               : cardIndex === 2
                   ? "border-[4px] border-medio-orange"
                 : "border-2 border-gray-200"
-        } bg-surface p-[clamp(1rem,2vh,1.5rem)] w-[clamp(16rem,28vw,24rem)] min-h-0 max-h-[min(52vh,520px)] rounded-2xl flex justify-between flex-col shadow-xl focus-visible:outline-none ${
-          reduceMotion
-            ? ""
-            : "perf-gpu-hover hover:scale-95 focus:scale-[0.95] transition-transform"
-        }`}
+        } bg-surface p-6 w-80 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all focus-visible:outline-none focus:scale-[0.95]`}
     >
-      <div className="flex flex-col gap-[clamp(0.75rem,2vh,1.5rem)] min-h-0 overflow-y-auto">
+      <div className="flex flex-col gap-6">
         <span>
           <p className="bg-gray-100 px-2 rounded-md w-min font-medium text-gray-500 text-sm uppercase tracking-[1px]">
             {mediumArt}
           </p>
           <h2
-            className="mt-1 px-1 font-semibold arcade:text-medio-lila text-[clamp(1.125rem,2.5vh,1.5rem)] uppercase"
+            className="mt-1 px-1 font-semibold arcade:text-medio-lila text-2xl uppercase"
             title={name}
           >
             {name.length > 27 ? `${name.slice(0, 27)}...` : name}
@@ -96,10 +90,8 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
         </span>
         <img
           src={image}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="bg-contain rounded-lg h-[clamp(6rem,18vh,12.5rem)] object-contain shrink-0"
+          alt="medium"
+          className="bg-contain rounded-lg h-[200px] object-contain"
         />
         {beschreibung && (
           <p className="arcade:text-medio-dark text-base">

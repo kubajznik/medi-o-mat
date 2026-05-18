@@ -5,7 +5,7 @@ export default async function Datenschutz() {
   const filePath = path.join(process.cwd(), "data", "datenschutz.md");
 
   return (
-    <div className="flex flex-col items-center px-4 w-full py-8">
+    <div className="flex flex-col items-center px-4 w-full min-h-screen">
       <div className="max-w-[900px] text-justify">
         <MarkdownDisplay filePath={filePath} />
       </div>

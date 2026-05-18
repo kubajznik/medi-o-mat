@@ -1,25 +1,19 @@
 "use client";
 import GewichtungsCard from "@/components/cards/gewichtungsCard";
-import React, { useEffect, useMemo, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
-import { useReduceMotion } from "@/context/PerformanceContext";
-import { scrollElementIntoView } from "@/util/scrollIntoView";
 import * as sounds from "@/util/sounds";
 import localStorageManager from "@/util/localStore";
 import { buildSurveyUrl, parseSurveyAnswersParam } from "@/util/surveyFlow";
 import { resetUserActivity } from "@/util/userActivity";
 
-import type {
-    Fragebogen,
-    GewichteteAntwort,
-} from "@/types/Befragung";
+import type { Fragebogen, GewichteteAntwort } from "@/types/Befragung";
 
 function GewichtungContent() {
     const router = useRouter();
-    const reduceMotion = useReduceMotion();
     const questionData = data as Fragebogen;
     const questions = questionData.fragen.flatMap((category) =>
         category.fragenliste.map((question) => question.frage)
@@ -46,8 +40,11 @@ function GewichtungContent() {
         if (!focusTarget) return;
 
         focusTarget.focus();
-        scrollElementIntoView(focusTarget, reduceMotion);
-    }, [focusedIndex, questions.length, reduceMotion]);
+        focusTarget.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+        });
+    }, [focusedIndex, questions.length]);
 
     useEffect(() => {
         const handlePointerEnter = () => {
@@ -97,7 +94,6 @@ function GewichtungContent() {
     });
 
 
-  // Answer handling — load on client only (avoids SSR/hydration empty cache bug)
     const searchParams = useSearchParams();
     const [output, setOutput] = useState<GewichteteAntwort[]>([]);
     const [isInitialized, setIsInitialized] = useState(false);
@@ -154,18 +150,18 @@ function GewichtungContent() {
     }
 
     return (
-        <div className="survey-page flex flex-col items-center px-4 md:px-10 py-[clamp(0.75rem,3vh,2.5rem)] w-full max-w-[900px] mx-auto min-h-0">
-            <div className="flex flex-col gap-2 w-full flex-1 min-h-0">
-                <div className="items-start shrink-0">
-                    <h1 className="font-semibold text-[clamp(1.5rem,4vh,3.75rem)] leading-tight">Gewichtung der Thesen</h1>
-                    <h3 className="mb-[clamp(0.5rem,2vh,2.5rem)] max-w-[900px] text-[clamp(1rem,2.5vh,1.5rem)] leading-snug">
+        <div className="flex flex-col items-center px-5 md:px-10 pt-10 min-h-screen">
+            <div className="flex flex-col gap-2 max-w-[900px]">
+                <div className="items-start">
+                    <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
+                    <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
                         Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
                         um diese mit doppelter Gewichtung in die Berechnung einfließen zu
                         lassen.
                     </h3>
                 </div>
 
-                <div className="flex flex-col justify-center gap-3 flex-1 min-h-0 overflow-y-auto w-full pr-1">
+                <div className="flex flex-col justify-center gap-3">
                     {questions.map((frage, index) => (
                         <div className="w-full" key={index}>
                             {index === 0 ? (
@@ -204,7 +200,7 @@ function GewichtungContent() {
                     ))}
                 </div>
 
-                <div className="flex flex-col items-center mx-auto mt-[clamp(0.75rem,2vh,2.5rem)] text-center shrink-0">
+                <div className="flex flex-col items-center mx-auto mt-5 md:mt-10 mb-5 text-center">
                     {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
                     {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
@@ -212,7 +208,7 @@ function GewichtungContent() {
                     <button
                         type="button"
                         onClick={handleButtonClick}
-                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-[clamp(0.75rem,2vh,1rem)] rounded-lg w-full max-w-[400px] font-medium text-medio-pink text-[clamp(1.125rem,2.5vh,1.5rem)] uppercase hover:scale-105 transition ease-in"
+                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg sm:w-full md:w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
                         ref={buttonRef}
                     >
                         zur auswertung

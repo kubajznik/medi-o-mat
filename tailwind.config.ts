@@ -50,7 +50,6 @@ const config: Config = {
       addVariant("arcade", 'html[data-theme="arcade"] &');
       addVariant("dark", 'html[data-theme="dark"] &');
       addVariant("light", 'html:not([data-theme]) &');
-      addVariant("short", "@media (max-height: 720px)");
     }),
   ],
 };

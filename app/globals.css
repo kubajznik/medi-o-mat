@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Mohave&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Mohave);
 
 @tailwind base;
 @tailwind components;
@@ -118,23 +118,6 @@ body::-webkit-scrollbar {
   color: var(--text-primary);
 }
 
-@media (max-height: 720px) {
-  .gewichtungCategory {
-    margin-top: 12px;
-    margin-bottom: 4px;
-    font-size: 0.875rem;
-  }
-}
-
-/* Survey / kiosk pages: fill space between navbar and footer */
-.survey-page {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  min-height: 0;
-  width: 100%;
-}
-
 #frageButton {
   width: 20%;
 }
@@ -218,42 +201,4 @@ body::-webkit-scrollbar {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-@keyframes head-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-4px);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(4px);
-  }
-}
-
-.animate-head-shake {
-  animation: head-shake 0.8s ease-in-out;
-}
-
-html[data-reduce-motion="true"] .animate-head-shake,
-html[data-reduce-motion="true"] .animate-\[pop_220ms_ease-out\] {
-  animation: none !important;
-}
-
-html[data-reduce-motion="true"] * {
-  scroll-behavior: auto !important;
-}
-
-html[data-reduce-motion="true"] .perf-gpu-hover:hover,
-html[data-reduce-motion="true"] .perf-gpu-hover:focus-visible {
-  transform: none !important;
 }
