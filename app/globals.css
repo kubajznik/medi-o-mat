@@ -99,6 +99,18 @@ body {
   color: var(--text-primary);
 }
 
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .gewichtungCategory {
   font-weight: 800;
   margin-top: 40px;
