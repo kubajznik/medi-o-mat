@@ -11,6 +11,7 @@ import { useReduceMotion } from "@/context/PerformanceContext";
 import { scrollElementIntoView } from "@/util/scrollIntoView";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import type { GewichteteAntworten } from "@/types/Befragung";
+import { parseSurveyAnswersParam } from "@/util/surveyFlow";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
 import Place from "@/components/icons/Place";
 
@@ -24,6 +25,8 @@ const ErgebnisContent = () => {
     const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [focusedIndex, setFocusedIndex] = useState(0);
+    const [answers, setAnswers] = useState<GewichteteAntworten | null>(null);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     const handleRestart = () => {
         localStorageManager.clearSurveyProgress();
@@ -32,25 +35,26 @@ const ErgebnisContent = () => {
 
     const mediaList: MediaList = test as MediaList;
     const mediaResults: MediaResults = {};
-    const answersParam = searchParams.get("answer");
-    const parseWeightedParam = (value: string | null): GewichteteAntworten => {
-        if (!value) return [];
-        try {
-            const decoded = decodeURIComponent(value);
-            const parsed = JSON.parse(decoded);
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (error) {
-            console.error("Failed to parse answers from search params:", error);
-            return [];
-        }
-    };
+    useEffect(() => {
+        const fromQuery = parseSurveyAnswersParam<{
+            value: number;
+            weight: number;
+        }>(searchParams.get("answer"));
+        const fromSession = localStorageManager.getWeightedAnswers();
+        const resolved = fromQuery.length > 0 ? fromQuery : fromSession;
 
-    const answersFromQuery = parseWeightedParam(answersParam);
-    const answersFromStorage = localStorageManager.getWeightedAnswers();
-    const answers: GewichteteAntworten =
-        answersFromQuery.length > 0 ? answersFromQuery : answersFromStorage;
+        if (resolved.length === 0) {
+            router.replace("/befragung/");
+            return;
+        }
+
+        localStorageManager.setWeightedAnswers(resolved);
+        setAnswers(resolved);
+        setIsInitialized(true);
+    }, [searchParams, router]);
 
     useEffect(() => {
+        if (!isInitialized) return;
         const target =
             focusedIndex === BUTTON_INDEX
                 ? buttonRef.current
@@ -58,13 +62,7 @@ const ErgebnisContent = () => {
         if (!target) return;
         target.focus();
         scrollElementIntoView(target, reduceMotion);
-    }, [focusedIndex, reduceMotion]);
-
-    useEffect(() => {
-        if (answers.length === 0) {
-            router.replace("/befragung");
-        }
-    }, [answers.length, router]);
+    }, [focusedIndex, reduceMotion, isInitialized]);
 
     useKeyboardHandler({
         enabled: true,
@@ -102,6 +100,10 @@ const ErgebnisContent = () => {
             return false;
         },
     });
+
+    if (!isInitialized || !answers) {
+        return null;
+    }
 
     for (const medium of mediaList) {
         mediaResults[medium.code] = 0;
