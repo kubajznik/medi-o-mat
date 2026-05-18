@@ -5,6 +5,7 @@ import Footer from "@/components/page/footer";
 
 // extern imports
 import "primeicons/primeicons.css";
+import AudioUnlock from "@/components/AudioUnlock";
 import InactivityRedirect from "@/components/InactivityRedirect";
 import Navbar from "@/components/page/navbar";
 import { PerformanceProvider } from "@/context/PerformanceContext";
@@ -31,6 +32,7 @@ export default function RootLayout({
           <LogoVisibilityProvider>
             <html lang="en">
               <body className={`${inter.className} bg-bg`}>
+                <AudioUnlock />
                 <InactivityRedirect />
                 <Navbar />
                 {children}

@@ -91,6 +91,7 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
             markUserActivity();
+            void sounds.unlockAudio();
 
             const action = normalizeKey(event);
             if (!action) return;
