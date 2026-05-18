@@ -17,7 +17,6 @@ const ACTIVITY_EVENTS = [
     "keydown",
     "touchstart",
     "click",
-    "mousemove",
 ] as const;
 
 const isStartPage = (pathname: string | null) =>

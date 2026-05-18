@@ -7,7 +7,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 //import {useEffect, useState} from 'react';
 import React, { Suspense, use } from "react";
 import textData from "@/data/texte.json";
-import useAnimationToggle from "@/hooks/useAnimationToggle";
+import { useReduceMotion } from "@/context/PerformanceContext";
+import { scrollElementIntoView } from "@/util/scrollIntoView";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import type { GewichteteAntworten } from "@/types/Befragung";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
@@ -18,7 +19,7 @@ const BUTTON_INDEX = CARD_COUNT;
 
 const ErgebnisContent = () => {
     const router = useRouter();
-    const animate = useAnimationToggle(7000);
+    const reduceMotion = useReduceMotion();
     const searchParams = useSearchParams();
     const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -56,12 +57,8 @@ const ErgebnisContent = () => {
                 : cardRefs.current[focusedIndex];
         if (!target) return;
         target.focus();
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-            inline: "center",
-        });
-    }, [focusedIndex]);
+        scrollElementIntoView(target, reduceMotion);
+    }, [focusedIndex, reduceMotion]);
 
     useEffect(() => {
         if (answers.length === 0) {
@@ -143,19 +140,19 @@ const ErgebnisContent = () => {
     );
 
     return (
-        <div className="mx-auto p-3 md:p-10 max-w-[1300px] min-h-screen overflow-x-hidden">
+        <div className="survey-shell mx-auto p-3 md:p-10 short:p-3 max-w-[1300px] min-h-screen short:min-h-0 overflow-x-hidden short:overflow-y-auto">
             <div className="flex flex-row justify-between">
                 <div>
-                    <h1 className="font-semibold text-4xl">Auswertung</h1>
-                    <h2 className="text-xl">
+                    <h1 className="font-semibold text-4xl short:text-2xl">Auswertung</h1>
+                    <h2 className="text-xl short:text-base short:leading-snug">
                         Diese Auswahl an Medien könnten Sie interessieren.
                     </h2>
                 </div>
             </div>
 
             <Suspense fallback={<div>Loading...</div>}>
-                <div className="pt-10 pb-5 w-full overflow-x-auto overflow-y-hidden">
-                    <div className="flex m-auto p-4 w-max">
+                <div className="pt-10 short:pt-4 pb-5 short:pb-2 w-full overflow-x-auto overflow-y-hidden">
+                    <div className="flex m-auto p-4 short:p-2 w-max">
                         {favoriteCards.map((card, index) => (
                             <div
                                 key={index}

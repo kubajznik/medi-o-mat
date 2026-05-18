@@ -11,7 +11,7 @@ interface FullpageTextProps {
 
 export const FullpageText = ({ header, filePath, headerId, nextSectionId, children }: FullpageTextProps) => {
   return (
-    <div className="flex flex-col justify-center ms-center max-w-[900px] min-h-screen text-justify" id ={headerId}> 
+    <div className="flex flex-col justify-center ms-center max-w-[900px] min-h-screen short:min-h-0 short:py-8 text-justify" id ={headerId}> 
       {header && <h1 className="mb-4 pt-16 font-bold text-2xl text-left">{header}</h1>}
       <MarkdownDisplay filePath={filePath}/>
       { nextSectionId && (

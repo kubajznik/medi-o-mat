@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
+import { useReduceMotion } from "@/context/PerformanceContext";
 import { SpotifyIcon } from "../icons/spotify";
 
 type VorschlagCardProps = {
@@ -30,6 +31,7 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
 ) => {
   const [showMore, setShowMore] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const reduceMotion = useReduceMotion();
 
   const setCardRef = (node: HTMLDivElement | null) => {
     cardRef.current = node;
@@ -74,15 +76,19 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
               : cardIndex === 2
                   ? "border-[4px] border-medio-orange"
                 : "border-2 border-gray-200"
-        } bg-surface p-6 w-80 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all focus-visible:outline-none focus:scale-[0.95]`}
+        } bg-surface p-6 short:p-4 w-80 md:w-96 short:w-72 min-h-[600px] md:min-h-[700px] short:min-h-0 short:max-h-[52vh] rounded-2xl scale-90 short:scale-100 flex justify-between flex-col shadow-xl focus-visible:outline-none ${
+          reduceMotion
+            ? ""
+            : "perf-gpu-hover hover:scale-95 focus:scale-[0.95] transition-transform"
+        }`}
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 short:gap-3">
         <span>
           <p className="bg-gray-100 px-2 rounded-md w-min font-medium text-gray-500 text-sm uppercase tracking-[1px]">
             {mediumArt}
           </p>
           <h2
-            className="mt-1 px-1 font-semibold arcade:text-medio-lila text-2xl uppercase"
+            className="mt-1 px-1 font-semibold arcade:text-medio-lila text-2xl short:text-lg uppercase"
             title={name}
           >
             {name.length > 27 ? `${name.slice(0, 27)}...` : name}
@@ -90,8 +96,10 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
         </span>
         <img
           src={image}
-          alt="medium"
-          className="bg-contain rounded-lg h-[200px] object-contain"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="bg-contain rounded-lg h-[200px] short:h-28 object-contain"
         />
         {beschreibung && (
           <p className="arcade:text-medio-dark text-base">

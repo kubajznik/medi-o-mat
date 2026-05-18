@@ -68,18 +68,26 @@ export default function HomeClient({
     });
 
     return (
-        <div id="#start" className="flex flex-col justify-center items-center mt-10 sm:mt-0 min-h-screen text-center">
-            <img ref={logoRef} src="/images/mediomat_logo.png" alt="Medi-o-Mat Logo" className="px-2 w-auto h-auto" />
+        <div id="#start" className="survey-shell flex flex-col justify-center items-center mt-10 sm:mt-0 short:mt-0 min-h-screen short:min-h-0 short:py-4 px-4 text-center">
+            <img
+                ref={logoRef}
+                src="/images/mediomat_logo.png"
+                alt="Medi-o-Mat Logo"
+                className="px-2 w-auto max-h-[32vh] short:max-h-[20vh] object-contain"
+                width={900}
+                height={300}
+                decoding="async"
+            />
             <p
-                className="mt-8 md:mt-16 max-w-[900px] font-normal text-xl"
+                className="mt-8 md:mt-16 short:mt-3 max-w-[900px] font-normal text-xl short:text-base short:leading-snug short:max-h-[30vh] short:overflow-y-auto"
                 style={{ whiteSpace: "pre-wrap" }}
             >
                 {ersteInformation}
             </p>
             <button
                 onClick={handleStartButtonClick}
-                className={`${animate ? "animate__animated animate__headShake" : ""
-                    } mt-28 px-6 py-4 bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-2xl rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
+                className={`${animate ? "animate-head-shake" : ""
+                    } mt-28 short:mt-4 px-6 py-4 short:py-3 bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-2xl short:text-lg rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] short:w-full short:max-w-sm perf-gpu-hover transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
             >
                 <i className="pi-arrow-right text-negative pi" style={{ fontSize: "1.2rem" }} />
                 {startButton}

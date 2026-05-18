@@ -5,6 +5,8 @@ import data from "../../data/questions.json";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
+import { useReduceMotion } from "@/context/PerformanceContext";
+import { scrollElementIntoView } from "@/util/scrollIntoView";
 import * as sounds from "@/util/sounds";
 import localStorageManager from "@/util/localStore";
 
@@ -16,6 +18,7 @@ import type {
 
 function GewichtungContent() {
     const router = useRouter();
+    const reduceMotion = useReduceMotion();
     const questionData = data as Fragebogen;
     const questions = questionData.fragen.flatMap((category) =>
         category.fragenliste.map((question) => question.frage)
@@ -53,11 +56,8 @@ function GewichtungContent() {
         if (!focusTarget) return;
 
         focusTarget.focus();
-        focusTarget.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-        });
-    }, [focusedIndex, questions.length]);
+        scrollElementIntoView(focusTarget, reduceMotion);
+    }, [focusedIndex, questions.length, reduceMotion]);
 
     useEffect(() => {
         const handlePointerEnter = () => {
@@ -159,18 +159,18 @@ function GewichtungContent() {
     // const totalCount = counters.reduce((acc, val) => acc + val, 0);
 
     return (
-        <div className="flex flex-col items-center px-5 md:px-10 pt-10 min-h-screen">
-            <div className="flex flex-col gap-2 max-w-[900px]">
-                <div className="items-start">
-                    <h1 className="font-semibold text-4xl md:text-6xl">Gewichtung der Thesen</h1>
-                    <h3 className="mb-3 md:mb-10 max-w-[900px] text-xl md:text-2xl">
+        <div className="survey-shell flex flex-col items-center px-5 md:px-10 short:px-4 pt-10 short:pt-4 min-h-screen short:min-h-0 short:max-h-[calc(100dvh-7rem)] short:overflow-hidden">
+            <div className="flex flex-col gap-2 short:gap-1 max-w-[900px] w-full short:min-h-0 short:flex-1 short:overflow-hidden">
+                <div className="items-start short:shrink-0">
+                    <h1 className="font-semibold text-4xl md:text-6xl short:text-2xl">Gewichtung der Thesen</h1>
+                    <h3 className="mb-3 md:mb-10 short:mb-2 max-w-[900px] text-xl md:text-2xl short:text-base">
                         Welche Thesen sind Ihnen besonders wichtig? Markieren Sie die Thesen,
                         um diese mit doppelter Gewichtung in die Berechnung einfließen zu
                         lassen.
                     </h3>
                 </div>
 
-                <div className="flex flex-col justify-center gap-3">
+                <div className="flex flex-col justify-center gap-3 short:gap-2 short:flex-1 short:min-h-0 short:overflow-y-auto short:pr-1">
                     {questions.map((frage, index) => (
                         <div className="w-full" key={index}>
                             {index === 0 ? (
@@ -209,7 +209,7 @@ function GewichtungContent() {
                     ))}
                 </div>
 
-                <div className="flex flex-col items-center mx-auto mt-5 md:mt-10 mb-5 text-center">
+                <div className="flex flex-col items-center mx-auto mt-5 md:mt-10 short:mt-3 mb-5 short:mb-2 text-center short:shrink-0">
                     {/* NOTE - Zum anzeigen, wie viele Thesen man ausgewählt hat. Funktionier noch nicht richtig! */}
                     {/* <p className="mb-2 text-soft-gray">
             {totalCount} These(n) wurde(n) ausgewählt
@@ -217,7 +217,7 @@ function GewichtungContent() {
                     <button
                         type="button"
                         onClick={handleButtonClick}
-                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 rounded-lg sm:w-full md:w-[400px] font-medium text-medio-pink text-2xl uppercase hover:scale-105 transition ease-in"
+                        className="flex flex-row justify-center items-center gap-3 bg-medio-purple-10 hover:bg-medio-purple-14 px-6 py-4 short:py-3 rounded-lg sm:w-full md:w-[400px] font-medium text-medio-pink text-2xl short:text-lg uppercase hover:scale-105 transition ease-in"
                         ref={buttonRef}
                     >
                         zur auswertung

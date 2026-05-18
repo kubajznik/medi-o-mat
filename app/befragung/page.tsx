@@ -6,6 +6,7 @@ import FragenKarte from "@/components/cards/fragenKarte";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import localStorageManager from "@/util/localStore";
+import { resetUserActivity } from "@/util/userActivity";
 import type { Antworten, Fragebogen } from "@/types/Befragung";
 import ResetButton from "@/components/buttons/ResetButton";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
@@ -41,13 +42,9 @@ export default function Befragung() {
     };
 
     const handleResetClick = () => {
-        onReset();
-    };
-
-    const onReset = () => {
-        setCurrentQuestionIndex(0);
-        setCurrentQuestValue([]);
-        setSumme(0);
+        localStorageManager.clearSurveyProgress();
+        resetUserActivity();
+        router.push("/");
     };
     const currentQuestion = flatQuestions[currentQuestionIndex] ?? null;
 
@@ -109,8 +106,8 @@ export default function Befragung() {
     })
 
     return (
-        <div className="px-4 w-full h-screen">
-            <div className="relative flex flex-row gap-4 mx-auto pt-4 md:pt-24 w-full max-w-[1000px]">
+        <div className="survey-shell px-4 w-full min-h-0 h-auto short:overflow-y-auto">
+            <div className="relative flex flex-row gap-4 mx-auto pt-4 md:pt-12 short:pt-2 pb-4 short:pb-2 w-full max-w-[1000px]">
                 {/* Zurück-Button */}
 
                 <div className="relative w-full">

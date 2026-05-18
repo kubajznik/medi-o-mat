@@ -5,9 +5,9 @@ import Footer from "@/components/page/footer";
 
 // extern imports
 import "primeicons/primeicons.css";
-import "animate.css";
-import Navbar from "@/components/page/navbar";
 import InactivityRedirect from "@/components/InactivityRedirect";
+import Navbar from "@/components/page/navbar";
+import { PerformanceProvider } from "@/context/PerformanceContext";
 import { ThemeProvider } from "../context/ThemeContext";
 import { KeyboardProvider } from "@/context/KeyboardContext";
 import { LogoVisibilityProvider } from "@/context/LogoVisibilityContext";
@@ -26,18 +26,20 @@ export default function RootLayout({
 }>) {
   return (
     <ThemeProvider>
-      <KeyboardProvider>
-        <LogoVisibilityProvider>
-          <html lang="en">
-            <body className={`${inter.className} bg-bg`}>
-              <InactivityRedirect />
-              <Navbar />
-              {children}
-              <Footer />
-            </body>
-          </html>
-        </LogoVisibilityProvider>
-      </KeyboardProvider>
+      <PerformanceProvider>
+        <KeyboardProvider>
+          <LogoVisibilityProvider>
+            <html lang="en">
+              <body className={`${inter.className} bg-bg`}>
+                <InactivityRedirect />
+                <Navbar />
+                {children}
+                <Footer />
+              </body>
+            </html>
+          </LogoVisibilityProvider>
+        </KeyboardProvider>
+      </PerformanceProvider>
     </ThemeProvider>
   );
 }
