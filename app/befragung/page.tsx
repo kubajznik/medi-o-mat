@@ -20,6 +20,10 @@ export default function Befragung() {
     const [summe, setSumme] = useState(0);
     const [currentQuestValue, setCurrentQuestValue] = useState<Antworten>([]);
     const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+    const restartButtonRef = React.useRef<HTMLButtonElement | null>(null);
+    const [focusRequestIndex, setFocusRequestIndex] = useState(0);
+    const [focusRequestToken, setFocusRequestToken] = useState(0);
+    const [lastFocusedIndex, setLastFocusedIndex] = useState(0);
 
     const questionData = data as Fragebogen;
     const flatQuestions = useMemo(
@@ -37,7 +41,7 @@ export default function Befragung() {
     };
 
     const handleResetClick = () => {
-        confirm("Möchtest du die Befragung wirklich zurücksetzen? Alle bisherigen Antworten gehen verloren.") && onReset();
+        onReset();
     };
 
     const onReset = () => {
@@ -72,9 +76,33 @@ export default function Befragung() {
     useKeyboardHandler({
         enabled: isKeyboardMode,
         onKey: (event, action) => {
+            if (!currentQuestion || hideExample) return false;
+
+            if (action.type === "nav" && action.direction === "down") {
+                if (document.activeElement !== restartButtonRef.current) {
+                    restartButtonRef.current?.focus();
+                    return true;
+                }
+            }
+
+            if (action.type === "nav" && action.direction === "up") {
+                if (document.activeElement === restartButtonRef.current) {
+                    setFocusRequestIndex(lastFocusedIndex);
+                    setFocusRequestToken((prev) => prev + 1);
+                    return true;
+                }
+            }
+
             if (action.type === "button" && action.button === "red") {
                 handleQuestionBefore();
                 return true;
+            }
+
+            if (document.activeElement === restartButtonRef.current) {
+                if (action.type === "confirm" || (action.type === "button" && action.button === "green")) {
+                    handleResetClick();
+                    return true;
+                }
             }
             return false;
         }
@@ -109,6 +137,9 @@ export default function Befragung() {
                                 counter: totalQuestionCount,
                             }}
                             bewertung={currentQuestion.bewertung ?? []}
+                            focusRequestIndex={focusRequestIndex}
+                            focusRequestToken={focusRequestToken}
+                            onFocusIndexChange={setLastFocusedIndex}
                         />
                     )}
 
@@ -135,8 +166,15 @@ export default function Befragung() {
                             beschreibung={currentQuestion?.beschreibung || ""}
                         />
                     }
-                </div>
+                <button
+                    className="flex bg-accent hover:bg-highlight focus:bg-highlight opacity-0 arcade:opacity-100 mx-auto mt-10 p-4 rounded-xl text-medio-dark"
+                    onClick={handleResetClick}
+                    ref={restartButtonRef}
 
+                >
+                    Befragung neu starten
+                </button>
+                </div>
             </div>
             {/* <button
           className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] p-2 rounded-lg w-[500px] font-medium text-[#FE4E4E] uppercase"

@@ -190,9 +190,9 @@ const ErgebnisContent = () => {
                     type="button"
                     ref={buttonRef}
                     onClick={handleRestart}
-                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mx-auto px-6 py-4 rounded-lg w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 transition-all focus-visible:outline-none focus:scale-100"
+                    className="flex items-center gap-3 bg-purple-100 hover:bg-purple-200 mx-auto px-6 py-4 rounded-lg focus-visible:outline-none w-fit text-purple-400 hover:text-purple-500 uppercase scale-95 hover:scale-100 focus:scale-100 transition-all"
                 >
-                    {textData.repeat}
+                    Zurück auf Start
                     <i className="pi pi-replay" style={{ fontSize: "1rem" }} />
                 </button>
             </span>
