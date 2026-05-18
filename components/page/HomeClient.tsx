@@ -4,6 +4,7 @@ import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
 import localStorageManager from "@/util/localStore";
+import { resetUserActivity } from "@/util/userActivity";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import ScrollToButton from "../buttons/ScrollToButton";
@@ -28,6 +29,7 @@ export default function HomeClient({
 
     const handleStartButtonClick = () => {
         localStorageManager.clearSurveyProgress();
+        resetUserActivity();
         router.push("/befragung");
     };
 

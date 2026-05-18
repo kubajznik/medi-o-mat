@@ -2,6 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from "react";
 import * as sounds from "@/util/sounds";
+import { markUserActivity } from "@/util/userActivity";
 import { useTheme } from "@/context/ThemeContext";
 
 type Direction = "left" | "right" | "up" | "down";
@@ -89,6 +90,8 @@ export function KeyboardProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => {
+            markUserActivity();
+
             const action = normalizeKey(event);
             if (!action) return;
 

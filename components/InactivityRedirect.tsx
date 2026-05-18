@@ -1,6 +1,11 @@
 "use client";
 
 import localStorageManager from "@/util/localStore";
+import {
+    getIdleMs,
+    markUserActivity,
+    resetUserActivity,
+} from "@/util/userActivity";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -12,6 +17,7 @@ const ACTIVITY_EVENTS = [
     "keydown",
     "touchstart",
     "click",
+    "mousemove",
 ] as const;
 
 const isStartPage = (pathname: string | null) =>
@@ -21,7 +27,6 @@ export default function InactivityRedirect() {
     const router = useRouter();
     const pathname = usePathname();
     const routerRef = useRef(router);
-    const lastActivityRef = useRef(Date.now());
     const hasRedirectedRef = useRef(false);
 
     routerRef.current = router;
@@ -30,22 +35,24 @@ export default function InactivityRedirect() {
         if (isStartPage(pathname)) return;
 
         hasRedirectedRef.current = false;
-        lastActivityRef.current = Date.now();
+        resetUserActivity();
 
         const markActive = () => {
-            lastActivityRef.current = Date.now();
+            markUserActivity();
+        };
+
+        const listenerOptions: AddEventListenerOptions = {
+            capture: true,
+            passive: true,
         };
 
         for (const event of ACTIVITY_EVENTS) {
-            window.addEventListener(event, markActive, { passive: true });
+            window.addEventListener(event, markActive, listenerOptions);
         }
-        window.addEventListener("mousemove", markActive, { passive: true });
 
         const intervalId = setInterval(() => {
             if (hasRedirectedRef.current) return;
-
-            const idleFor = Date.now() - lastActivityRef.current;
-            if (idleFor < INACTIVITY_MS) return;
+            if (getIdleMs() < INACTIVITY_MS) return;
 
             hasRedirectedRef.current = true;
             localStorageManager.clearSurveyProgress();
@@ -55,9 +62,8 @@ export default function InactivityRedirect() {
         return () => {
             clearInterval(intervalId);
             for (const event of ACTIVITY_EVENTS) {
-                window.removeEventListener(event, markActive);
+                window.removeEventListener(event, markActive, listenerOptions);
             }
-            window.removeEventListener("mousemove", markActive);
         };
     }, [pathname]);
 
