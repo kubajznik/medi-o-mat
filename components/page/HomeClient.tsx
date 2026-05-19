@@ -5,6 +5,7 @@ import { useLogoVisibility } from "@/context/LogoVisibilityContext";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
 import localStorageManager from "@/util/localStore";
 import { resetUserActivity } from "@/util/userActivity";
+import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import ScrollToButton from "../buttons/ScrollToButton";
@@ -78,8 +79,10 @@ export default function HomeClient({
             </p>
             <button
                 onClick={handleStartButtonClick}
-                className={`${animate ? "animate__animated animate__headShake" : ""
-                    } mt-28 px-6 py-4 bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-2xl rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase`}
+                className={clsx(
+                    "mt-28 px-6 py-4 bg-medio-pink arcade:bg-medio-cyan text-negative font-medium text-2xl rounded-lg shadow-md flex flex-row-reverse gap-3 justify-center items-center w-[400px] transition hover:shadow-2xl hover:scale-105 ease-in uppercase",
+                    animate && "animate__animated animate__headShake"
+                )}
             >
                 <i className="pi-arrow-right text-negative pi" style={{ fontSize: "1.2rem" }} />
                 {startButton}

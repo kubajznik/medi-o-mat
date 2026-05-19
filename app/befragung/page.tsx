@@ -1,16 +1,17 @@
 "use client";
-import ToggleKeyboardButton from "@/components/buttons/ToggleKeyboardButton";
-import BeschreibungsBtn from "@/components/buttons/beschreibungsBtn";
+import ResetButton from "@/components/buttons/icons/ResetButton";
+import ToggleKeyboardButton from "@/components/buttons/icons/ToggleKeyboardButton";
+import BeschreibungsButton from "@/components/buttons/icons/BeschreibungsButton";
 import BeschreibungsCard from "@/components/cards/beschreibungsCard";
 import FragenKarte from "@/components/cards/fragenKarte";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import { LoadingScreen } from "@/components/screens/LoadingScreen";
+import { useKeyboardHandler } from "@/context/KeyboardContext";
+import type { Antworten, Fragebogen } from "@/types/Befragung";
 import localStorageManager from "@/util/localStore";
 import { buildSurveyUrl } from "@/util/surveyFlow";
 import { resetUserActivity } from "@/util/userActivity";
-import type { Antworten, Fragebogen } from "@/types/Befragung";
-import ResetButton from "@/components/buttons/ResetButton";
-import { useKeyboardHandler } from "@/context/KeyboardContext";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useMemo, useState } from "react";
 
 // import JSON
 import data from "../../data/questions.json";
@@ -150,7 +151,7 @@ export default function Befragung() {
 
                     {!hideExample &&
                         <div className="xl:top-3 right-3 xl:-right-16 -bottom-2 xl:bottom-auto z-10 absolute flex flex-row-reverse xl:flex-col gap-4 h-fit translate-y-full xl:translate-y-0">
-                            <BeschreibungsBtn
+                            <BeschreibungsButton
                                 hideExample={hideExample}
                                 handleClick={() => setHideExample(!hideExample)}
                             />
@@ -172,7 +173,7 @@ export default function Befragung() {
                         />
                     }
                 <button
-                    className="flex bg-accent hover:bg-highlight focus:bg-highlight opacity-0 arcade:opacity-100 mx-auto mt-10 p-4 rounded-xl text-medio-dark"
+                    className="mt-10 arcade-only btn-primary"
                     onClick={handleResetClick}
                     ref={restartButtonRef}
 
@@ -182,25 +183,8 @@ export default function Befragung() {
                 </div>
             </div>
             {isSubmitting && (
-                <div
-                    className="z-50 absolute inset-0 flex justify-center items-center bg-white/70"
-                    aria-live="polite"
-                >
-                    <div className="flex flex-col items-center gap-3">
-                        <div
-                            className="border-4 border-medio-pink/30 border-t-medio-pink rounded-full w-10 h-10 animate-spin"
-                            role="status"
-                            aria-label="Loading"
-                        />
-                    </div>
-                </div>
+                <LoadingScreen />
             )}
-            {/* <button
-          className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] p-2 rounded-lg w-[500px] font-medium text-[#FE4E4E] uppercase"
-          onClick={handleCancel}
-        >
-          befragung abbrechen
-        </button> */}
         </div>
     );
 }

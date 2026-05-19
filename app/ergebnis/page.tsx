@@ -184,7 +184,7 @@ const ErgebnisContent = () => {
                     type="button"
                     ref={buttonRef}
                     onClick={handleRestart}
-                    className="flex flex-row justify-center items-center bg-accent hover:bg-highlight focus:bg-highlight opacity-0 arcade:opacity-100 mx-auto -mt-4 p-4 rounded-xl text-medio-dark"
+                    className="-mt-4 btn-primary"
                 >
                     Zurück auf Start
                     <i className="ml-2 pi pi-replay" style={{ fontSize: "1rem" }} />

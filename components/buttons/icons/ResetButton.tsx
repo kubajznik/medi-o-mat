@@ -1,4 +1,5 @@
-import { Refresh } from "iconoir-react"
+import clsx from "clsx";
+import { Refresh } from "iconoir-react";
 
 interface ResetButtonProps {
   onReset: () => void;
@@ -10,9 +11,9 @@ export default function ResetButton({ onReset, className = "" }: ResetButtonProp
         <button
         onClick={onReset}
         type="button"
-        className={`p-2 bg-surface transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110 ${className}`}
+        className={clsx("btn-icon", className)}
         >
-            <Refresh className="w-8 h-8 arcade:text-medio-pink"/> 
+            <Refresh className="w-8 h-8"/> 
         </button>
   );
 }

@@ -7,7 +7,6 @@ type Props = {
   index: number;
   buttonRef?: (el: HTMLButtonElement | null) => void;
   onFocus?: () => void;
-  isFocused?: boolean;
 };
 
 export default function FrageButton({
@@ -15,7 +14,6 @@ export default function FrageButton({
   handleClick,
   buttonRef,
   onFocus,
-  isFocused = false,
 }: Props) {
   return (
     <button

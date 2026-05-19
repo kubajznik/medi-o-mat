@@ -1,4 +1,5 @@
-import React, { forwardRef, useRef } from "react";
+import clsx from "clsx";
+import React, { forwardRef, useRef, useState } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 
 type GewichtungsCardProps = {
@@ -10,6 +11,7 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
   ({ frage, onClick }, ref) => {
     const barRef = useRef<HTMLDivElement | null>(null);
     const markerRef = useRef<HTMLParagraphElement | null>(null);
+    const [isMarked, setIsMarked] = useState(false);
 
     const setBarRef = (node: HTMLDivElement | null) => {
       barRef.current = node;
@@ -20,20 +22,9 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
       }
     };
 
-    function mark() {
-    if (barRef.current != null) {
-      //if (bar.current.classList.contains('bg-white'))
-      // bar.current.classList.remove('bg-white')
-      // bar.current.classList.add('bg-blue', 'text-white')
-      //   bar.current.classList.toggle("bg-white");
-      barRef.current.classList.toggle("ring-2");
-      barRef.current.classList.toggle("ring-highlight");
-      barRef.current.classList.toggle("text-highlight");
-    }
-    if (markerRef.current != null) {
-      markerRef.current.classList.toggle("opacity-0");
-    }
-  }
+    const toggleMark = () => {
+      setIsMarked((prev) => !prev);
+    };
 
   const loseFocus = () => {
     barRef.current?.blur();
@@ -45,7 +36,7 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
         if (action.type === "button" && 
             (action.button === "green" || action.button === "red") && 
             barRef.current === document.activeElement) {
-            mark();
+            toggleMark();
             onClick();
             return true;
         }
@@ -59,12 +50,18 @@ const GewichtungsCard = forwardRef<HTMLDivElement, GewichtungsCardProps>(
       onMouseEnter={loseFocus}
       ref={setBarRef}
       tabIndex={0}
-      className="relative bg-surface p-4 rounded-lg md:hover:ring-2 md:hover:ring-highlight overflow-hidden md:focus:scale-105 cursor-pointer"
+      className={clsx(
+        "card-base relative p-4 md:hover:ring-2 md:hover:ring-highlight overflow-hidden md:focus:scale-105 cursor-pointer",
+        isMarked && "ring-2 ring-highlight text-highlight"
+      )}
     >
       <p
-        onClick={mark}
+        onClick={toggleMark}
         ref={markerRef}
-        className="absolute inset-0 flex justify-start items-center opacity-0 md:hover:opacity-100 ml-5 font-bold text-highlight text-lg md:text-xl transition-opacity duration-300"
+        className={clsx(
+          "absolute inset-0 flex justify-start items-center md:hover:opacity-100 ml-5 font-bold text-highlight text-lg md:text-xl transition-opacity duration-300",
+          isMarked ? "opacity-100" : "opacity-0"
+        )}
       >
         2x
       </p>

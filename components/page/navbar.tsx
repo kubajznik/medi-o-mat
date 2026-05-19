@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
 import { Menu, Xmark, Arcade, SunLight, HalfMoon  } from "iconoir-react";
 import { THEMES } from "@/types/storage";
 import { useTheme } from "@/context/ThemeContext";
@@ -148,11 +149,11 @@ export default function Navbar() {
                   }
                   closeMobileMenu();
                 }}
-                className={`mx-auto px-3 py-2 rounded-md transition hover:bg-navbar-bg ${
-                  item.label === "Befragung"
-                    ? "bg-medio-lila text-white font-semibold shadow-md ring-2 ring-medio-lila/40"
-                    : ""
-                }`}
+                className={clsx(
+                  "mx-auto px-3 py-2 rounded-md transition hover:bg-navbar-bg",
+                  item.label === "Befragung" &&
+                    "bg-medio-lila text-white font-semibold shadow-md ring-2 ring-medio-lila/40"
+                )}
                 ref={(el) => {
                   itemRefs.current[index] = el;
                 }}

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 import { SpotifyIcon } from "../icons/spotify";
@@ -44,6 +45,13 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
     setShowMore((prev) => !prev);
   };
 
+  const borderClass = clsx({
+    "border-[4px] border-medio-cyan": cardIndex === 1,
+    "border-[4px] border-medio-pink": cardIndex === 0,
+    "border-[4px] border-medio-orange": cardIndex === 2,
+    "border-2 border-gray-200": cardIndex !== 0 && cardIndex !== 1 && cardIndex !== 2,
+  });
+
   useKeyboardHandler({
     enabled: true,
     onKey: (event, action) => {
@@ -67,14 +75,11 @@ const VorschlagCard = forwardRef<HTMLDivElement, VorschlagCardProps>((
     <div
       ref={setCardRef}
       tabIndex={0}
-      className={`${cardClassName} ${cardIndex === 1
-          ? "border-[4px] border-medio-cyan"
-          : cardIndex === 0
-                ? "border-[4px] border-medio-pink"
-              : cardIndex === 2
-                  ? "border-[4px] border-medio-orange"
-                : "border-2 border-gray-200"
-        } bg-surface p-6 w-80 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all focus-visible:outline-none focus:scale-[0.95]`}
+      className={clsx(
+        "card-base p-6 w-80 md:w-96 min-h-[600px] md:min-h-[700px] rounded-2xl hover:scale-95 scale-90 flex justify-between flex-col shadow-xl transition-all focus-visible:outline-none focus:scale-[0.95]",
+        borderClass,
+        cardClassName
+      )}
     >
       <div className="flex flex-col gap-6">
         <span>

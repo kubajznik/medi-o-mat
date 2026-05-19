@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import FrageButton from "../buttons/frageButtun";
+import FrageButton from "../buttons/FrageButton";
 import type { BewertungsOption } from "@/types/Befragung";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
 
@@ -108,7 +108,7 @@ export default function FragenKarte({
   });
 
   return (
-    <div className="flex flex-col gap-6 md:gap-10 bg-surface shadow-lg px-4 md:px-8 lg:px-16 py-6 md:py-10 rounded-2xl w-full max-w-[1000px]">
+    <div className="flex flex-col gap-6 md:gap-10 shadow-lg px-4 md:px-8 lg:px-16 py-6 md:py-10 rounded-2xl w-full max-w-[1000px] card-base">
       <h3 className="font-semibold arcade:text-medio-lila text-lg md:text-2xl md:text-left text-center leading-[140%]">
         {"Frage " + fragenCounter.index + " von " + fragenCounter.counter}
       </h3>
@@ -127,7 +127,6 @@ export default function FragenKarte({
               buttonRefs.current[index] = el;
             }}
               onFocus={() => setFocusedIndex(index)}
-            isFocused={focusedIndex === index}
             handleClick={() => handleButtonClick(frage.wert)}
           />
         ))}

@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import localStorageManager from "@/util/localStore";
 import Keyboard from "@/components/icons/keyboard";
 import Mouse from "@/components/icons/mouse";
@@ -19,13 +20,13 @@ export default function ToggleKeyboardButton({ className, isActive = false, onTo
         <button
         onClick={handleClick}
         type="button"
-        className={`p-2 bg-surface text-text-primary transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110 ${className}`}
+        className={clsx("btn-icon", className)}
         >
             {
                 isActive ? 
-                <Mouse className="w-8 h-8 arcade:text-medio-pink"/>
+                <Mouse className="w-8 h-8"/>
                 : 
-                <Keyboard className="w-8 h-8 arcade:text-medio-pink"/> 
+                <Keyboard className="w-8 h-8"/> 
             }
         </button>
     )

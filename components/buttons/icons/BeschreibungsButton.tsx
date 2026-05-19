@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
 
-export default function BeschreibungsBtn({
+import clsx from "clsx";
+
+export default function BeschreibungsButton({
   handleClick,
   hideExample,
 }: {
@@ -12,9 +13,9 @@ export default function BeschreibungsBtn({
     <button
       onClick={handleClick}
       type="button"
-      className={`${
-        hideExample ? "hidden" : ""
-      } p-2 bg-surface transition w-min h-min flex items-center justify-center rounded-full shadow-lg hover:scale-110 arcade:text-medio-pink`}
+      className={clsx("btn-icon", {
+        hidden: hideExample,
+      })}
     >
       <i
         className="pi pi-question-circle"

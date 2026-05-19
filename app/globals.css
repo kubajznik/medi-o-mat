@@ -4,6 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .btn-icon {
+    @apply flex justify-center items-center bg-surface shadow-lg p-2 rounded-full w-min h-min arcade:text-medio-pink hover:scale-110 transition;
+  }
+
+  .card-base {
+    @apply bg-surface rounded-lg;
+  }
+
+  .btn-primary {
+    @apply flex justify-center items-center bg-accent hover:bg-highlight focus:bg-highlight mx-auto p-4 rounded-xl text-medio-dark 
+  }
+
+  .arcade-only {
+    @apply hidden arcade:block;
+  }
+}
+
 :root {
   --medio-dark: #101028;
   --medio-lila: #6631d7;
