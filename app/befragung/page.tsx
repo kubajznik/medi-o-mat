@@ -22,6 +22,7 @@ export default function Befragung() {
     const [summe, setSumme] = useState(0);
     const [currentQuestValue, setCurrentQuestValue] = useState<Antworten>([]);
     const [isKeyboardMode, setIsKeyboardMode] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const restartButtonRef = React.useRef<HTMLButtonElement | null>(null);
     const [focusRequestIndex, setFocusRequestIndex] = useState(0);
     const [focusRequestToken, setFocusRequestToken] = useState(0);
@@ -43,6 +44,10 @@ export default function Befragung() {
     };
 
     const handleResetClick = () => {
+        setCurrentQuestionIndex(0);
+        setCurrentQuestValue([]);
+        setSumme(0);
+        setIsSubmitting(false);
         localStorageManager.clearSurveyProgress();
         resetUserActivity();
         router.push("/");
@@ -58,6 +63,7 @@ export default function Befragung() {
             setCurrentQuestionIndex(nextIndex);
             return;
         }
+        setIsSubmitting(true);
         localStorageManager.setAnswers(nextValues);
         resetUserActivity();
         router.push(buildSurveyUrl("/gewichtung", nextValues));
@@ -175,6 +181,20 @@ export default function Befragung() {
                 </button>
                 </div>
             </div>
+            {isSubmitting && (
+                <div
+                    className="z-50 absolute inset-0 flex justify-center items-center bg-white/70"
+                    aria-live="polite"
+                >
+                    <div className="flex flex-col items-center gap-3">
+                        <div
+                            className="border-4 border-medio-pink/30 border-t-medio-pink rounded-full w-10 h-10 animate-spin"
+                            role="status"
+                            aria-label="Loading"
+                        />
+                    </div>
+                </div>
+            )}
             {/* <button
           className="bg-[#FE4E4E20] hover:bg-[#FE4E4E30] p-2 rounded-lg w-[500px] font-medium text-[#FE4E4E] uppercase"
           onClick={handleCancel}
