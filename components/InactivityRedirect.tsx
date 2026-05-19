@@ -1,6 +1,7 @@
 "use client";
 
 import localStorageManager from "@/util/localStore";
+import { isSurveyPath, normalizePathname } from "@/util/surveyFlow";
 import {
     getIdleMs,
     markUserActivity,
@@ -17,11 +18,10 @@ const ACTIVITY_EVENTS = [
     "keydown",
     "touchstart",
     "click",
-    "mousemove",
 ] as const;
 
 const isStartPage = (pathname: string | null) =>
-    !pathname || pathname === "/";
+    normalizePathname(pathname) === "/";
 
 export default function InactivityRedirect() {
     const router = useRouter();
@@ -32,7 +32,7 @@ export default function InactivityRedirect() {
     routerRef.current = router;
 
     useEffect(() => {
-        if (isStartPage(pathname)) return;
+        if (isStartPage(pathname) || isSurveyPath(pathname)) return;
 
         hasRedirectedRef.current = false;
         resetUserActivity();

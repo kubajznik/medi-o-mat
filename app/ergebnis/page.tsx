@@ -1,15 +1,20 @@
 "use client";
 import localStorageManager from "@/util/localStore";
-import { useEffect, useRef, useState } from "react";
+import { parseSurveyAnswersParam } from "@/util/surveyFlow";
+import { resetUserActivity } from "@/util/userActivity";
+import { useEffect, useMemo, useRef, useState } from "react";
 import VorschlagCard from "@/components/cards/vorschlagCard";
 import test from "../../data/media.json";
 import { useRouter, useSearchParams } from "next/navigation";
 //import {useEffect, useState} from 'react';
-import React, { Suspense, use } from "react";
+import React, { Suspense } from "react";
 import textData from "@/data/texte.json";
 import useAnimationToggle from "@/hooks/useAnimationToggle";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
-import type { GewichteteAntworten } from "@/types/Befragung";
+import type {
+    GewichteteAntwort,
+    GewichteteAntworten,
+} from "@/types/Befragung";
 import type { Media, MediaList, MediaResults } from "@/types/Media";
 import Place from "@/components/icons/Place";
 
@@ -24,30 +29,33 @@ const ErgebnisContent = () => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const [focusedIndex, setFocusedIndex] = useState(0);
 
+    const [answers, setAnswers] = useState<GewichteteAntworten>([]);
+    const [isInitialized, setIsInitialized] = useState(false);
+
     const handleRestart = () => {
         localStorageManager.clearSurveyProgress();
+        resetUserActivity();
         router.push("/");
     };
 
     const mediaList: MediaList = test as MediaList;
-    const mediaResults: MediaResults = {};
-    const answersParam = searchParams.get("answer");
-    const parseWeightedParam = (value: string | null): GewichteteAntworten => {
-        if (!value) return [];
-        try {
-            const decoded = decodeURIComponent(value);
-            const parsed = JSON.parse(decoded);
-            return Array.isArray(parsed) ? parsed : [];
-        } catch (error) {
-            console.error("Failed to parse answers from search params:", error);
-            return [];
-        }
-    };
 
-    const answersFromQuery = parseWeightedParam(answersParam);
-    const answersFromStorage = localStorageManager.getWeightedAnswers();
-    const answers: GewichteteAntworten =
-        answersFromQuery.length > 0 ? answersFromQuery : answersFromStorage;
+    useEffect(() => {
+        const fromQuery = parseSurveyAnswersParam<GewichteteAntwort>(
+            searchParams.get("answer")
+        );
+        const fromSession = localStorageManager.getWeightedAnswers();
+        const resolved = fromQuery.length > 0 ? fromQuery : fromSession;
+
+        if (resolved.length === 0) {
+            router.replace("/befragung/");
+            return;
+        }
+
+        localStorageManager.setWeightedAnswers(resolved);
+        setAnswers(resolved);
+        setIsInitialized(true);
+    }, [searchParams, router]);
 
     useEffect(() => {
         const target =
@@ -62,12 +70,6 @@ const ErgebnisContent = () => {
             inline: "center",
         });
     }, [focusedIndex]);
-
-    useEffect(() => {
-        if (answers.length === 0) {
-            router.replace("/befragung");
-        }
-    }, [answers.length, router]);
 
     useKeyboardHandler({
         enabled: true,
@@ -106,41 +108,33 @@ const ErgebnisContent = () => {
         },
     });
 
-    for (const medium of mediaList) {
-        mediaResults[medium.code] = 0;
-        for (let attr in medium.codierung) {
-            const answerIndex = Number(attr) - 1;
-            const answer = answers[answerIndex];
-            if (!Number.isInteger(answerIndex) || !answer) {
-                console.error("Invalid answer mapping for medium:", {
-                    mediumCode: medium.code,
-                    attr,
-                    answerIndex,
-                });
-                continue;
+    const favoriteCards = useMemo(() => {
+        const mediaResults: MediaResults = {};
+        for (const medium of mediaList) {
+            mediaResults[medium.code] = 0;
+            for (let attr in medium.codierung) {
+                const answerIndex = Number(attr) - 1;
+                const answer = answers[answerIndex];
+                if (!Number.isInteger(answerIndex) || !answer) {
+                    continue;
+                }
+                mediaResults[medium.code] +=
+                    Math.pow(answer.value - medium.codierung[attr], 2) *
+                    answer.weight;
             }
-            mediaResults[medium.code] +=
-                Math.pow(answer.value - medium.codierung[attr], 2) * answer.weight;
+            mediaResults[medium.code] = Math.sqrt(mediaResults[medium.code]);
         }
-        mediaResults[medium.code] = Math.sqrt(mediaResults[medium.code]);
+
+        const sorted = Object.entries(mediaResults).sort((a, b) => a[1] - b[1]);
+        const winners = sorted.slice(0, 3);
+        return winners.map(
+            ([code]) => mediaList.find((e) => e.code === code) as Media
+        );
+    }, [answers, mediaList]);
+
+    if (!isInitialized) {
+        return null;
     }
-
-    let sorted = Object.entries(mediaResults).sort((a, b) => {
-        // @ts-ignore
-        return a[1] - b[1];
-    });
-
-    let winners = sorted.slice(0, 3);
-    const favoriteCards: Media[] = [];
-    favoriteCards.push(
-        mediaList.find((e) => e.code === winners[0][0]) as Media
-    );
-    favoriteCards.push(
-        mediaList.find((e) => e.code === winners[1][0]) as Media
-    );
-    favoriteCards.push(
-        mediaList.find((e) => e.code === winners[2][0]) as Media
-    );
 
     return (
         <div className="mx-auto p-3 md:p-10 max-w-[1300px] min-h-screen overflow-x-hidden">

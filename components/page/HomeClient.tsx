@@ -30,7 +30,7 @@ export default function HomeClient({
     const handleStartButtonClick = () => {
         localStorageManager.clearSurveyProgress();
         resetUserActivity();
-        router.push("/befragung");
+        router.push("/befragung/");
     };
 
     useEffect(() => {

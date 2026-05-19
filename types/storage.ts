@@ -3,6 +3,8 @@ export const STORAGE_KEYS = {
     ANSWERS: "answers",
     WEIGHTED_ANSWERS: "weighted-answers",
     THEME: "theme",
+    /** "true" | "false" — force low-/high-performance mode (overrides auto detection). */
+    LOW_PERFORMANCE: "low-performance",
 } as const;
 
 export type StorageKey = typeof STORAGE_KEYS[keyof typeof STORAGE_KEYS];

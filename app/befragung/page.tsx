@@ -6,6 +6,8 @@ import FragenKarte from "@/components/cards/fragenKarte";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import localStorageManager from "@/util/localStore";
+import { buildSurveyUrl } from "@/util/surveyFlow";
+import { resetUserActivity } from "@/util/userActivity";
 import type { Antworten, Fragebogen } from "@/types/Befragung";
 import ResetButton from "@/components/buttons/ResetButton";
 import { useKeyboardHandler } from "@/context/KeyboardContext";
@@ -42,14 +44,13 @@ export default function Befragung() {
     };
 
     const handleResetClick = () => {
-        onReset();
-    };
-
-    const onReset = () => {
         setCurrentQuestionIndex(0);
         setCurrentQuestValue([]);
         setSumme(0);
         setIsSubmitting(false);
+        localStorageManager.clearSurveyProgress();
+        resetUserActivity();
+        router.push("/");
     };
     const currentQuestion = flatQuestions[currentQuestionIndex] ?? null;
 
@@ -64,7 +65,8 @@ export default function Befragung() {
         }
         setIsSubmitting(true);
         localStorageManager.setAnswers(nextValues);
-        router.push("/gewichtung");
+        resetUserActivity();
+        router.push(buildSurveyUrl("/gewichtung", nextValues));
     };
 
     const handleQuestionBefore = () => {
